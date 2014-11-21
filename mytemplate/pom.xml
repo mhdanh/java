@@ -12,35 +12,54 @@
 		<jstl.version>1.2</jstl.version>
 		<spring.version>4.1.2.RELEASE</spring.version>
 		<tiles.version>3.0.4</tiles.version>
+		<hibernate.version>4.3.7.Final</hibernate.version>
+		<postgresql.jdbc.version>9.1-901.jdbc4</postgresql.jdbc.version>
 	</properties>
 	<dependencies>
-	<!-- java ee for tomcat -->
+		<!-- java ee for tomcat -->
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>${javaee.version}</version>
 			<scope>provided</scope>
 		</dependency>
-	<!-- jstl for jsp -->
+		<!-- jstl for jsp -->
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
 		</dependency>
-	<!-- spring mvc -->	
+		<!-- spring mvc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
-	<!-- tiles 3.0.4 work well -->
-	<dependency>
-		<groupId>org.apache.tiles</groupId>
-		<artifactId>tiles-extras</artifactId>
-		<version>3.0.4</version>
-	</dependency>
-		
+
+		<!-- tiles 3.0.4 work well -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-extras</artifactId>
+			<version>${tiles.version}</version>
+		</dependency>
+		<!-- hibernate -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<!-- jdbc for postgres -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.jdbc.version}</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>mytemplate</finalName>
