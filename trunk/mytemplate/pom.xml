@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com-mhdanh</groupId>
+	<artifactId>mytemplate</artifactId>
+	<packaging>war</packaging>
+	<version>1.0</version>
+	<name>mytemplate Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<javaee.version>7.0</javaee.version>
+		<jstl.version>1.2</jstl.version>
+		<spring.version>4.1.2.RELEASE</spring.version>
+		<tiles.version>3.0.4</tiles.version>
+	</properties>
+	<dependencies>
+	<!-- java ee for tomcat -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>${javaee.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	<!-- jstl for jsp -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+	<!-- spring mvc -->	
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+	<!-- tiles 3.0.4 work well -->
+	<dependency>
+		<groupId>org.apache.tiles</groupId>
+		<artifactId>tiles-extras</artifactId>
+		<version>3.0.4</version>
+	</dependency>
+		
+	</dependencies>
+	<build>
+		<finalName>mytemplate</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
