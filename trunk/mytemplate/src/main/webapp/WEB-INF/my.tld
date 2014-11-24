@@ -5,8 +5,8 @@
     <tlib-version>2.0</tlib-version>
     <uri>http://www.localhost.com/taglib</uri>
     <function>
-        <name>testok</name>
+        <name>doMyStuff</name>
         <function-class>com.mhdanh.mytemplate.utils.ElFunctions</function-class>
-        <function-signature>String testok(java.lang.String)</function-signature>
+        <function-signature>String doMyStuff(java.lang.String)</function-signature>
     </function>
 </taglib>

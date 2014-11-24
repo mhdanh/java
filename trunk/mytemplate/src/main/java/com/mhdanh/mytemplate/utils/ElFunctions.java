@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ElFunctions {
-	public static String testok(String param){
+	public static String doMyStuff(String param) {
 		return param;
 	}
 }
