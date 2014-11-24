@@ -15,6 +15,8 @@
 		<hibernate.version>4.3.7.Final</hibernate.version>
 		<postgresql.jdbc.version>9.1-901.jdbc4</postgresql.jdbc.version>
 		<log4j.version>1.2.17</log4j.version>
+		<commons.fileupload.version>1.3.1</commons.fileupload.version>
+		<commons.io.version>2.4</commons.io.version>
 	</properties>
 	<dependencies>
 		<!-- java ee for tomcat -->
@@ -66,7 +68,18 @@
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
+		<!-- upload file -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${commons.fileupload.version}</version>
+		</dependency>
 
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons.io.version}</version>
+		</dependency>
 
 	</dependencies>
 	<build>
