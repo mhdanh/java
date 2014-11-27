@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-	<definition name="template" template="/view/template/default.jsp">
+	<definition name="template" template="/view/template/home/home.jsp">
 	</definition>
 	<!-- index controller -->
 	<definition name = "indexIndex" extends="template">
-		<put-attribute name="title" value = "not have value duplicate with name"></put-attribute>
+		<put-attribute name="title" value = "Template 4u"></put-attribute>
 		<put-attribute name="content" value = "/view/pages/index/index.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/public/css/index/index.css"/>
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/public/js/index/index.js" />
+		</put-list-attribute>
 	</definition>
 </tiles-definitions>
