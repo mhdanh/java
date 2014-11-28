@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<web:web-app xmlns:dep="http://geronimo.apache.org/xml/ns/deployment-1.2"
+	xmlns:web="http://geronimo.apache.org/xml/ns/j2ee/web-2.0.1"
+	xmlns:naming="http://geronimo.apache.org/xml/ns/naming-1.2">
+	<dep:environment>
+		<dep:moduleId>
+			<dep:groupId>com-mhdanh</dep:groupId>
+			<dep:artifactId>mytemplate</dep:artifactId>
+			<dep:version>1.0</dep:version>
+		</dep:moduleId>
+		<dep:dependencies>
+			<dep:dependency>
+				<dep:groupId>console.dbpool</dep:groupId>
+				<dep:artifactId>mytemplate</dep:artifactId>
+			</dep:dependency>
+		</dep:dependencies>
+		<dep:hidden-classes>
+			<dep:filter>org.apache.log4j</dep:filter>
+			<dep:filter>org.slf4j</dep:filter>
+		</dep:hidden-classes>
+	</dep:environment>
+	<web:context-root>/</web:context-root>
+	<naming:resource-ref>
+		<naming:ref-name>jdbc/MyDataSource</naming:ref-name>
+		<naming:resource-link>mytemplate</naming:resource-link>
+	</naming:resource-ref>
+</web:web-app>
