@@ -10,7 +10,8 @@
 	<properties>
 		<javaee.version>7.0</javaee.version>
 		<jstl.version>1.2</jstl.version>
-		<spring.version>4.1.2.RELEASE</spring.version>
+		<spring.version>4.0.5.RELEASE</spring.version>
+		<spring.security>3.2.4.RELEASE</spring.security>
 		<tiles.version>3.0.4</tiles.version>
 		<hibernate.version>4.2.9.Final</hibernate.version>
 		<postgresql.jdbc.version>9.1-901.jdbc4</postgresql.jdbc.version>
@@ -93,6 +94,23 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<!-- spring security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security}</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>
@@ -172,7 +190,7 @@
 			</build>
 			<properties>
 				<database.driver>org.postgresql.Driver</database.driver>
-				<database.url>jdbc:postgresql://192.168.52.129:5432/mytemplate</database.url>
+				<database.url>jdbc:postgresql://192.168.153.128:5432/mytemplate</database.url>
 				<database.username>postgres</database.username>
 				<database.password>hydra</database.password>
 			</properties>
