@@ -14,4 +14,16 @@
 			<add-attribute value="/public/js/index/index.js" />
 		</put-list-attribute>
 	</definition>
+	
+	<!-- login controller -->
+	<definition name = "loginLoginPage" extends="template">
+		<put-attribute name="title" value = "Login mytemplate"></put-attribute>
+		<put-attribute name="content" value = "/view/pages/login/login.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value=""/>
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="" />
+		</put-list-attribute>
+	</definition>
 </tiles-definitions>
