@@ -1,0 +1,16 @@
+.mt-no-border-radius{border-radius:0px;}
+.mt-no-margin-bottom{margin-bottom:0px;}
+.mt-display-none{display:none !important;}
+.mt-button{border-radius:0px;min-width:90px;}
+.mt-hidden-complete{visibility: hidden;height:0px;}
+.mt-no-padding-left{padding-left:0px;}
+
+.error-custom{
+	margin-top:3px;
+	margin-bottom:3px;
+	background:#f2dede;
+	color:#a94442;
+	border-color:#ebccd1;
+	line-height: 30px;
+}
+.error-custom label{margin-bottom:0px;margin-left:10px;}
