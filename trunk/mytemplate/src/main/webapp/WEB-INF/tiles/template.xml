@@ -3,27 +3,44 @@
 <tiles-definitions>
 	<definition name="template" template="/view/template/home/home.jsp">
 	</definition>
+	<definition name="adminTemplate" template="/view/template/admin/index.jsp">
+		<put-attribute name="header" value="/view/template/admin/header.jsp"></put-attribute>
+		<put-attribute name="footer" value="/view/template/admin/footer.jsp"></put-attribute>
+	</definition>
 	<!-- index controller -->
-	<definition name = "indexIndex" extends="template">
-		<put-attribute name="title" value = "Template 4u"></put-attribute>
-		<put-attribute name="content" value = "/view/pages/index/index.jsp"></put-attribute>
+	<definition name="indexIndex" extends="template">
+		<put-attribute name="title" value="Template 4u"></put-attribute>
+		<put-attribute name="content" value="/view/pages/index/index.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
-			<add-attribute value="/public/css/index/index.css"/>
+			<add-attribute value="/public/css/index/index.css" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts">
 			<add-attribute value="/public/js/index/index.js" />
 		</put-list-attribute>
 	</definition>
-	
+
 	<!-- login controller -->
-	<definition name = "loginLoginPage" extends="template">
-		<put-attribute name="title" value = "Login mytemplate"></put-attribute>
-		<put-attribute name="content" value = "/view/pages/login/login.jsp"></put-attribute>
+	<definition name="loginLoginPage" extends="template">
+		<put-attribute name="title" value="Login mytemplate"></put-attribute>
+		<put-attribute name="content" value="/view/pages/login/login.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
-			<add-attribute value=""/>
+			<add-attribute value="" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts">
 			<add-attribute value="" />
+		</put-list-attribute>
+	</definition>
+
+	<!-- Manage file controller -->
+	<definition name="manageFileuploadTemplateFilePage" extends="adminTemplate">
+		<put-attribute name="title" value="Upload new template"></put-attribute>
+		<put-attribute name="content" value="/view/pages/manage-file/index.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/view/public/css/manage-file/index.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/view/public/js/lib/jquery.validate.js" />
+			<add-attribute value="/view/public/js/manage-file/index.js" />
 		</put-list-attribute>
 	</definition>
 </tiles-definitions>
