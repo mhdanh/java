@@ -1,9 +1,12 @@
 package com.mhdanh.mytemplate.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,6 +22,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="account")
 public class Account {
 	
+	public static enum ACCOUNT_STATUS {ACTIVE,WAITING,DELETED,BLOCKED}
+	
 	@Id
 	@GenericGenerator(name="increment" , strategy="increment")
 	@GeneratedValue(generator="increment")
@@ -30,6 +35,21 @@ public class Account {
 	
 	@Column(name = "password", length = 32, nullable = false)
 	private String password;
+	
+	@Column
+	private String email;
+	
+	@Column(nullable = true)
+	private Date dateCreated;
+	
+	@Column(nullable = true)
+	@Enumerated(EnumType.STRING)
+	private ACCOUNT_STATUS status;
+	
+	@Column(nullable = true,unique = true)
+	private String token;
+	
+	
 
 	@ManyToMany(targetEntity = Role.class)
 	@JoinTable(name = "account_role",joinColumns = {@JoinColumn(name = "account_id")},inverseJoinColumns = {@JoinColumn(name = "role_id")})
@@ -70,5 +90,36 @@ public class Account {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public ACCOUNT_STATUS getStatus() {
+		return status;
+	}
+
+	public void setStatus(ACCOUNT_STATUS status) {
+		this.status = status;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
 }

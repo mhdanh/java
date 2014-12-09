@@ -1,4 +1,4 @@
-package com.mhdanh.mytemplate.utils;
+package com.mhdanh.mytemplate.utility;
 
 import org.springframework.stereotype.Component;
 

@@ -18,6 +18,6 @@ public class IndexController {
 		LOGGER.debug("-----TEST LOGGER-----");
 		LOGGER.warn("-----TEST LOGGER-----");
 		model.addAttribute("ok", "hi every one");
-		return "indexIndex";
+		return "/index";
 	}
 }

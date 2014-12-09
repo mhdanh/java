@@ -2,7 +2,7 @@ $(document).ready(function(){
 	function ajaxUploadTemplate(){
 		var formUpload = new FormData();
 		var file = $("#file-template-upload")[0].files[0];
-		var fileName = $(".txt-name-file-upload").val() + ".rar";
+		var fileName = $(".txt-name-file-upload").val() + ".zip";
 		console.log(fileName);
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
@@ -37,7 +37,7 @@ $(document).ready(function(){
 		var file = $("#file-template-upload")[0].files[0];
 		var fileName = file.name;
 		console.log(file);
-		var allowExtension = ".rar";
+		var allowExtension = ".zip";
 		var existExtension = fileName.indexOf(allowExtension);
 		if(existExtension == -1){
 			alert("extension not support");

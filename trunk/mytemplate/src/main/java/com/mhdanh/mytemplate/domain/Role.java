@@ -16,7 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "role")
 public class Role {
-	private static enum ROLE_NAME {ADMIN,SUPPER_USER,USER}
+	public static enum ROLE_NAME {ADMIN,SUPPER_USER,USER}
 	
 	@Id
 	@GenericGenerator(name="increment" , strategy="increment")
