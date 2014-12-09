@@ -8,7 +8,8 @@
 		<put-attribute name="footer" value="/view/template/admin/footer.jsp"></put-attribute>
 	</definition>
 	<!-- index controller -->
-	<definition name="indexIndex" extends="template">
+	<!-- 	"/index","/","/index/" -->
+	<definition name="/index" extends="template">
 		<put-attribute name="title" value="Template 4u"></put-attribute>
 		<put-attribute name="content" value="/view/pages/index/index.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
@@ -20,7 +21,7 @@
 	</definition>
 
 	<!-- login controller -->
-	<definition name="loginLoginPage" extends="template">
+	<definition name="/login" extends="template">
 		<put-attribute name="title" value="Login mytemplate"></put-attribute>
 		<put-attribute name="content" value="/view/pages/login/login.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
@@ -32,7 +33,7 @@
 	</definition>
 
 	<!-- Manage file controller -->
-	<definition name="manageFileuploadTemplateFilePage" extends="adminTemplate">
+	<definition name="/upload-template-file-page" extends="adminTemplate">
 		<put-attribute name="title" value="Upload new template"></put-attribute>
 		<put-attribute name="content" value="/view/pages/manage-file/index.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">

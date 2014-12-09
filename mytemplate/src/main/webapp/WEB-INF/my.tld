@@ -6,7 +6,7 @@
     <uri>http://www.localhost.com/taglib</uri>
     <function>
         <name>doMyStuff</name>
-        <function-class>com.mhdanh.mytemplate.utils.ElFunctions</function-class>
+        <function-class>com.mhdanh.mytemplate.utility.ElFunctions</function-class>
         <function-signature>String doMyStuff(java.lang.String)</function-signature>
     </function>
 </taglib>

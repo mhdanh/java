@@ -1,42 +1,44 @@
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <div class="row manage-file-index">
-	<div class="col-sm-6">
-		<h2 class="title-upload-template">Upload template</h2>
-		<form class="form-horizontal" id = "frm-upload-template">
-			<div class="form-group wrap-input-and-button-choose-file">
-				<div class="col-xs-9">
-					<div class="input-group">
-						<input type="text"
-							class="form-control input-sm mt-no-border-radius txt-name-file-upload" name="fileNameTemplate" autocomplete="off"> <span
-							class="input-group-addon mt-no-border-radius">*.rar</span>
-					</div>
-					<div id = "error-file-template" class = "error-custom"></div>
-					<div id = "error-file-name-template" class = "error-custom"></div>
-				</div>
-				<div class="col-sm-3 mt-no-padding-left">
-					<input type="file" id="file-template-upload"
-						class="mt-hidden-complete" accept=".rar" name = "fileTemplateUpload">
-					<label for = "file-template-upload" class="btn btn-primary btn-sm mt-button">Choose File</label>
-				</div>
-			</div>
-			<!-- end form group -->
+	<div class="col-sm-4">
+		<h2 class="title-upload-template"><spring:message code = 'msg.upload-template-file-page.title'/></h2>
+		<form id = "frm-upload-template">
 			<div class="form-group">
-				<div class="col-xs-12">
-					<div class="checkbox">
-						<label> <input type="checkbox"> Overide template
-							exist
-						</label>
-					</div>
+                <label>Chose category</label>
+                <select class = 'form-control input-sm mt-no-border-radius'>
+					<c:forEach items="${categories}" var = "category">
+						<option value = "${category.id}"><spring:message code ="${category.name}"/></option>
+					</c:forEach>
+				</select>
+            </div>
+            
+            <div class="form-group">
+                <label>Chose file</label>
+                <div class="input-group">
+                	<input type="file" id="file-template-upload"
+						class="mt-hidden-complete" accept="<spring:message code='msg.support.extension'/>" name = "fileTemplateUpload">
+					<input type="text"
+						class="form-control input-sm mt-no-border-radius txt-name-file-upload" name="fileNameTemplate" autocomplete="off">
+						<label for = "file-template-upload" class="input-group-addon mt-no-border-radius btn btn-primary btn-sm"><spring:message code = 'msg.upload-template-file-page.button.choosefile'/> <spring:message code='msg.support.extension'/></label>
+				</div>
+				<div id = "error-file-template" class = "error-custom"></div>
+				<div id = "error-file-name-template" class = "error-custom"></div>
+            </div>
+            
+            <div class="form-group">
+				<div class="checkbox">
+					<label> <input type="checkbox"> <spring:message code = 'msg.upload-template-file-page.label.overwrite'/></label>
 				</div>
 			</div>
-			<!-- end form group -->
-			<div class="form-group">
-				<div class="col-xs-12">
-					<button class="btn btn-primary btn-sm mt-button" id = "upload-file-button" type="submit">Upload</button>
-				</div>
+			
+            <div class="form-group">
+				<button class="btn btn-primary btn-sm mt-button" id = "upload-file-button" type="submit"><spring:message code = 'msg.upload-template-file-page.button.upload'/></button>
 			</div>
-			<!-- end form group -->
+			
 		</form>
+
 	</div>
-	
 	
 </div>
