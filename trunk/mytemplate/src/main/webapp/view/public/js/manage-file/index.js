@@ -3,16 +3,17 @@ $(document).ready(function(){
 		var formUpload = new FormData();
 		var file = $("#file-template-upload")[0].files[0];
 		var fileName = $(".txt-name-file-upload").val() + ".zip";
-		console.log(fileName);
+		var categoryId = $("#selCategory").val();
+		
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
 		
-		console.log(token+"|"+header);
-		
 		formUpload.append("name",fileName);
+		formUpload.append("categoryId",categoryId);
 		formUpload.append("file",file);
 		
 		var labelButtonSumit = $("#upload-file-button").text().trim();
+		
 		$.ajax({
 			url : ctxPath + "/ajax/upload-template-file-page",
 			data : formUpload,

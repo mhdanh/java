@@ -23,22 +23,22 @@ public class InstallationController {
 		try {
 			logger.debug("insert category sample");
 			
-			Category categoryAdminDashboard = new Category("ADMIN_DASHBOARD");
+			Category categoryAdminDashboard = new Category("CATEGORY.ADMIN_DASHBOARD");
 			categoryService.add(categoryAdminDashboard);
 			
-			Category categoryLandingPage = new Category("LANDING_PAGES");
+			Category categoryLandingPage = new Category("CATEGORY.LANDING_PAGES");
 			categoryService.add(categoryLandingPage);
 			
-			Category categoryBussinessCorporate= new Category("BUSSINESS_CORPORATE");
+			Category categoryBussinessCorporate= new Category("CATEGORY.BUSSINESS_CORPORATE");
 			categoryService.add(categoryBussinessCorporate);
 			
-			Category categoryComponent= new Category("COMPONENT");
+			Category categoryComponent= new Category("CATEGORY.COMPONENT");
 			categoryService.add(categoryComponent);
 			
-			Category categoryWordPress= new Category("WORKPRESS");
+			Category categoryWordPress= new Category("CATEGORY.WORKPRESS");
 			categoryService.add(categoryWordPress);
 			
-			Category categoryOther= new Category("OTHER");
+			Category categoryOther= new Category("CATEGORY.OTHER");
 			categoryService.add(categoryOther);
 			
 			logger.debug("end insert category sample");

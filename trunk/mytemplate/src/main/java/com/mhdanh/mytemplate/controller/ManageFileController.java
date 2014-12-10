@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mhdanh.mytemplate.domain.Category;
+import com.mhdanh.mytemplate.domain.UploadTemplate;
 import com.mhdanh.mytemplate.service.CategoryService;
 import com.mhdanh.mytemplate.service.UnzipService;
+import com.mhdanh.mytemplate.service.UploadTemplateService;
 import com.mhdanh.mytemplate.utility.Utility;
 
 @Controller
@@ -32,6 +35,8 @@ public class ManageFileController {
 	UnzipService unzipService;
 	@Autowired
 	CategoryService categoryService;
+	@Autowired
+	UploadTemplateService uploadTemplateService;
 	
 	@RequestMapping(value = "/upload-template-file-page")
 	public String uploadTemplateFilePage(Model model){
@@ -43,13 +48,17 @@ public class ManageFileController {
 	@ResponseBody
 	public String uploadTemplateFile(
 			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "categoryId") int categoryId,
 			@RequestParam("file") MultipartFile file,HttpServletRequest request) {
 
 		if (!file.isEmpty()) {
 			try {
 				
+				Category categoryBeUploadTo = categoryService.getById(categoryId);
+				
+				
 				byte[] bytes = file.getBytes();
-				String pathFolderTemplate = utility.getHtmlWebappPath();
+				String pathFolderTemplate = utility.getHtmlWebappPath() + "/" + utility.convertTextInDatabaseToNormalText(categoryBeUploadTo.getName());
 				
 				File folderTemplate = new File(pathFolderTemplate);
 				// Create the file on server
@@ -72,6 +81,11 @@ public class ManageFileController {
 				
 				//extract zip file to folder template
 				unzipService.unZip(pathToNewZipFile, pathFolderTemplate);
+				
+				//save upload template
+				UploadTemplate newTemplate = new UploadTemplate();
+				
+				
 				
 				return "true";
 			} catch (Exception e) {
