@@ -2,7 +2,7 @@ package com.mhdanh.mytemplate.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.net.URLDecoder;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,7 +26,8 @@ import com.mhdanh.mytemplate.utility.Utility;
 @Controller
 public class ManageFileController {
 
-	private final String FOLDER_ZIP_TEMPLATE = "/opt/mytemplate/template/";
+	private final String FOLDER_ZIP_TEMPLATE = "D:/opt/mytemplate/template/";
+	private final String LINK_TEMPLATE = "view/html/";
 	private Logger logger = Logger.getLogger(ManageFileController.class);
 	
 	@Autowired
@@ -38,6 +39,8 @@ public class ManageFileController {
 	@Autowired
 	UploadTemplateService uploadTemplateService;
 	
+	
+	
 	@RequestMapping(value = "/upload-template-file-page")
 	public String uploadTemplateFilePage(Model model){
 		model.addAttribute("categories", categoryService.getAll());
@@ -47,7 +50,7 @@ public class ManageFileController {
 	@RequestMapping(value = "/ajax/upload-template-file-page", method = RequestMethod.POST)
 	@ResponseBody
 	public String uploadTemplateFile(
-			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "name", required = false) String fileName,
 			@RequestParam(value = "categoryId") int categoryId,
 			@RequestParam("file") MultipartFile file,HttpServletRequest request) {
 
@@ -58,7 +61,7 @@ public class ManageFileController {
 				
 				
 				byte[] bytes = file.getBytes();
-				String pathFolderTemplate = utility.getHtmlWebappPath() + "/" + utility.convertTextInDatabaseToNormalText(categoryBeUploadTo.getName());
+				String pathFolderTemplate = utility.getHtmlWebappPath() + utility.convertTextInDatabaseToNormalText(categoryBeUploadTo.getName());
 				
 				File folderTemplate = new File(pathFolderTemplate);
 				// Create the file on server
@@ -67,7 +70,7 @@ public class ManageFileController {
 				}
 				
 				//create path to zip file
-				String pathToNewZipFile = FOLDER_ZIP_TEMPLATE + name;
+				String pathToNewZipFile = FOLDER_ZIP_TEMPLATE + fileName;
 				File zipFile = new File(pathToNewZipFile);
 				
 				//create folder zip template if not exist
@@ -84,13 +87,19 @@ public class ManageFileController {
 				
 				//save upload template
 				UploadTemplate newTemplate = new UploadTemplate();
-				
-				
-				
+				newTemplate.setDateCreated(new Date());
+				newTemplate.setName(fileName);
+				newTemplate.setCategory(categoryBeUploadTo);
+				String link = LINK_TEMPLATE  
+						+ utility.convertTextInDatabaseToNormalText(categoryBeUploadTo.getName()) 
+						+ "/" + utility.getNameWithouExtension(fileName) + "/index.html";
+				newTemplate.setLink(link);
+				newTemplate.setOwner(utility.getUserLogined());
+				uploadTemplateService.add(newTemplate);
 				return "true";
 			} catch (Exception e) {
 				logger.error("upload file failed",e);
-				return "You failed to upload " + name + " => " + e.getMessage();
+				return "You failed to upload " + fileName + " => " + e.getMessage();
 			}
 		} else {
 			return "The file was empty.";
