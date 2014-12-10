@@ -6,8 +6,8 @@
 		<h2 class="title-upload-template"><spring:message code = 'msg.upload-template-file-page.title'/></h2>
 		<form id = "frm-upload-template">
 			<div class="form-group">
-                <label>Chose category</label>
-                <select class = 'form-control input-sm mt-no-border-radius'>
+                <label><spring:message code = 'msg.upload-template-file-page.label.choosecategory' /></label>
+                <select class = 'form-control input-sm mt-no-border-radius' id = "selCategory">
 					<c:forEach items="${categories}" var = "category">
 						<option value = "${category.id}"><spring:message code ="${category.name}"/></option>
 					</c:forEach>
@@ -15,13 +15,13 @@
             </div>
             
             <div class="form-group">
-                <label>Chose file</label>
+                <label><spring:message code = 'msg.upload-template-file-page.label.choosefile'/></label>
                 <div class="input-group">
                 	<input type="file" id="file-template-upload"
 						class="mt-hidden-complete" accept="<spring:message code='msg.support.extension'/>" name = "fileTemplateUpload">
 					<input type="text"
 						class="form-control input-sm mt-no-border-radius txt-name-file-upload" name="fileNameTemplate" autocomplete="off">
-						<label for = "file-template-upload" class="input-group-addon mt-no-border-radius btn btn-primary btn-sm"><spring:message code = 'msg.upload-template-file-page.button.choosefile'/> <spring:message code='msg.support.extension'/></label>
+						<label for = "file-template-upload" class="input-group-addon mt-no-border-radius btn btn-primary btn-sm"><spring:message code = 'msg.upload-template-file-page.button.choosezipfile'/></label>
 				</div>
 				<div id = "error-file-template" class = "error-custom"></div>
 				<div id = "error-file-name-template" class = "error-custom"></div>
