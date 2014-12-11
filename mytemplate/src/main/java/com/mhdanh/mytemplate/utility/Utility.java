@@ -36,7 +36,7 @@ public class Utility {
 	 * 
 	 */
 	public String getHtmlWebappPath() throws UnsupportedEncodingException {
-		return this.getWebappPath() + "/view/html/";
+		return this.getWebappPath() + "/view/layout/";
 	}
 
 	public String getMessage(String key) {

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,7 @@ import com.mhdanh.mytemplate.utility.Utility;
 public class ManageFileController {
 
 	private final String FOLDER_ZIP_TEMPLATE = "D:/opt/mytemplate/template/";
-	private final String LINK_TEMPLATE = "view/html/";
+	private final String LINK_TEMPLATE = "view/layout/";
 	private Logger logger = Logger.getLogger(ManageFileController.class);
 	
 	@Autowired
@@ -38,7 +39,6 @@ public class ManageFileController {
 	CategoryService categoryService;
 	@Autowired
 	UploadTemplateService uploadTemplateService;
-	
 	
 	
 	@RequestMapping(value = "/upload-template-file-page")
@@ -61,7 +61,7 @@ public class ManageFileController {
 				
 				
 				byte[] bytes = file.getBytes();
-				String pathFolderTemplate = utility.getHtmlWebappPath() + utility.convertTextInDatabaseToNormalText(categoryBeUploadTo.getName());
+				String pathFolderTemplate = utility.getHtmlWebappPath() + utility.convertTextInDatabaseToNormalText(categoryBeUploadTo.getName()) + "/" + utility.getNameWithouExtension(fileName);
 				
 				File folderTemplate = new File(pathFolderTemplate);
 				// Create the file on server
@@ -70,9 +70,8 @@ public class ManageFileController {
 				}
 				
 				//create path to zip file
-				String pathToNewZipFile = FOLDER_ZIP_TEMPLATE + fileName;
+				String pathToNewZipFile = FOLDER_ZIP_TEMPLATE + utility.convertTextInDatabaseToNormalText(categoryBeUploadTo.getName()) + "/" + fileName;
 				File zipFile = new File(pathToNewZipFile);
-				
 				//create folder zip template if not exist
 				if(!zipFile.getParentFile().exists()){
 					zipFile.getParentFile().mkdirs();
