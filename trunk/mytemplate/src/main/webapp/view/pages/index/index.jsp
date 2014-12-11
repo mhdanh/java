@@ -4,13 +4,6 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 
-<c:set var="myVar" value="maihuudanh" />
-
-<h1>${my:doMyStuff(myVar)}</h1>
-
-
-<span class="content"> <spring:message code="msg.client.id" />
-</span>
 
 -------------update load file------------------
 <input type="file" name="uploadfile" id="upload" multiple />
@@ -27,6 +20,10 @@
 		value="${_csrf.token}" />
 	<button type="submit">logout</button>
 </form>
+
+<c:forEach var="category" items="${my:getCategories()}">
+	<li><a href="<c:url value="${category.name}"/>"><spring:message code='${category.name}'/></a></li>
+</c:forEach>
 
 <sec:authorize access="hasRole('ADMIN')">
 	hi admin

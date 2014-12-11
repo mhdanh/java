@@ -5,8 +5,8 @@
     <tlib-version>2.0</tlib-version>
     <uri>http://www.localhost.com/taglib</uri>
     <function>
-        <name>doMyStuff</name>
+        <name>getCategories</name>
         <function-class>com.mhdanh.mytemplate.utility.ElFunctions</function-class>
-        <function-signature>String doMyStuff(java.lang.String)</function-signature>
+        <function-signature>java.util.List getCategories()</function-signature>
     </function>
 </taglib>

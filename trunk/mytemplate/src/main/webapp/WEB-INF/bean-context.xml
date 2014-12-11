@@ -48,4 +48,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 			<ref bean="localeChangeInterceptor" />
 		</property>
 	</bean>
+	
+	<!-- Application context  -->
+	<bean id="springContext" class="com.mhdanh.mytemplate.utility.SpringContext" />
 </beans>

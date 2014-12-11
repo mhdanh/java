@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-	<definition name="template" template="/view/template/home/home.jsp">
+	<definition name="homeTemplate" template="/view/template/home/index.jsp">
+		<put-attribute name="header" value="/view/template/home/header.jsp"></put-attribute>
+		<put-attribute name="footer" value="/view/template/home/footer.jsp"></put-attribute>
 	</definition>
 	<definition name="adminTemplate" template="/view/template/admin/index.jsp">
 		<put-attribute name="header" value="/view/template/admin/header.jsp"></put-attribute>
@@ -9,7 +11,7 @@
 	</definition>
 	<!-- index controller -->
 	<!-- 	"/index","/","/index/" -->
-	<definition name="/index" extends="template">
+	<definition name="/index" extends="homeTemplate">
 		<put-attribute name="title" value="Template 4u"></put-attribute>
 		<put-attribute name="content" value="/view/pages/index/index.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
@@ -21,7 +23,7 @@
 	</definition>
 
 	<!-- login controller -->
-	<definition name="/login" extends="template">
+	<definition name="/login" extends="homeTemplate">
 		<put-attribute name="title" value="Login mytemplate"></put-attribute>
 		<put-attribute name="content" value="/view/pages/login/login.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
