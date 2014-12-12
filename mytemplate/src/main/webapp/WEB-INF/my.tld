@@ -9,4 +9,10 @@
         <function-class>com.mhdanh.mytemplate.utility.ElFunctions</function-class>
         <function-signature>java.util.List getCategories()</function-signature>
     </function>
+    
+    <function>
+        <name>getUserLogined</name>
+        <function-class>com.mhdanh.mytemplate.utility.ElFunctions</function-class>
+        <function-signature>Object getUserLogined()</function-signature>
+    </function>
 </taglib>

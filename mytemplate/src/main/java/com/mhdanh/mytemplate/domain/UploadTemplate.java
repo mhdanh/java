@@ -29,6 +29,15 @@ public class UploadTemplate {
 
 	@Column(nullable = false, unique = true)
 	private String link;
+	
+	@Column
+	private String cost;
+	
+	@Column
+	private String sellOff;
+	
+	@Column
+	private int view;
 
 	@Column
 	private Date dateCreated;
@@ -97,6 +106,28 @@ public class UploadTemplate {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
 
+	public String getCost() {
+		return cost;
+	}
+
+	public void setCost(String cost) {
+		this.cost = cost;
+	}
+
+	public String getSellOff() {
+		return sellOff;
+	}
+
+	public void setSellOff(String sellOff) {
+		this.sellOff = sellOff;
+	}
+
+	public int getView() {
+		return view;
+	}
+
+	public void setView(int view) {
+		this.view = view;
+	}
 }
