@@ -8,17 +8,21 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 	<!-- Enable use-expression -->
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/upload-template-file-page" access="hasAnyRole('ADMIN','SUPPER_USER','USER')" />
-		
+		<intercept-url pattern="/" access="hasAnyRole('ADMIN','SUPPER_USER','USER')" />
+		 <intercept-url pattern="/login" access="hasRole('ROLE_ANONYMOUS')" />
 		<!-- access denied page -->
 		<access-denied-handler error-page="/login" />
-		<form-login login-page="/login" default-target-url="/"
+		<form-login login-page="/login" default-target-url="/" 
 			authentication-failure-url="/login?error" username-parameter="username"
 			password-parameter="password" />
-		<logout logout-success-url="/login?logout" delete-cookies="JSESSIONID" />
+		<logout logout-success-url="/login?logout" delete-cookies="JSESSIONID" invalidate-session="false" />
 		<!-- Enable CSRF Protection - Prevent CSRF Attach from hacker => by add 
 			token into link - below GET OR POST METHOD -->
 		<csrf />
 
+		<session-management invalid-session-url="/login">
+	        <concurrency-control expired-url="/login"/>
+	    </session-management>
 		<!-- Enable Remember Me -->
 		<!-- <remember-me key="memberkey" remember-me-parameter="remember-me" token-validity-seconds="20"/> -->
 		<!-- <remember-me token-validity-seconds="20" remember-me-parameter="remember-me" 

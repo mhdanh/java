@@ -53,6 +53,14 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<listener>
+	   <listener-class>
+	     org.springframework.security.web.session.HttpSessionEventPublisher
+	   </listener-class>
+	 </listener>
+	<session-config>
+	  <session-timeout>1</session-timeout>
+	</session-config>
   <!-- data source -->
   <resource-ref>
     <res-ref-name>jdbc/MyDataSource</res-ref-name>

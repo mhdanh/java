@@ -1,6 +1,7 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" uri="/WEB-INF/my.tld"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <nav class="navbar navbar-default mt-no-margin-bottom" role="navigation">
 	<div class="container-fluid">
@@ -19,25 +20,32 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle multi-level" data-toggle="dropdown">Template</a>
-				<ul class="dropdown-menu dropdown-menu-with-arrow" role="menu">
-					<c:forEach var="category" items="${my:getCategories()}">
-						<li><a href="<c:url value='/view-layout/${category.id}'/>"><spring:message code='${category.name}'/></a></li>
-					</c:forEach>
-				</ul>
-			</li>
-
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle multi-level" data-toggle="dropdown">Template</a>
+					<ul class="dropdown-menu dropdown-menu-with-arrow" role="menu">
+						<c:forEach var="category" items="${my:getCategories()}">
+							<li><a href="<c:url value='/view-layout/${category.id}'/>"><spring:message code='${category.name}'/></a></li>
+						</c:forEach>
+					</ul>
+				</li>
 			</ul>
-			<form class="navbar-form navbar-left" role="search">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search">
-				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
-			</form>
+			
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Sign in</a></li>
-				<li><a href="#">Sign up</a></li>
+				<sec:authorize access="hasAnyRole('ADMIN','SUPPER_USER','USER')">
+				<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">${my:getUserLogined().username} <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Account info</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Sign out</a></li>
+					</ul>
+				</li>
+				</sec:authorize>
+				
+				<sec:authorize access="isAnonymous()">
+					<li><a href="<c:url value='/login'/>">Sign in</a></li>
+					<li><a href="<c:url value='/register'/>">Sign up</a></li>
+				</sec:authorize>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

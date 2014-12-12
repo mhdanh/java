@@ -12,7 +12,6 @@ public class IndexController {
 	private static final Logger LOGGER = Logger.getLogger(IndexController.class);
 	
 	@RequestMapping(value={"/index","/","/index/"})
-	@PreAuthorize("hasRole('USER')")
 	public String index(Model model){
 		System.out.println("ok man");
 		LOGGER.debug("-----TEST LOGGER-----");
