@@ -14,8 +14,11 @@ public class IndexController {
 	@RequestMapping(value={"/index","/","/index/"})
 	public String index(Model model){
 		System.out.println("ok man");
-		LOGGER.debug("-----TEST LOGGER-----");
-		LOGGER.warn("-----TEST LOGGER-----");
+		LOGGER.debug("-----debug LOGGER-----");
+		LOGGER.warn("-----warn LOGGER-----");
+		LOGGER.info("-----info LOGGER-----");
+		LOGGER.error("-----error LOGGER-----");
+		LOGGER.fatal("-----fatal LOGGER-----");
 		model.addAttribute("ok", "hi every one");
 		return "/index";
 	}
