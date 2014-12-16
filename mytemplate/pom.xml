@@ -154,6 +154,20 @@
 				<database.url>jdbc:postgresql://127.0.0.1:5432/mytemplate</database.url>
 				<database.username>postgres</database.username>
 				<database.password>123456</database.password>
+				<system.url.store.template>D:/opt/mytemplate/template/</system.url.store.template>
+			</properties>
+		</profile>
+		<profile>
+			<id>production-tomcat</id>
+			<build>
+				<finalName>mytemplate</finalName>
+			</build>
+			<properties>
+				<database.driver>org.postgresql.Driver</database.driver>
+				<database.url>jdbc:postgresql://localhost:5432/mytemplate</database.url>
+				<database.username>postgres</database.username>
+				<database.password>Mhdnnd169188</database.password>
+				<system.url.store.template>C:/opt/mytemplate/template/</system.url.store.template>
 			</properties>
 		</profile>
 		<profile>
