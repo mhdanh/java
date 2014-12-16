@@ -21,7 +21,7 @@ public class InstallationController {
 	@ResponseBody
 	private Object insertDataSample(){
 		try {
-			logger.debug("insert category sample");
+			logger.info("insert category sample");
 			
 			Category categoryAdminDashboard = new Category("CATEGORY.ADMIN_DASHBOARD");
 			categoryService.add(categoryAdminDashboard);
@@ -41,7 +41,7 @@ public class InstallationController {
 			Category categoryOther= new Category("CATEGORY.OTHER");
 			categoryService.add(categoryOther);
 			
-			logger.debug("end insert category sample");
+			logger.info("end insert category sample");
 		} catch (Exception e) {
 			logger.error("insert data sample error",e);
 		}

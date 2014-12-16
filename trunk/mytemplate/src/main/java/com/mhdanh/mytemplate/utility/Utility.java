@@ -1,9 +1,14 @@
 package com.mhdanh.mytemplate.utility;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Locale;
+import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -17,6 +22,8 @@ import com.mhdanh.mytemplate.service.AccountService;
 @Component
 public class Utility {
 
+	private final Logger logger = Logger.getLogger(Utility.class);
+	
 	@Autowired
 	MessageSource messageSource;
 	@Autowired
@@ -78,5 +85,30 @@ public class Utility {
 		}
 		return splitedTextByDot[0];
 	}
-
+	
+	public String getPropValues(String filename,String key){
+		Properties prop = new Properties();
+		String propFileName = filename;
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+		try {
+			prop.load(inputStream);
+		} catch (IOException e) {
+			logger.error("cannot read properties file", e);
+		}
+		// get the property value and print it out
+		String valueKey = prop.getProperty(key);
+		return valueKey;
+	}
+	
+	public String getValueFromPropertiesSystemFile(String key){
+		Properties prop = new Properties();
+		String propFileName = "system.properties";
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+		try {
+			prop.load(inputStream);
+		} catch (IOException e) {
+			logger.error("cannot read properties file", e);
+		}
+		return prop.getProperty(key);
+	}
 }

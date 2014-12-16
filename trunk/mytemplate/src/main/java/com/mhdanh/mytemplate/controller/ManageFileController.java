@@ -27,7 +27,7 @@ import com.mhdanh.mytemplate.utility.Utility;
 @Controller
 public class ManageFileController {
 
-	private final String FOLDER_ZIP_TEMPLATE = "D:/opt/mytemplate/template/";
+	private final String FOLDER_ZIP_TEMPLATE = "system.url.store.template";
 	private final String LINK_TEMPLATE = "view/layout/";
 	private Logger logger = Logger.getLogger(ManageFileController.class);
 	
@@ -70,7 +70,7 @@ public class ManageFileController {
 				}
 				
 				//create path to zip file
-				String pathToNewZipFile = FOLDER_ZIP_TEMPLATE + utility.convertTextInDatabaseToNormalText(categoryBeUploadTo.getName()) + "/" + fileName;
+				String pathToNewZipFile = utility.getValueFromPropertiesSystemFile(FOLDER_ZIP_TEMPLATE) + utility.convertTextInDatabaseToNormalText(categoryBeUploadTo.getName()) + "/" + fileName;
 				File zipFile = new File(pathToNewZipFile);
 				//create folder zip template if not exist
 				if(!zipFile.getParentFile().exists()){

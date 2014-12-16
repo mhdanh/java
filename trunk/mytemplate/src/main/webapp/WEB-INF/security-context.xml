@@ -20,9 +20,17 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 			token into link - below GET OR POST METHOD -->
 		<csrf />
 
-		<session-management invalid-session-url="/login">
-	        <concurrency-control expired-url="/login"/>
-	    </session-management>
+		<session-management 
+        invalid-session-url="/login" 
+        session-authentication-error-url="/login">
+
+        <concurrency-control 
+            max-sessions="1" 
+            expired-url="/login" 
+            error-if-maximum-exceeded="false" 
+            session-registry-alias="sessionRegistry"/>
+
+    </session-management>  
 		<!-- Enable Remember Me -->
 		<!-- <remember-me key="memberkey" remember-me-parameter="remember-me" token-validity-seconds="20"/> -->
 		<!-- <remember-me token-validity-seconds="20" remember-me-parameter="remember-me" 
