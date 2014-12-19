@@ -9,26 +9,24 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/upload-template-file-page" access="hasAnyRole('ADMIN','SUPPER_USER','USER')" />
 		<intercept-url pattern="/" access="hasAnyRole('ADMIN','SUPPER_USER','USER')" />
-		 <intercept-url pattern="/login" access="hasRole('ROLE_ANONYMOUS')" />
 		<!-- access denied page -->
 		<access-denied-handler error-page="/login" />
 		<form-login login-page="/login" default-target-url="/" 
 			authentication-failure-url="/login?error" username-parameter="username"
 			password-parameter="password" />
-		<logout logout-success-url="/login?logout" delete-cookies="JSESSIONID" invalidate-session="false" />
+		<logout logout-success-url="/login?logout" delete-cookies="JSESSIONID" invalidate-session="true" />
 		<!-- Enable CSRF Protection - Prevent CSRF Attach from hacker => by add 
 			token into link - below GET OR POST METHOD -->
 		<csrf />
 
 		<session-management 
-        invalid-session-url="/login" 
-        session-authentication-error-url="/login">
+        invalid-session-url="/login">
 
         <concurrency-control 
             max-sessions="1" 
-            expired-url="/login" 
-            error-if-maximum-exceeded="false" 
-            session-registry-alias="sessionRegistry"/>
+            expired-url="/login" />
+<!--             error-if-maximum-exceeded="false"  -->
+<!--             session-registry-alias="sessionRegistry"/> -->
 
     </session-management>  
 		<!-- Enable Remember Me -->

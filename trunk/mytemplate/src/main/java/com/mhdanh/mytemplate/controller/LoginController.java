@@ -19,8 +19,7 @@ public class LoginController {
 	private String loginPage(HttpServletRequest request){
 		Account userLogined = utility.getUserLogined();
 		if(userLogined != null){
-			 String referer = request.getHeader("Referer");
-			 return "redirect:"+ referer;
+			 return "redirect:/";
 		}
 		return "/login";
 	}
