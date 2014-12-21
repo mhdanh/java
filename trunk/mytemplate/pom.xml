@@ -153,8 +153,9 @@
 				<database.driver>org.postgresql.Driver</database.driver>
 				<database.url>jdbc:postgresql://127.0.0.1:5432/mytemplate</database.url>
 				<database.username>postgres</database.username>
-				<database.password>123456</database.password>
+				<database.password>hydra</database.password>
 				<system.url.store.template>D:/opt/mytemplate/template/</system.url.store.template>
+				<system.url.store.image>D:/opt/mytemplate/images/</system.url.store.image>
 			</properties>
 		</profile>
 		<profile>
@@ -168,10 +169,11 @@
 				<database.username>postgres</database.username>
 				<database.password>Mhdnnd169188</database.password>
 				<system.url.store.template>C:/opt/mytemplate/template/</system.url.store.template>
+				<system.url.store.image>C:/opt/mytemplate/images/</system.url.store.image>
 			</properties>
 		</profile>
 		<profile>
-			<id>production</id>
+			<id>production-geronimo</id>
 			<build>
 				<finalName>mytemplate</finalName>
 				<plugins>
@@ -207,6 +209,8 @@
 				<database.url>jdbc:postgresql://192.168.153.128:5432/mytemplate</database.url>
 				<database.username>postgres</database.username>
 				<database.password>hydra</database.password>
+				<system.url.store.template>C:/opt/mytemplate/template/</system.url.store.template>
+				<system.url.store.image>C:/opt/mytemplate/images/</system.url.store.image>
 			</properties>
 		</profile>
 	</profiles>
