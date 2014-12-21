@@ -41,6 +41,9 @@ public class UploadTemplate {
 
 	@Column
 	private Date dateCreated;
+	
+	@Column
+	private String thumbnail;
 
 	@ManyToOne(targetEntity = Category.class)
 	private Category category;
@@ -130,4 +133,13 @@ public class UploadTemplate {
 	public void setView(int view) {
 		this.view = view;
 	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	
 }

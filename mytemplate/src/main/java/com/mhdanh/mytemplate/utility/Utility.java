@@ -1,10 +1,12 @@
 package com.mhdanh.mytemplate.utility;
 
-import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.security.MessageDigest;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -111,4 +113,49 @@ public class Utility {
 		}
 		return prop.getProperty(key);
 	}
+	
+	/**
+	 * return string after hashing by md5 
+	 */
+	public String hashString(String string){
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5"); 
+	        byte byteData[] = md.digest();
+	        //convert the byte to hex format method 1
+	        StringBuffer sb = new StringBuffer();
+	        for (int i = 0; i < byteData.length; i++) {
+	         sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+	        }
+	        return sb.toString();
+		} catch (Exception e) {
+			logger.error("Error hashing string",e);
+			return null;
+		}
+	}
+	/**
+	 * hash file into string 
+	 */
+	public String hashFile(File fileBeHashed){
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+	        FileInputStream fis = new FileInputStream(fileBeHashed);
+	        byte[] dataBytes = new byte[1024];
+	        int nread = 0; 
+	        while ((nread = fis.read(dataBytes)) != -1) {
+	          md.update(dataBytes, 0, nread);
+	        };
+	        fis.close();
+	        byte[] mdbytes = md.digest();
+	        //convert the byte to hex format method 1
+	        StringBuffer sb = new StringBuffer();
+	        for (int i = 0; i < mdbytes.length; i++) {
+	          sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+	        }
+	        return sb.toString();
+		} catch (Exception e) {
+			logger.error("Error hashing file",e);
+			return null;
+		}
+	}
+	
 }

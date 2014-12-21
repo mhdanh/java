@@ -1,22 +1,29 @@
 $(document).ready(function(){
 	function ajaxUploadTemplate(){
-		var formUpload = new FormData();
-		var file = $("#file-template-upload")[0].files[0];
-		var fileName = $(".txt-name-file-upload").val() + ".zip";
-		var categoryId = $("#selCategory").val();
+		var templateUpload = new FormData();
+		var fileTemplate = $("#file-template-upload")[0].files[0];
+		var fileThumbnail = $("#file-thumbnail-upload")[0].files[0];
+		var fileNameTemplate = $(".txt-name-file-upload").val() + ".zip";
+		var fileNameThumbnail = $("#fileNameThumbnail").val();
+		var categoryTemplateId = $("#selCategory").val();
+		var costTemplate = $("#costTemplate").val();
 		
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
 		
-		formUpload.append("name",fileName);
-		formUpload.append("categoryId",categoryId);
-		formUpload.append("file",file);
+		templateUpload.append("fileNameTemplate",fileNameTemplate);
+		templateUpload.append("categoryTemplateId",categoryTemplateId);
+		templateUpload.append("fileTemplate",fileTemplate);
+		templateUpload.append("fileThumbnail",fileThumbnail);
+		templateUpload.append("fileNameThumbnail",fileNameThumbnail);
+		templateUpload.append("costTemplate",costTemplate);
+		
 		
 		var labelButtonSumit = $("#upload-file-button").text().trim();
 		
 		$.ajax({
 			url : ctxPath + "/ajax/upload-template-file-page",
-			data : formUpload,
+			data : templateUpload,
 			processData : false,
 			contentType : false,
 			method : 'POST',
@@ -47,6 +54,25 @@ $(document).ready(function(){
 			var nameWithoutExtension = removeFileExtension(fileName);
 			nameWithoutExtension = nameWithoutExtension.trim().replace(/ /g,'-');
 			$(".txt-name-file-upload").val(nameWithoutExtension);
+		}
+	});
+	
+	$(document).on("change","#file-thumbnail-upload",function(){
+		var file = $("#file-thumbnail-upload")[0].files[0];
+		var fileName = file.name;
+		console.log(file);
+		var allowExtension = "image/*";
+		if(file.type.match(allowExtension)){
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function(e){
+				//show img
+				var containImg = $("#thumbnail");
+				$(containImg).removeClass("mt-display-none").children('img').attr("src",e.target.result);
+				$("#fileNameThumbnail").val(fileName);
+			};
+		}else{
+			alert("not support");
 		}
 	});
 	
