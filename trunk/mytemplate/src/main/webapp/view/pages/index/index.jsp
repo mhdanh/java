@@ -4,27 +4,29 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 
-
--------------update load file------------------
-<input type="file" name="uploadfile" id="upload" multiple />
-<br />
-<button id="btnUp">Upload</button>
-<hr />
-<button class="btn btn-default glyphicon glyphicon-asterisk">ok
-	man</button>
-<!--  -->
-<form name='logoutForm'
-	action="<c:url value='j_spring_security_logout' />" method='POST'>
-
-	<input type="hidden" name="${_csrf.parameterName}"
-		value="${_csrf.token}" />
-	<button type="submit">logout</button>
-</form>
-
-<c:forEach var="category" items="${my:getCategories()}">
-	<li><a href="<c:url value="${category.name}"/>"><spring:message code='${category.name}'/></a></li>
-</c:forEach>
-
-<sec:authorize access="hasRole('ADMIN')">
-	hi admin
-</sec:authorize>
+<div class = "wrapper-content-template">
+	<c:forEach items="${templates}" var="template" varStatus="status">
+		<c:choose>
+			<c:when test="${status.index % 2== 0}">
+			<div class = "row row-content-template">
+				<div class = "col-md-6">
+					<div class = "content-template">
+						<img src="<c:url value='/viewimg/${template.thumbnail}'/>" class="img-thumbnail" alt="Cinque Terre" width="420" height="236">
+					</div>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class = "col-md-6">
+					<div class = "content-template">
+						<img src="<c:url value='/viewimg/${template.thumbnail}'/>" class="img-thumbnail" alt="Cinque Terre" width="420" height="236">
+					</div>
+				</div>
+			</div>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	<c:if test="${templates.size() % 2 == 1}">
+		<!-- enclose div if odd size -->
+		</div>
+	</c:if>
+</div>

@@ -153,7 +153,7 @@
 				<database.driver>org.postgresql.Driver</database.driver>
 				<database.url>jdbc:postgresql://127.0.0.1:5432/mytemplate</database.url>
 				<database.username>postgres</database.username>
-				<database.password>hydra</database.password>
+				<database.password>123456</database.password>
 				<system.url.store.template>D:/opt/mytemplate/template/</system.url.store.template>
 				<system.url.store.image>D:/opt/mytemplate/images/</system.url.store.image>
 			</properties>

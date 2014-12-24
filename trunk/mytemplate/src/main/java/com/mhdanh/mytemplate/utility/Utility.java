@@ -10,6 +10,9 @@ import java.security.MessageDigest;
 import java.util.Locale;
 import java.util.Properties;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -155,6 +158,26 @@ public class Utility {
 		} catch (Exception e) {
 			logger.error("Error hashing file",e);
 			return null;
+		}
+	}
+	/**
+	 *  render img for view from phycial storage
+	 */
+	public void viewImg(HttpServletResponse response,String outputPath,String filename) throws IOException{
+		File file = new File(outputPath);
+		if(file.exists()){
+			FileInputStream inputStream= new FileInputStream(file);
+			ServletOutputStream outStream = response.getOutputStream();
+	        byte[] buffer = new byte[4096];
+	        int bytesRead = -1;
+	        response.setContentType("image/*");
+			response.setHeader("Content-Disposition","inline;filename="+filename);
+			response.setContentLength((int) file.length());
+	        while ((bytesRead = inputStream.read(buffer)) != -1) {
+	            outStream.write(buffer, 0, bytesRead);
+	        }
+	        inputStream.close();
+	        outStream.close();
 		}
 	}
 	
