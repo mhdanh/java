@@ -1,3 +1,14 @@
-body {
+.wrapper-content-template{
+	max-width:1000px;
+	margin:auto;
+}
+.row-content-template{
+	margin-top:40px;
+}
+.content-template{
+	text-align: center;
 	background: #e3e3e3;
+	margin-top:20px;
+	margin-bottom:20px;
+	border-radius:4px;
 }

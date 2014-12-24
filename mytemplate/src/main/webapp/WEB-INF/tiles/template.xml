@@ -15,10 +15,10 @@
 		<put-attribute name="title" value="Template 4u"></put-attribute>
 		<put-attribute name="content" value="/view/pages/index/index.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
-			<add-attribute value="/public/css/index/index.css" />
+			<add-attribute value="/view/public/css/index/index.css" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts">
-			<add-attribute value="/public/js/index/index.js" />
+			<add-attribute value="/view/public/js/index/index.js" />
 		</put-list-attribute>
 	</definition>
 

@@ -37,7 +37,14 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#">Account info</a></li>
 						<li class="divider"></li>
-						<li><a href="#">Sign out</a></li>
+						<li><a href="#">
+							<form name='logoutForm' action="<c:url value='j_spring_security_logout' />" method='POST'>
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
+								<button type="submit" class = "link-button-sign-out">Sign out</button>
+							</form>
+							</a>
+						</li>
 					</ul>
 				</li>
 				</sec:authorize>
