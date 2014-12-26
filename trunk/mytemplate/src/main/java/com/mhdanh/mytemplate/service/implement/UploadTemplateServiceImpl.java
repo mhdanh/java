@@ -59,6 +59,7 @@ public class UploadTemplateServiceImpl extends
 	public boolean uploadTemplate(UploadTemplateDTO uploadTemplate) {
 		if (!uploadTemplate.getFileTemplate().isEmpty()) {
 			try {
+				String titleTemplate = uploadTemplate.getTitleTemplate();
 				String fileNameTemplate = uploadTemplate.getFileNameTemplate();
 				int categoryTemplateId = uploadTemplate.getCategoryTemplateId();
 				MultipartFile fileTemplate = uploadTemplate.getFileTemplate();
@@ -142,8 +143,9 @@ public class UploadTemplateServiceImpl extends
 
 				// save upload template
 				UploadTemplate newTemplate = new UploadTemplate();
+				newTemplate.setTitle(titleTemplate);
 				newTemplate.setDateCreated(new Date());
-				newTemplate.setName(fileNameTemplate);
+				newTemplate.setFileName(fileNameTemplate);
 				newTemplate.setCategory(categoryBeUploadTo);
 				String link = LINK_TEMPLATE
 						+ utility

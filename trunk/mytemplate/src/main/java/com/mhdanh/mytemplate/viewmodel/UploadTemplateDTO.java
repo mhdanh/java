@@ -3,15 +3,24 @@ package com.mhdanh.mytemplate.viewmodel;
 import org.springframework.web.multipart.MultipartFile;
 
 public class UploadTemplateDTO {
-	
+
+	private String titleTemplate;
 	private String fileNameTemplate;
 	private int categoryTemplateId;
 	private MultipartFile fileTemplate;
 	private MultipartFile fileThumbnail;
 	private String fileNameThumbnail;
 	private String costTemplate;
-	
+
 	public UploadTemplateDTO() {
+	}
+
+	public String getTitleTemplate() {
+		return titleTemplate;
+	}
+
+	public void setTitleTemplate(String titleTemplate) {
+		this.titleTemplate = titleTemplate;
 	}
 
 	public String getFileNameTemplate() {

@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	function ajaxUploadTemplate(){
 		var templateUpload = new FormData();
+		var titleTemplate = $("#titleTemplate").val().trim();
 		var fileTemplate = $("#file-template-upload")[0].files[0];
 		var fileThumbnail = $("#file-thumbnail-upload")[0].files[0];
 		var fileNameTemplate = $(".txt-name-file-upload").val() + ".zip";
@@ -11,6 +12,8 @@ $(document).ready(function(){
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
 		
+		
+		templateUpload.append("titleTemplate",titleTemplate);
 		templateUpload.append("fileNameTemplate",fileNameTemplate);
 		templateUpload.append("categoryTemplateId",categoryTemplateId);
 		templateUpload.append("fileTemplate",fileTemplate);

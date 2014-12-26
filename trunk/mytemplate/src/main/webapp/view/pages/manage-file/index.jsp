@@ -5,6 +5,11 @@
 	<div class="col-sm-4">
 		<h2 class="title-upload-template"><spring:message code = 'msg.upload-template-file-page.title'/></h2>
 		<form id = "frm-upload-template">
+			<!-- title template -->
+            <div class="form-group">
+                <label><spring:message code = 'msg.upload-template-file-page.label.titletemplate'/></label>
+                <input type = "text" class = "form-control  mt-no-border-radius" name = "titleTemplate" id = "titleTemplate"/>
+            </div>
 			<!-- category -->
 			<div class="form-group">
                 <label><spring:message code = 'msg.upload-template-file-page.label.choosecategory' /></label>

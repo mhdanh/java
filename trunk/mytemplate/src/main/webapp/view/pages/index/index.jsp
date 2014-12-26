@@ -11,14 +11,38 @@
 			<div class = "row row-content-template">
 				<div class = "col-md-6">
 					<div class = "content-template">
-						<img src="<c:url value='/viewimg/${template.thumbnail}'/>" class="img-thumbnail" alt="Cinque Terre" width="420" height="236">
+						<div class = "wrap-title-img">
+							<h4 class = "title-template">${template.title}</h4>
+							<img src="<c:url value='/1viewimg/${template.thumbnail}'/>" class="img-thumbnail" alt="Cinque Terre" width="420" height="236">
+							<div class = "detail-item">
+								<strong class = "cost-item">
+									${template.cost}
+								</strong>
+								<strong class = "buy-item">
+									<span class = "glyphicon glyphicon-shopping-cart icon"></span>
+									<span class = "buy-item-text">${template.buy}</span>
+								</strong>
+							</div>
+						</div>
 					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class = "col-md-6">
 					<div class = "content-template">
-						<img src="<c:url value='/viewimg/${template.thumbnail}'/>" class="img-thumbnail" alt="Cinque Terre" width="420" height="236">
+						<div class = "wrap-title-img">
+							<h4 class = "title-template">${template.title}</h4>
+							<img src="<c:url value='/1viewimg/${template.thumbnail}'/>" class="img-thumbnail" alt="Cinque Terre" width="420" height="236">
+							<div class = "detail-item">
+								<strong class = "cost-item">
+									${template.cost}
+								</strong>
+								<strong class = "buy-item">
+									<span class = "glyphicon glyphicon-shopping-cart icon"></span>
+									<span class = "buy-item-text">${template.buy}</span>
+								</strong>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
