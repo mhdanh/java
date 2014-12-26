@@ -1,14 +1,38 @@
 .wrapper-content-template{
 	max-width:1000px;
 	margin:auto;
+	cursor: default;
 }
 .row-content-template{
 	margin-top:40px;
 }
 .content-template{
-	text-align: center;
 	background: #e3e3e3;
 	margin-top:20px;
 	margin-bottom:20px;
 	border-radius:4px;
+}
+.wrap-title-img{
+	max-width:420px;
+	margin:auto;
+}
+.title-template{
+	overflow-x:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	color:#3c763d;
+	padding-top:10px;
+	text-align:left;
+}
+.cost-item{
+	font-weight:bold;
+	color:#a94442;
+	margin-right:15px;
+	font-size:1.3em;
+}
+.buy-item .icon{
+	font-size:1.07em;
+}
+.buy-item .buy-item-text{
+	font-size:1.3em;
 }

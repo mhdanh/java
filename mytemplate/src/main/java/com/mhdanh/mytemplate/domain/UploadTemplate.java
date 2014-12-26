@@ -22,26 +22,29 @@ public class UploadTemplate {
 	private int id;
 
 	@Column
-	private String name;
-	
+	private String title;
+
 	@Column
+	private String fileName;
+
+	@Column(columnDefinition = "text")
 	private String description;
 
 	@Column(nullable = false, unique = true)
 	private String link;
-	
+
 	@Column
 	private String cost;
-	
+
 	@Column
 	private String sellOff;
-	
-	@Column
-	private int view;
+
+	@Column(columnDefinition="int default 0")
+	private Integer buy;
 
 	@Column
 	private Date dateCreated;
-	
+
 	@Column
 	private String thumbnail;
 
@@ -62,12 +65,20 @@ public class UploadTemplate {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public String getLink() {
@@ -126,12 +137,15 @@ public class UploadTemplate {
 		this.sellOff = sellOff;
 	}
 
-	public int getView() {
-		return view;
+	public Integer getBuy() {
+		if(buy == null){
+			return 0;
+		}
+		return buy;
 	}
 
-	public void setView(int view) {
-		this.view = view;
+	public void setBuy(Integer buy) {
+		this.buy = buy;
 	}
 
 	public String getThumbnail() {
@@ -141,5 +155,5 @@ public class UploadTemplate {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	
+
 }

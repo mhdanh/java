@@ -4,11 +4,11 @@
 	<table>
 		<tr>
 			<td>User:</td>
-			<td><input type='text' name='username' value='' autofocus="true"></td>
+			<td><input type='text' name='username' value='admin' autofocus="true"></td>
 		</tr>
 		<tr>
 			<td>Password:</td>
-			<td><input type='password' name='password' /></td>
+			<td><input type='password' name='password' value='123'/></td>
 		</tr>
 		<tr>
 			<td colspan='2'><input name="submit" type="submit"

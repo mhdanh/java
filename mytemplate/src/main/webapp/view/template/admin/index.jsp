@@ -11,6 +11,7 @@
     
 	<title><tiles:insertAttribute name = "title" /></title>
 	<!-- stylesheets global-->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/view/public/css/lib/font-awesome.css'/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value='/view/public/css/lib/bootstrap.css'/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value='/view/public/css/lib/bootstrap-theme.css'/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value='/view/public/css/global/global.css'/>"/>
