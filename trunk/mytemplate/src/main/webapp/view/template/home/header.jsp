@@ -13,7 +13,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Admin</a>
+			<a class="navbar-brand" href="/">Home</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -28,6 +28,7 @@
 						</c:forEach>
 					</ul>
 				</li>
+				<li><a href="<c:url value = 'upload-template-file-page'/>">Upload template</a></li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">

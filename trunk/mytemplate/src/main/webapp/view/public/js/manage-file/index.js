@@ -85,6 +85,9 @@ $(document).ready(function(){
 			return false;
 		},
 	  	rules: {
+	  		titleTemplate:{
+	  			required:true
+	  		},
 	  		fileTemplateUpload:{
 	  			required:true
 	  		},
@@ -93,6 +96,9 @@ $(document).ready(function(){
 	  		}
 		},
 		messages:{
+			titleTemplate:{
+				required:"You need input title"
+			},
 			fileTemplateUpload:{
 				required:"You need choose file"
 			},
@@ -102,11 +108,14 @@ $(document).ready(function(){
 		},
 		focusInvalid: true,
 		errorPlacement: function(error, element) {
+			
 			if(element.attr("name") == "fileNameTemplate"){
 				error.appendTo($("#error-file-name-template"));
 			}else if(element.attr("name") == "fileTemplateUpload"){
 				error.appendTo($("#error-file-template"));
-			}else {
+			}else if(element.attr("name") == "titleTemplate"){
+				error.appendTo($("#error-title-template"));
+			}else{
 		        error.insertAfter(element); // default error placement.
 		    }
 		}

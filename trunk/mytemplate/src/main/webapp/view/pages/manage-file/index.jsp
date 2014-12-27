@@ -9,6 +9,7 @@
             <div class="form-group">
                 <label><spring:message code = 'msg.upload-template-file-page.label.titletemplate'/></label>
                 <input type = "text" class = "form-control  mt-no-border-radius" name = "titleTemplate" id = "titleTemplate"/>
+            	<div id = "error-title-template" class = "error-custom"></div>
             </div>
 			<!-- category -->
 			<div class="form-group">
