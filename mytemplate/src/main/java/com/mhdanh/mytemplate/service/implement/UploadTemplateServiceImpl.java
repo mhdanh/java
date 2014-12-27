@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Date;
 
 import javax.imageio.ImageIO;
@@ -105,7 +106,7 @@ public class UploadTemplateServiceImpl extends
 						+ fileAfterHash;
 				File newFileNameForThumbnail = new File(newFileNameAfterHash);
 				Files.copy(fileThumbnailNeedChangeName.toPath(),
-						newFileNameForThumbnail.toPath());
+						newFileNameForThumbnail.toPath(),StandardCopyOption.REPLACE_EXISTING);
 				// delete old file
 				fileThumbnailNeedChangeName.delete();
 

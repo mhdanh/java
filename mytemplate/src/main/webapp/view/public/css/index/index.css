@@ -15,6 +15,7 @@
 .wrap-title-img{
 	max-width:420px;
 	margin:auto;
+	padding-bottom:20px;
 }
 .title-template{
 	overflow-x:hidden;
@@ -30,9 +31,44 @@
 	margin-right:15px;
 	font-size:1.3em;
 }
+
+.detail-item{
+	margin-top:5px;
+}
+
 .buy-item .icon{
 	font-size:1.07em;
 }
 .buy-item .buy-item-text{
 	font-size:1.3em;
 }
+
+.wrap-livedemo-buy{
+	text-align:center;
+}
+.wrap-imag-viewdetail{
+	position: relative;
+}
+.overlay-view-detail-button{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	display:flex;
+	align-items:center;
+	top: 0px;
+}
+.overlay-view-detail-button:hover .view-detail-button{
+	visibility: visible;
+}
+.view-detail-button{
+	margin:auto;
+	width: 150px;
+	height: 50px;
+	background: rgba(20,20,20,0.5);
+	color: white;
+	border:1px solid #ccc;
+	outline: none;
+	border-radius: 4px;
+	visibility: hidden;
+}
+
