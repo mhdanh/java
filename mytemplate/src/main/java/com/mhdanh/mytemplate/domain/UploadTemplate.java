@@ -44,6 +44,9 @@ public class UploadTemplate {
 
 	@Column
 	private Date dateCreated;
+	
+	@Column
+	private Date dateModified;
 
 	@Column
 	private String thumbnail;
@@ -95,6 +98,14 @@ public class UploadTemplate {
 
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
+	}
+
+	public Date getDateModified() {
+		return dateModified;
+	}
+
+	public void setDateModified(Date dateModified) {
+		this.dateModified = dateModified;
 	}
 
 	public Category getCategory() {
