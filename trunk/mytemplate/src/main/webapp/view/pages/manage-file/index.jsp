@@ -7,13 +7,13 @@
 		<form id = "frm-upload-template">
 			<!-- title template -->
             <div class="form-group">
-                <label><spring:message code = 'msg.upload-template-file-page.label.titletemplate'/></label>
-                <input type = "text" class = "form-control  mt-no-border-radius" name = "titleTemplate" id = "titleTemplate"/>
+                <label><spring:message code = 'msg.upload-template-file-page.label.titletemplate'/> *</label>
+                <input type = "text" class = "form-control  mt-no-border-radius" name = "titleTemplate" id = "titleTemplate" autofocus="autofocus"/>
             	<div id = "error-title-template" class = "error-custom"></div>
             </div>
 			<!-- category -->
 			<div class="form-group">
-                <label><spring:message code = 'msg.upload-template-file-page.label.choosecategory' /></label>
+                <label><spring:message code = 'msg.upload-template-file-page.label.choosecategory' /> *</label>
                 <select class = 'form-control  mt-no-border-radius' id = "selCategory">
 					<c:forEach items="${categories}" var = "category">
 						<option value = "${category.id}"><spring:message code ="${category.name}"/></option>
@@ -22,20 +22,26 @@
             </div>
             <!-- upload file  -->
             <div class="form-group">
-                <label><spring:message code = 'msg.upload-template-file-page.label.choosefile'/></label>
+                <label><spring:message code = 'msg.upload-template-file-page.label.choosefile'/> *</label>
                 <div class="input-group">
                 	<input type="file" id="file-template-upload"
 						class="mt-hidden-complete" accept="<spring:message code='msg.support.extension'/>" name = "fileTemplateUpload">
 					<input type="text"
-						class="form-control  mt-no-border-radius txt-name-file-upload" name="fileNameTemplate" autocomplete="off">
+						class="form-control  mt-no-border-radius txt-name-file-upload" name="fileNameTemplate" id = "fileNameTemplate"  autocomplete="off">
 						<label for = "file-template-upload" class="input-group-addon mt-no-border-radius btn btn-primary  btn-upload"><spring:message code = 'msg.upload-template-file-page.button.choosezipfile'/></label>
+				</div>
+				<div id = "error-file-isused-template" class = "error-custom mt-display-none">
+					<label><spring:message code = 'msg.upload-template-file-page.text.isusedbyothermember'/></label>
+				</div>
+				<div id = "info-file-overwrite-template" class = "info-custom mt-display-none">
+					<label><spring:message code = 'msg.upload-template-file-page.text.overwriteyourtemplate'/></label>
 				</div>
 				<div id = "error-file-template" class = "error-custom"></div>
 				<div id = "error-file-name-template" class = "error-custom"></div>
             </div>
             <!-- upload thumbnail -->
             <div class="form-group">
-                <label><spring:message code = 'msg.upload-template-file-page.label.thumbnail' /></label>
+                <label><spring:message code = 'msg.upload-template-file-page.label.thumbnail' /> *</label>
                 <div class="input-group">
                 	<input type="file" id="file-thumbnail-upload"
 						class="mt-hidden-complete" accept="image/*" name = "fileThumbnailUpload">
@@ -45,13 +51,17 @@
 				</div>
 				<div id = "error-file-thumbnail" class = "error-custom"></div>
 				<div class = "thumbnail mt-display-none" id = "thumbnail">
-					<img src = "df" alt = "thumbnail template"/>
+					<img alt = "thumbnail template"/>
 				</div>
             </div>
             <!-- cost -->
             <div class="form-group">
-                <label><spring:message code = 'msg.upload-template-file-page.label.cost'/></label>
-                <input type = "text" class = "form-control  mt-no-border-radius" name = "costTemplate" id = "costTemplate" placeholder="100K <spring:message code = "msg.upload-template-file-page.text.or" /> 2$"/>
+                <label><spring:message code = 'msg.upload-template-file-page.label.cost'/>( <spring:message code = 'msg.upload-template-file-page.text.freetemplate'/> )</label>
+                <div class="input-group">
+					<input type="text"
+						class="form-control  mt-no-border-radius" name="costTemplate" id = "costTemplate">
+						<span class="input-group-addon mt-no-border-radius">x 1000VND</span>
+				</div>
             </div>
             
             <div class="form-group">

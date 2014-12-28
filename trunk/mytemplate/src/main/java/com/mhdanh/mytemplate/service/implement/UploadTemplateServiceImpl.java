@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mhdanh.mytemplate.dao.UploadTemplateDao;
 import com.mhdanh.mytemplate.domain.Category;
 import com.mhdanh.mytemplate.domain.UploadTemplate;
 import com.mhdanh.mytemplate.service.CategoryService;
@@ -41,6 +44,8 @@ public class UploadTemplateServiceImpl extends
 	CategoryService categoryService;
 	@Autowired
 	UnzipService unzipService;
+	@Autowired
+	UploadTemplateDao uploadTemplateDao;
 
 	private BufferedImage resizeImage(BufferedImage originalImage, int type) {
 		int thumbnailHeight = Integer.valueOf(utility
@@ -142,23 +147,33 @@ public class UploadTemplateServiceImpl extends
 				// extract zip file to folder template
 				unzipService.unZip(pathToNewZipFile, pathFolderTemplate);
 
-				// save upload template
-				UploadTemplate newTemplate = new UploadTemplate();
-				newTemplate.setTitle(titleTemplate);
-				newTemplate.setDateCreated(new Date());
-				newTemplate.setFileName(fileNameTemplate);
-				newTemplate.setCategory(categoryBeUploadTo);
-				String link = LINK_TEMPLATE
-						+ utility
-								.convertTextInDatabaseToNormalText(categoryBeUploadTo
-										.getName()) + "/"
-						+ utility.getNameWithouExtension(fileNameTemplate)
-						+ "/index.html";
-				newTemplate.setLink(link);
-				newTemplate.setOwner(utility.getUserLogined());
-				newTemplate.setThumbnail(fileAfterHash);
-				newTemplate.setCost(costTemplate);
-				this.add(newTemplate);
+				UploadTemplate updateTemplate = uploadTemplateDao.getUploadTemplateByCategoryAndFileNameOfOwner(categoryTemplateId,fileNameTemplate); 
+				if(updateTemplate != null){
+					//update template
+					updateTemplate.setTitle(titleTemplate);
+					updateTemplate.setDateModified(new Date());
+					updateTemplate.setThumbnail(fileAfterHash);
+					this.update(updateTemplate);
+				}else if(uploadTemplateDao.getUploadTemplateByCategoryAndFileNameNotOwner(categoryTemplateId,fileNameTemplate) == null){
+					//add new template
+					UploadTemplate newTemplate = new UploadTemplate();
+					newTemplate.setTitle(titleTemplate);
+					newTemplate.setDateCreated(new Date());
+					newTemplate.setFileName(fileNameTemplate);
+					newTemplate.setCategory(categoryBeUploadTo);
+					String link = LINK_TEMPLATE
+							+ utility
+									.convertTextInDatabaseToNormalText(categoryBeUploadTo
+											.getName()) + "/"
+							+ utility.getNameWithouExtension(fileNameTemplate)
+							+ "/index.html";
+					newTemplate.setLink(link);
+					newTemplate.setOwner(utility.getUserLogined());
+					newTemplate.setThumbnail(fileAfterHash);
+					newTemplate.setCost(costTemplate);
+					this.add(newTemplate);
+				}
+				
 				return true;
 			} catch (Exception e) {
 				logger.error("upload file failed", e);
@@ -169,4 +184,23 @@ public class UploadTemplateServiceImpl extends
 		}
 	}
 
+	@Override
+	public Object checkkUploadTemplateState(int categoryId, String fileName) {
+		String overwriteyourtemplate = "msg.upload-template-file-page.text.overwriteyourtemplate";
+		String isusedbyothermember = "msg.upload-template-file-page.text.isusedbyothermember";
+		
+		Map<String, String> jsonObject = new HashMap<String, String>();
+		//check overwriting 
+		if(uploadTemplateDao.getUploadTemplateByCategoryAndFileNameOfOwner(categoryId, fileName) != null){
+			jsonObject.put("state","overwriteyourtemplate");
+			jsonObject.put("overwriteyourtemplate",utility.getMessage(overwriteyourtemplate));
+		//check is use by other member
+		}else if(uploadTemplateDao.getUploadTemplateByCategoryAndFileNameNotOwner(categoryId, fileName) != null){
+			jsonObject.put("state","isusedbyothermember");
+			jsonObject.put("overwriteyourtemplate",utility.getMessage(isusedbyothermember));
+		}else{
+			jsonObject.put("state","canuse");
+		}
+		return jsonObject;
+	}
 }

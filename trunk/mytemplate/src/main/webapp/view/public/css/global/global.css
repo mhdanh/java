@@ -17,4 +17,14 @@
 	border-color:#ebccd1;
 	line-height: 30px;
 }
-.error-custom label{margin-bottom:0px;margin-left:10px;}
+.error-custom label,
+.info-custom label{margin-bottom:0px;margin-left:10px;}
+
+.info-custom{
+	margin-top:3px;
+	margin-bottom:3px;
+	background:#dff0d8;
+	color:#3c763d;
+	border-color:#d6e9c6;
+	line-height: 30px;
+}

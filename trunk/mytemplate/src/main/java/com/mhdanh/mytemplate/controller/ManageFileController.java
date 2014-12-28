@@ -45,6 +45,12 @@ public class ManageFileController {
 		boolean result = uploadTemplateService.uploadTemplate(templateUpload);
 		return String.valueOf(result);
 	}
+	
+	@RequestMapping(value = "/ajax/check-template-upload-state",method = RequestMethod.POST)
+	@ResponseBody
+	public Object checkTemplateUploadState(@ModelAttribute("templateUpload") UploadTemplateDTO templateUpload){
+		return uploadTemplateService.checkkUploadTemplateState(templateUpload.getCategoryTemplateId(), templateUpload.getFileNameTemplate());
+	}
 
 	
 	

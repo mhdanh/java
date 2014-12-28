@@ -12,7 +12,7 @@
 				<div class = "col-md-6">
 					<div class = "content-template">
 						<div class = "wrap-title-img">
-							<h4 class = "title-template">${template.title}</h4>
+							<h4 class = "title-template"><c:out value="${template.title}" escapeXml="true"/></h4>
 							<div class = "wrap-imag-viewdetail">
 								<img src="<c:url value='/viewimg/${template.thumbnail}'/>" class="img-thumbnail" alt="Cinque Terre" width="420" height="236">
 								<div class = "overlay-view-detail-button">
@@ -21,7 +21,7 @@
 							</div><!-- end wrap img and delete -->
 							<div class = "detail-item">
 								<strong class = "cost-item">
-									${template.cost}
+									<c:out value='${template.cost}' escapeXml="true"/>
 								</strong>
 								<strong class = "buy-item">
 									<span class = "glyphicon glyphicon-shopping-cart icon"></span>
@@ -41,7 +41,7 @@
 				<div class = "col-md-6">
 					<div class = "content-template">
 						<div class = "wrap-title-img">
-							<h4 class = "title-template">${template.title}</h4>
+							<h4 class = "title-template"><c:out value="${template.title}" escapeXml="true"/></h4>
 							<div class = "wrap-imag-viewdetail">
 								<img src="<c:url value='/viewimg/${template.thumbnail}'/>" class="img-thumbnail" alt="Cinque Terre" width="420" height="236">
 								<div class = "overlay-view-detail-button">
