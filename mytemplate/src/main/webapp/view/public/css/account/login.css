@@ -1,0 +1,9 @@
+.login-page {
+	width: 600px;
+	margin: auto;
+}
+
+.login-page-title {
+	border-bottom: 1px groove #ccc;
+	padding-bottom: 3px;
+}
