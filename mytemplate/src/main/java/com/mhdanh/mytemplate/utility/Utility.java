@@ -56,6 +56,11 @@ public class Utility {
 		return messageSource.getMessage(key, null, locale);
 	}
 	
+	public String getMessage(String key,Object... param) {
+		Locale locale = LocaleContextHolder.getLocale();
+		return messageSource.getMessage(key, param, locale);
+	}
+	
 	/**
 	 * Example: CATEGORY.ADMIN_DASHBOARD to admin-dashboard
 	 * @param dataBaseText

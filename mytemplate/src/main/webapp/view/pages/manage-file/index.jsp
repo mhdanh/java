@@ -56,26 +56,20 @@
             </div>
             <!-- cost -->
             <div class="form-group">
-                <label><spring:message code = 'msg.upload-template-file-page.label.cost'/>( <spring:message code = 'msg.upload-template-file-page.text.freetemplate'/> )</label>
+                <label><spring:message code = 'msg.upload-template-file-page.label.cost'/></label>
                 <div class="input-group">
 					<input type="text"
 						class="form-control  mt-no-border-radius" name="costTemplate" id = "costTemplate">
 						<span class="input-group-addon mt-no-border-radius">x 1000VND</span>
 				</div>
+				<p class="help-block"><spring:message code = 'msg.upload-template-file-page.text.freetemplate'/>.</p>
+            	<div id = "error-cost-template" class = "error-custom"></div>
             </div>
             
             <div class="form-group">
-				<div class="checkbox">
-					<label> <input type="checkbox"> <spring:message code = 'msg.upload-template-file-page.label.overwrite'/></label>
-				</div>
-			</div>
-			
-            <div class="form-group">
 				<button class="btn btn-primary  mt-button" id = "upload-file-button" type="submit"><spring:message code = 'msg.upload-template-file-page.button.upload'/></button>
 			</div>
-			
 		</form>
-
 	</div>
 	
 </div>
