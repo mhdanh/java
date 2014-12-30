@@ -28,11 +28,13 @@
 						</c:forEach>
 					</ul>
 				</li>
+				<sec:authorize access="isAuthenticated()">
 				<li><a href="<c:url value = 'upload-template-file-page'/>">Upload template</a></li>
+				</sec:authorize>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
-				<sec:authorize access="hasAnyRole('ADMIN','SUPPER_USER','USER')">
+				<sec:authorize access="isAuthenticated()">
 				<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">${my:getUserLogined().username} <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">

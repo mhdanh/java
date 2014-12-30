@@ -27,7 +27,7 @@
 		<put-attribute name="title" value="Login mytemplate"></put-attribute>
 		<put-attribute name="content" value="/view/pages/login/login.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
-			<add-attribute value="" />
+			<add-attribute value="/view/public/css/account/login.css" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts">
 			<add-attribute value="" />
