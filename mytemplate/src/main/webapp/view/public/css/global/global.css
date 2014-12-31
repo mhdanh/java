@@ -34,3 +34,8 @@
 	line-height: 30px;
 }
 
+.page-title {
+	border-bottom: 1px groove #ccc;
+	padding-bottom: 3px;
+	color:#555;
+}
