@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <div class = "row login-page">
-	<h2 class = "login-page-title"><spring:message code = "msg.login.label.title.logintomyui" /></h2>
+	<h2 class = "page-title"><spring:message code = "msg.login.label.title.logintomyui" /></h2>
 	<!-- login with register account -->
 	<div class = "col-md-7">
 		<form name='loginForm' action="<c:url value='j_spring_security_check' />" method='POST' id = "loginForm">
