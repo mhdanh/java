@@ -1,8 +1,13 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <footer class="footer">
-	<div class="container">
-		<p class="text-muted">Place sticky footer content here.</p>
+	<div class = "row">
+		<div class = "col-md-4">
+			<ul>
+				<li><a href = "" class = "fa fa-globe"> Find Jobs</a></li>
+				<li><a href = "" class = "fa fa-slideshare"> Blog</a></li>
+			</ul>
+		</div>
 	</div>
 </footer>
 <!-- modal inform error -->

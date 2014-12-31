@@ -6,4 +6,10 @@
 .login-page-title {
 	border-bottom: 1px groove #ccc;
 	padding-bottom: 3px;
+	color:#555;
+}
+
+.login-page-form-login-link-forgot-password{
+	float: right;
+	margin-top:5px;
 }

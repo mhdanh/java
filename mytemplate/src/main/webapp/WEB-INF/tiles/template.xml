@@ -12,7 +12,7 @@
 	<!-- index controller -->
 	<!-- 	"/index","/","/index/" -->
 	<definition name="/index" extends="homeTemplate">
-		<put-attribute name="title" value="Template 4u"></put-attribute>
+		<put-attribute name="title" value="Template for you"></put-attribute>
 		<put-attribute name="content" value="/view/pages/index/index.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
 			<add-attribute value="/view/public/css/index/index.css" />
@@ -22,15 +22,28 @@
 		</put-list-attribute>
 	</definition>
 
-	<!-- login controller -->
+	<!-- account controller -->
 	<definition name="/login" extends="homeTemplate">
-		<put-attribute name="title" value="Login mytemplate"></put-attribute>
-		<put-attribute name="content" value="/view/pages/login/login.jsp"></put-attribute>
+		<put-attribute name="title" value="Login"></put-attribute>
+		<put-attribute name="content" value="/view/pages/account/login.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
 			<add-attribute value="/view/public/css/account/login.css" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts">
-			<add-attribute value="" />
+			<add-attribute value="/view/public/js/lib/jquery.validate.js" />
+			<add-attribute value="/view/public/js/account/login.js" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/register" extends="homeTemplate">
+		<put-attribute name="title" value="Register account"></put-attribute>
+		<put-attribute name="content" value="/view/pages/account/register.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/view/public/css/account/register.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/view/public/js/lib/jquery.validate.js" />
+			<add-attribute value="/view/public/js/account/register.js" />
 		</put-list-attribute>
 	</definition>
 
