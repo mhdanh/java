@@ -10,7 +10,7 @@ import com.mhdanh.mytemplate.domain.Account;
 import com.mhdanh.mytemplate.utility.Utility;
 
 @Controller
-public class LoginController {
+public class AccountController {
 	
 	@Autowired
 	Utility utility;
@@ -23,4 +23,14 @@ public class LoginController {
 		}
 		return "/login";
 	}
+	
+	@RequestMapping(value = {"/register","/register/"})
+	private String registerPage(HttpServletRequest request){
+		Account userLogined = utility.getUserLogined();
+		if(userLogined != null){
+			 return "redirect:/";
+		}
+		return "/register";
+	}
+	
 }
