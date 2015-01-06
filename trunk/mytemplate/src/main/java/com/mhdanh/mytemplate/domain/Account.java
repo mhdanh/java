@@ -19,43 +19,55 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="account")
+@Table(name = "account")
 public class Account {
-	
-	public static enum ACCOUNT_STATUS {ACTIVE,WAITING,DELETED,BLOCKED}
-	
+
+	public static enum ACCOUNT_STATUS {
+		ACTIVE, WAITING, DELETED, BLOCKED
+	}
+
 	@Id
-	@GenericGenerator(name="increment" , strategy="increment")
-	@GeneratedValue(generator="increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
+	@GeneratedValue(generator = "increment")
 	@Column(name = "id")
-	private int id; 
-	
+	private int id;
+
 	@Column(name = "username", length = 32, nullable = false, unique = true)
 	private String username;
-	
+
 	@Column(name = "password", length = 32, nullable = false)
 	private String password;
-	
+
 	@Column
 	private String email;
-	
+
 	@Column(nullable = true)
 	private Date dateCreated;
-	
+
 	@Column(nullable = true)
 	@Enumerated(EnumType.STRING)
 	private ACCOUNT_STATUS status;
-	
-	@Column(nullable = true,unique = true)
+
+	@Column(nullable = true, unique = true)
 	private String token;
-	
-	
+
+	@Column
+	private String firstName;
+
+	@Column
+	private String lastName;
+
+	@Column
+	private Date dateModified;
+
+	@Column
+	private Date dateExpired;
 
 	@ManyToMany(targetEntity = Role.class)
-	@JoinTable(name = "account_role",joinColumns = {@JoinColumn(name = "account_id")},inverseJoinColumns = {@JoinColumn(name = "role_id")})
-	@Cascade(value={CascadeType.DELETE})
+	@JoinTable(name = "account_role", joinColumns = { @JoinColumn(name = "account_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+	@Cascade(value = { CascadeType.DELETE })
 	private List<Role> roles;
-	
+
 	public Account() {
 	}
 
@@ -122,4 +134,37 @@ public class Account {
 	public void setToken(String token) {
 		this.token = token;
 	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Date getDateModified() {
+		return dateModified;
+	}
+
+	public void setDateModified(Date dateModified) {
+		this.dateModified = dateModified;
+	}
+
+	public Date getDateExpired() {
+		return dateExpired;
+	}
+
+	public void setDateExpired(Date dateExpired) {
+		this.dateExpired = dateExpired;
+	}
+
 }
