@@ -44,4 +44,12 @@ public class AccountDaoImpl extends CommonDaoImpl<Account> implements AccountDao
 				.uniqueResult();
 	}
 
+	@Override
+	public Account getAccountByEmail(String email) {
+		return (Account) sessionFactory.getCurrentSession()
+				.createCriteria(Account.class)
+				.add(Restrictions.eq("email", email))
+				.uniqueResult();
+	}
+
 }
