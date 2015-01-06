@@ -20,6 +20,8 @@
 		<commons.io.version>2.4</commons.io.version>
 		<testng.version>6.8.8</testng.version>
 		<jackson.databind.version>2.4.2</jackson.databind.version>
+		<javamail.version>1.4.3</javamail.version>
+
 	</properties>
 	<dependencies>
 		<!-- java ee for tomcat -->
@@ -118,7 +120,17 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.databind.version}</version>
 		</dependency>
-
+		<!-- java mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>${javamail.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>
@@ -164,6 +176,8 @@
 				<database.password>123456</database.password>
 				<system.url.store.template>D:/opt/mytemplate/template/</system.url.store.template>
 				<system.url.store.image>D:/opt/mytemplate/images/</system.url.store.image>
+				<system.email.username>myuiinfo@gmail.com</system.email.username>
+				<system.email.password>Mhdnnd169188</system.email.password>
 			</properties>
 		</profile>
 		<profile>
@@ -178,6 +192,8 @@
 				<database.password>Mhdnnd169188</database.password>
 				<system.url.store.template>C:/opt/mytemplate/template/</system.url.store.template>
 				<system.url.store.image>C:/opt/mytemplate/images/</system.url.store.image>
+				<system.email.username>myuiinfo@gmail.com</system.email.username>
+				<system.email.password>Mhdnnd169188</system.email.password>
 			</properties>
 		</profile>
 		<profile>
@@ -219,6 +235,8 @@
 				<database.password>hydra</database.password>
 				<system.url.store.template>C:/opt/mytemplate/template/</system.url.store.template>
 				<system.url.store.image>C:/opt/mytemplate/images/</system.url.store.image>
+				<system.email.username>myuiinfo@gmail.com</system.email.username>
+				<system.email.password>Mhdnnd169188</system.email.password>
 			</properties>
 		</profile>
 	</profiles>

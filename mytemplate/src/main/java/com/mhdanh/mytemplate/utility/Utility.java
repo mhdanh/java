@@ -34,6 +34,10 @@ public class Utility {
 	@Autowired
 	AccountService accountService;
 	
+	public String getValidatedValue(String valueNeedToValidate){
+		return valueNeedToValidate.trim().replaceAll("\\p{Cntrl}", "");
+	}
+	
 	public String getWebappPath() throws UnsupportedEncodingException {
 		String classPath = this.getClass().getClassLoader().getResource("")
 				.getPath();

@@ -1,36 +1,31 @@
 package com.mhdanh.mytemplate.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mhdanh.mytemplate.domain.Account;
+import com.mhdanh.mytemplate.service.AccountService;
+import com.mhdanh.mytemplate.service.MailService;
 import com.mhdanh.mytemplate.utility.Utility;
+import com.mhdanh.mytemplate.viewmodel.MailSenderDTO;
 
 @Controller
 public class AccountController {
-	
+
 	@Autowired
-	Utility utility;
-	
-	@RequestMapping(value = {"/login","/login/"})
-	private String loginPage(HttpServletRequest request){
-		Account userLogined = utility.getUserLogined();
-		if(userLogined != null){
-			 return "redirect:/";
-		}
-		return "/login";
+	AccountService accountService;
+
+	@RequestMapping(value = { "/login", "/login/" })
+	private String loginPage() {
+		return accountService.loginSystem();
 	}
-	
-	@RequestMapping(value = {"/register","/register/"})
-	private String registerPage(HttpServletRequest request){
-		Account userLogined = utility.getUserLogined();
-		if(userLogined != null){
-			 return "redirect:/";
-		}
-		return "/register";
+
+	@RequestMapping(value = { "/register", "/register/" })
+	private String registerPage(
+			@ModelAttribute("register") Account registerAccount) {
+		return accountService.registerAccount(registerAccount);
 	}
-	
+
 }
