@@ -32,13 +32,13 @@ public class Account {
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "username", length = 32, nullable = false, unique = true)
+	@Column(name = "username", length = 32, unique = true)
 	private String username;
 
-	@Column(name = "password", length = 32, nullable = false)
+	@Column(name = "password", length = 32)
 	private String password;
 
-	@Column
+	@Column(unique = true)
 	private String email;
 
 	@Column(nullable = true)
