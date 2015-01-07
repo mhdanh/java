@@ -60,9 +60,6 @@ public class Account {
 	@Column
 	private Date dateModified;
 
-	@Column
-	private Date dateExpired;
-
 	@ManyToMany(targetEntity = Role.class)
 	@JoinTable(name = "account_role", joinColumns = { @JoinColumn(name = "account_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
 	@Cascade(value = { CascadeType.DELETE })
@@ -157,14 +154,6 @@ public class Account {
 
 	public void setDateModified(Date dateModified) {
 		this.dateModified = dateModified;
-	}
-
-	public Date getDateExpired() {
-		return dateExpired;
-	}
-
-	public void setDateExpired(Date dateExpired) {
-		this.dateExpired = dateExpired;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.mhdanh.mytemplate.service.implement;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
@@ -85,7 +87,7 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 					+ ":"
 					+ request.getServerPort()
 					+ request.getContextPath()
-					+ "/account-info/"
+					+ "/init-account/"
 					+ utility.hashStringWithDefaultKey(registerAccount
 							.getEmail());
 			String contentRegister = utility.getMessage(
@@ -108,7 +110,6 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 			return "redirect:/";
 		}
 		return "/login";
-
 	}
 
 	private boolean isExistAccountByEmail(String email) {
@@ -119,4 +120,30 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 		return false;
 	}
 
+	@Override
+	public String initAccountPage(String token) {
+		Account accountByToken = accountDao.getAccountByToken(token);
+		if (accountByToken == null) {
+			return "/404";
+		}
+		return "/init-account/";
+	}
+
+	@Override
+	public String updateInitAccount(Account accountTemp,String token) {
+		Account accountByToken = accountDao.getAccountByToken(token);
+		if (accountTemp.getUsername() != null
+				&& accountTemp.getPassword() != null) {
+			// update account
+			accountByToken.setDateCreated(new Date());
+			accountByToken.setDateModified(new Date());
+			accountByToken.setUsername(accountTemp.getUsername());
+			accountByToken.setPassword(accountTemp.getPassword());
+			accountByToken.setFirstName(accountTemp.getFirstName());
+			accountByToken.setLastName(accountTemp.getLastName());
+			accountByToken.setStatus(ACCOUNT_STATUS.ACTIVE);
+			accountDao.update(accountByToken);
+		}
+		return "/init-account/";
+	}
 }

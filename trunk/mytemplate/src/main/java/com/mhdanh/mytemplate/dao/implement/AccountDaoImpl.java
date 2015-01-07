@@ -52,4 +52,12 @@ public class AccountDaoImpl extends CommonDaoImpl<Account> implements AccountDao
 				.uniqueResult();
 	}
 
+	@Override
+	public Account getAccountByToken(String token) {
+		return (Account) sessionFactory.getCurrentSession()
+				.createCriteria(Account.class)
+				.add(Restrictions.eq("token", token))
+				.uniqueResult();
+	}
+
 }

@@ -8,6 +8,8 @@ public interface AccountService extends CommonService<Account>{
 	
 	
 	String registerAccount(Account registerAccount);
+	String initAccountPage(String token);
+	String updateInitAccount(Account accountTemp,String token);
 	String loginSystem();
 	void testtransaction();
 }

@@ -1,0 +1,16 @@
+.init-account-page {
+	width: 500px;
+	margin: auto;
+}
+
+.col-last-name {
+	padding-left: 0px;
+}
+
+.col-first-name {
+	padding-right: 0px;
+}
+
+#init-account-save-button {
+	margin-right: 5px;
+}
