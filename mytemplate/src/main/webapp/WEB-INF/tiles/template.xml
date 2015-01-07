@@ -9,6 +9,17 @@
 		<put-attribute name="header" value="/view/template/admin/header.jsp"></put-attribute>
 		<put-attribute name="footer" value="/view/template/admin/footer.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="/404" extends="homeTemplate">
+		<put-attribute name="title" value="Not found myui.info"></put-attribute>
+		<put-attribute name="content" value="/view/pages/error/404.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/view/public/css/error/404.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+		</put-list-attribute>
+	</definition>
+	
 	<!-- index controller -->
 	<!-- 	"/index","/","/index/" -->
 	<definition name="/index" extends="homeTemplate">
@@ -24,7 +35,7 @@
 
 	<!-- account controller -->
 	<definition name="/login" extends="homeTemplate">
-		<put-attribute name="title" value="Login"></put-attribute>
+		<put-attribute name="title" value="Login myui.info"></put-attribute>
 		<put-attribute name="content" value="/view/pages/account/login.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
 			<add-attribute value="/view/public/css/account/login.css" />
@@ -36,7 +47,7 @@
 	</definition>
 	
 	<definition name="/register" extends="homeTemplate">
-		<put-attribute name="title" value="Register account"></put-attribute>
+		<put-attribute name="title" value="Register account myui.info"></put-attribute>
 		<put-attribute name="content" value="/view/pages/account/register.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
 			<add-attribute value="/view/public/css/account/register.css" />
@@ -46,10 +57,22 @@
 			<add-attribute value="/view/public/js/account/register.js" />
 		</put-list-attribute>
 	</definition>
+	
+	<definition name="/init-account/" extends="homeTemplate">
+		<put-attribute name="title" value="init account myui.info"></put-attribute>
+		<put-attribute name="content" value="/view/pages/account/init-account.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/view/public/css/account/init-account.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/view/public/js/lib/jquery.validate.js" />
+			<add-attribute value="/view/public/js/account/init-account.js" />
+		</put-list-attribute>
+	</definition>
 
 	<!-- Manage file controller -->
 	<definition name="/upload-template-file-page" extends="homeTemplate">
-		<put-attribute name="title" value="Upload new template"></put-attribute>
+		<put-attribute name="title" value="Upload new template myui.info"></put-attribute>
 		<put-attribute name="content" value="/view/pages/manage-file/index.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
 			<add-attribute value="/view/public/css/manage-file/index.css" />

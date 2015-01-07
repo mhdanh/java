@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.mhdanh.mytemplate.service.MailService;
+import com.mhdanh.mytemplate.utility.Utility;
 import com.mhdanh.mytemplate.viewmodel.MailSenderDTO;
 
 @Service
@@ -20,6 +21,8 @@ public class MailServiceImpl implements MailService {
 	
 	@Autowired
 	JavaMailSender javaMailSender;
+	@Autowired
+	Utility utility;
 
 	@Override
 	public void sendHtmlMail(MailSenderDTO mailSender) {
@@ -27,7 +30,7 @@ public class MailServiceImpl implements MailService {
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 			MimeMessageHelper message = new MimeMessageHelper(
 					mimeMessage, "UTF-8");
-
+			message.setFrom(utility.getValueFromPropertiesSystemFile("system.email.username"));
 			message.setTo(new InternetAddress(mailSender.getTo()));
 			message.setSubject(mailSender.getSubject());
 			message.setText(mailSender.getContent(), true);
