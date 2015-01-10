@@ -23,7 +23,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Account {
 
 	public static enum ACCOUNT_STATUS {
-		ACTIVE, WAITING, DELETED, BLOCKED
+		ACTIVE, WAITING, BLOCKED
 	}
 
 	@Id
@@ -50,6 +50,9 @@ public class Account {
 
 	@Column(nullable = true, unique = true)
 	private String token;
+	
+	@Column(nullable = true, unique = true,length = 32)
+	private String keyRecoverPassword;
 
 	@Column
 	private String firstName;
@@ -156,4 +159,11 @@ public class Account {
 		this.dateModified = dateModified;
 	}
 
+	public String getKeyRecoverPassword() {
+		return keyRecoverPassword;
+	}
+
+	public void setKeyRecoverPassword(String keyRecoverPassword) {
+		this.keyRecoverPassword = keyRecoverPassword;
+	}
 }

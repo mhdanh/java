@@ -19,7 +19,7 @@
 		    </div>
 		    <div class="form-group">
 				<button class="btn btn-primary  mt-button" id = "upload-file-button" type="submit"><spring:message code = 'msg.login.label.signin'/></button>
-				<a href = "" class = "login-page-form-login-link-forgot-password"><spring:message code="msg.login.label.forgotpassword"/></a>
+				<a href = "<c:url value='/forgot-password'/>" class = "login-page-form-login-link-forgot-password"><spring:message code="msg.login.label.forgotpassword"/></a>
 			</div>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		</form>

@@ -60,4 +60,12 @@ public class AccountDaoImpl extends CommonDaoImpl<Account> implements AccountDao
 				.uniqueResult();
 	}
 
+	@Override
+	public Account getAccountByKeyRecoverPassword(String tokenRecoverPassword) {
+		return (Account) sessionFactory.getCurrentSession()
+				.createCriteria(Account.class)
+				.add(Restrictions.eq("keyRecoverPassword", tokenRecoverPassword))
+				.uniqueResult();
+	}
+
 }
