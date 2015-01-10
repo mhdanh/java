@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.Properties;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
@@ -20,6 +21,8 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.mhdanh.mytemplate.domain.Account;
 import com.mhdanh.mytemplate.service.AccountService;
@@ -33,6 +36,16 @@ public class Utility {
 	MessageSource messageSource;
 	@Autowired
 	AccountService accountService;
+	/**
+	 * 
+	 * @return http://localhost:8080/mytemplate
+	 */
+	public String getUrlSystem(){
+		HttpServletRequest request = (((ServletRequestAttributes) RequestContextHolder
+				.currentRequestAttributes()).getRequest());
+		String systemUrl = request.getScheme()+ "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+		return systemUrl;
+	}
 	
 	public String getValidatedValue(String valueNeedToValidate){
 		return valueNeedToValidate.trim().replaceAll("\\p{Cntrl}", "");

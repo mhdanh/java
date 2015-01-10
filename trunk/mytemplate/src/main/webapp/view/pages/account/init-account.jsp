@@ -4,20 +4,20 @@
 	<h2 class = "page-title"><spring:message code = "msg.register.label.title" /></h2>
 	<!-- login with register account -->
 	<div class = "col-md-12">
-		<form name='initaccount' action="<c:url value='/init-account-update/${paramToken}'/>" method='POST'>
+		<form name='initaccount' action="<c:url value='/init-account-update/${paramToken}'/>" method='POST' id="frmInitAccount">
 			<!-- name -->
 		    <div class="form-group">
 		    	<div class = "col-md-6 col-last-name">
 		    		<label><spring:message code = 'msg.initaccount.label.lastname'/> *</label>
-		        	<input type = "text" class = "form-control  mt-no-border-radius" name = "lastName" id = "firstName" autofocus="autofocus"/>
-		    		<p class="help-block"><spring:message code = 'msg.initaccount.text.example'/>. Mai</p>
+		        	<input type = "text" class = "form-control  mt-no-border-radius" name = "lastName" id = "lastName" autofocus="autofocus"/>
 		    		<div id = "error-last-name" class = "error-custom"></div>
+		    		<p class="help-block"><spring:message code = 'msg.initaccount.text.example'/>. Nguyen</p>
 		    	</div>
 		    	<div class = "col-md-6 col-first-name">
 		    		<label><spring:message code = 'msg.initaccount.label.firstname'/> *</label>
-		        	<input type = "text" class = "form-control  mt-no-border-radius" name = "firstName" id = "lastName"/>
-		    		<p class="help-block"><spring:message code = 'msg.initaccount.text.example'/>. Danh</p>
+		        	<input type = "text" class = "form-control  mt-no-border-radius" name = "firstName" id = "firstName"/>
 		    		<div id = "error-first-name" class = "error-custom"></div>
+		    		<p class="help-block"><spring:message code = 'msg.initaccount.text.example'/>. Van A</p>
 		    	</div>
 		    	<div class = "mt-clear-both"></div>
 		    </div>

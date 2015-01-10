@@ -7,4 +7,5 @@ public interface AccountDao extends CommonDao<Account>{
 	Account getAccountByUsername(String username);
 	Account getAccountByEmail(String email);
 	Account getAccountByToken(String token);
+	Account getAccountByKeyRecoverPassword(String tokenRecoverPassword);
 }
