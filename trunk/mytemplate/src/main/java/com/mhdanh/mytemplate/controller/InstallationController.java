@@ -13,7 +13,7 @@ import com.mhdanh.mytemplate.service.CategoryService;
 public class InstallationController {
 
 	@Autowired
-	CategoryService categoryService;
+	private CategoryService categoryService;
 	
 	private final Logger logger = Logger.getLogger(InstallationController.class);
 	

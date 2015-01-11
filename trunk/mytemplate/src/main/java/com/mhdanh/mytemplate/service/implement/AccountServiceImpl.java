@@ -35,15 +35,15 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 		AccountService {
 
 	@Autowired
-	AccountDao accountDao;
+	private AccountDao accountDao;
 	@Autowired
-	RoleDao roleDao;
+	private RoleDao roleDao;
 	@Autowired
-	FeedbackDao feedbackDao;
+	private FeedbackDao feedbackDao;
 	@Autowired
-	Utility utility;
+	private Utility utility;
 	@Autowired
-	MailService mailService;
+	private MailService mailService;
 
 	@Override
 	public boolean existUsernameAndPasword(String username, String password) {

@@ -42,10 +42,10 @@ $(document).ready(function(){
 				$("#upload-file-button").attr("disabled","disabled");
 				$("#upload-file-button").text("Uploading...");
 			},
-			success : function(data) {
+			success : function(linkToTemplateDetail) {
 				$("#upload-file-button").removeAttr("disabled");
 				$("#upload-file-button").text(labelButtonSumit);
-				window.location.href='/';
+				window.location.href = linkToTemplateDetail;
 			}
 		});
 	}

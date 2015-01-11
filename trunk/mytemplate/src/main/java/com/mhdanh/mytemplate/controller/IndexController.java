@@ -18,11 +18,11 @@ public class IndexController {
 	private Logger logger = Logger.getLogger(IndexController.class);
 	
 	@Autowired
-	TemplateService uploadTemplateService;
+	private TemplateService templateService;
 	
 	@RequestMapping(value={"/index","/","/index/"})
 	public String index(Model model){
-		List<Template> templates = uploadTemplateService.getAll();
+		List<Template> templates = templateService.getAll();
 		model.addAttribute("templates", templates);
 		return "/index";
 	}

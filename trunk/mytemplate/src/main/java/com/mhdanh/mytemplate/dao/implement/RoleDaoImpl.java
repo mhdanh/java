@@ -16,7 +16,7 @@ import com.mhdanh.mytemplate.domain.Role.ROLE_NAME;
 public class RoleDaoImpl extends CommonDaoImpl<Role> implements RoleDao{
 
 	@Autowired
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	@Override
 	public Role getRoleByRoleName(ROLE_NAME name) {

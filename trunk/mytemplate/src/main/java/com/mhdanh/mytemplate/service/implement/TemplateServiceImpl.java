@@ -16,6 +16,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mhdanh.mytemplate.dao.TemplateDao;
@@ -39,13 +40,13 @@ public class TemplateServiceImpl extends
 	private final String LINK_TEMPLATE = "view/layout/";
 
 	@Autowired
-	Utility utility;
+	private Utility utility;
 	@Autowired
-	CategoryService categoryService;
+	private CategoryService categoryService;
 	@Autowired
-	UnzipService unzipService;
+	private UnzipService unzipService;
 	@Autowired
-	TemplateDao uploadTemplateDao;
+	private TemplateDao templateDao;
 
 	private BufferedImage resizeImage(BufferedImage originalImage, int type) {
 		int thumbnailHeight = Integer.valueOf(utility
@@ -62,7 +63,7 @@ public class TemplateServiceImpl extends
 	}
 
 	@Override
-	public boolean uploadTemplate(UploadTemplateDTO uploadTemplate) {
+	public int uploadTemplate(UploadTemplateDTO uploadTemplate) {
 		if (!uploadTemplate.getFileTemplate().isEmpty()) {
 			try {
 				String titleTemplate = uploadTemplate.getTitleTemplate();
@@ -147,14 +148,15 @@ public class TemplateServiceImpl extends
 				// extract zip file to folder template
 				unzipService.unZip(pathToNewZipFile, pathFolderTemplate);
 
-				Template updateTemplate = uploadTemplateDao.getUploadTemplateByCategoryAndFileNameOfOwner(categoryTemplateId,fileNameTemplate); 
+				Template updateTemplate = templateDao.getUploadTemplateByCategoryAndFileNameOfOwner(categoryTemplateId,fileNameTemplate); 
 				if(updateTemplate != null){
 					//update template
 					updateTemplate.setTitle(titleTemplate);
 					updateTemplate.setDateModified(new Date());
 					updateTemplate.setThumbnail(fileAfterHash);
 					this.update(updateTemplate);
-				}else if(uploadTemplateDao.getUploadTemplateByCategoryAndFileNameNotOwner(categoryTemplateId,fileNameTemplate) == null){
+					return updateTemplate.getId();
+				}else if(templateDao.getUploadTemplateByCategoryAndFileNameNotOwner(categoryTemplateId,fileNameTemplate) == null){
 					//add new template
 					Template newTemplate = new Template();
 					newTemplate.setTitle(titleTemplate);
@@ -172,16 +174,14 @@ public class TemplateServiceImpl extends
 					newTemplate.setThumbnail(fileAfterHash);
 					newTemplate.setCost(costTemplate);
 					this.add(newTemplate);
+					return newTemplate.getId();
 				}
-				
-				return true;
 			} catch (Exception e) {
 				logger.error("upload file failed", e);
-				return false;
+				return -1;
 			}
-		} else {
-			return false;
 		}
+		return -1;
 	}
 
 	@Override
@@ -191,16 +191,26 @@ public class TemplateServiceImpl extends
 		
 		Map<String, String> jsonObject = new HashMap<String, String>();
 		//check overwriting 
-		if(uploadTemplateDao.getUploadTemplateByCategoryAndFileNameOfOwner(categoryId, fileName) != null){
+		if(templateDao.getUploadTemplateByCategoryAndFileNameOfOwner(categoryId, fileName) != null){
 			jsonObject.put("state","overwriteyourtemplate");
 			jsonObject.put("overwriteyourtemplate",utility.getMessage(overwriteyourtemplate));
 		//check is use by other member
-		}else if(uploadTemplateDao.getUploadTemplateByCategoryAndFileNameNotOwner(categoryId, fileName) != null){
+		}else if(templateDao.getUploadTemplateByCategoryAndFileNameNotOwner(categoryId, fileName) != null){
 			jsonObject.put("state","isusedbyothermember");
 			jsonObject.put("overwriteyourtemplate",utility.getMessage(isusedbyothermember));
 		}else{
 			jsonObject.put("state","canuse");
 		}
 		return jsonObject;
+	}
+
+	@Override
+	public String templateDetail(Model model, int idTemplate) {
+		Template templateById = templateDao.getTemplateById(idTemplate);
+		if(templateById == null){
+			return "/404";
+		}
+		model.addAttribute("template", templateById);
+		return "/template-detail";
 	}
 }

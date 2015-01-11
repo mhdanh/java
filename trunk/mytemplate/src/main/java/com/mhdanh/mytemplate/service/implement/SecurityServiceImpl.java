@@ -21,9 +21,9 @@ import com.mhdanh.mytemplate.utility.Utility;
 public class SecurityServiceImpl implements AuthenticationProvider{
 
 	@Autowired
-	AccountService accountService;
+	private AccountService accountService;
 	@Autowired
-	Utility utility;
+	private Utility utility;
 	
 	@SuppressWarnings("deprecation")
 	@Override

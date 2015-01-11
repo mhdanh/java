@@ -149,16 +149,28 @@
 		</put-list-attribute>
 	</definition>
 
-	<!-- Manage file controller -->
+	<!-- template controller -->
 	<definition name="/upload-template-file-page" extends="homeTemplate">
 		<put-attribute name="title" value="Upload new template myui.info"></put-attribute>
-		<put-attribute name="content" value="/view/pages/manage-file/index.jsp"></put-attribute>
+		<put-attribute name="content" value="/view/pages/template/upload-template.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
-			<add-attribute value="/view/public/css/manage-file/index.css" />
+			<add-attribute value="/view/public/css/template/upload-template.css" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts">
 			<add-attribute value="/view/public/js/lib/jquery.validate.js" />
-			<add-attribute value="/view/public/js/manage-file/index.js" />
+			<add-attribute value="/view/public/js/template/upload-template.js" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/template-detail" extends="homeTemplate">
+		<put-attribute name="title" value="Template detail"></put-attribute>
+		<put-attribute name="content" value="/view/pages/template/template-detail.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/view/public/css/template/template-detail.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/view/public/js/lib/jquery.validate.js" />
+			<add-attribute value="/view/public/js/template/template-detail.js" />
 		</put-list-attribute>
 	</definition>
 </tiles-definitions>

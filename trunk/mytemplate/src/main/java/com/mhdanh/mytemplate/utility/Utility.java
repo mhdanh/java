@@ -33,9 +33,9 @@ public class Utility {
 	private final Logger logger = Logger.getLogger(Utility.class);
 	
 	@Autowired
-	MessageSource messageSource;
+	private MessageSource messageSource;
 	@Autowired
-	AccountService accountService;
+	private AccountService accountService;
 	/**
 	 * 
 	 * @return http://localhost:8080/mytemplate
