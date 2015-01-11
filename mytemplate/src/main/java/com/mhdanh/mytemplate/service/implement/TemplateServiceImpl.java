@@ -4,11 +4,14 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import javax.imageio.ImageIO;
 
@@ -212,5 +215,41 @@ public class TemplateServiceImpl extends
 		}
 		model.addAttribute("template", templateById);
 		return "/template-detail";
+	}
+
+	@Override
+	public boolean checkTemplateFormat(MultipartFile fileTemplate) {
+		try {
+			boolean isCorrectFormat = false;
+			ZipInputStream zis = new ZipInputStream(fileTemplate.getInputStream());
+			// get the zipped file list entry
+			ZipEntry ze = zis.getNextEntry();
+			while (ze != null) {
+				String fileName = ze.getName();
+				if("index.html".equals(fileName)){
+					isCorrectFormat = true;
+					break;
+				}
+				ze = zis.getNextEntry();
+			}
+			zis.closeEntry();
+			zis.close();
+			return isCorrectFormat;
+		} catch (IOException e) {
+			e.printStackTrace();
+			logger.error("error read zip file",e);
+			return false;
+		}
+	}
+
+	@Override
+	public Object checkFormatAndExistTemplate(UploadTemplateDTO templateUpload) {
+		boolean templateFormat = checkTemplateFormat(templateUpload.getFileTemplate());
+		if(templateFormat){
+			return checkkUploadTemplateState(templateUpload.getCategoryTemplateId(), templateUpload.getFileNameTemplate());
+		}
+		Map<String, String> wrongFormatTemplate = new HashMap<String, String>();
+		wrongFormatTemplate.put("state","wrongformat");
+		return wrongFormatTemplate;
 	}
 }
