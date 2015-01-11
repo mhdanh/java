@@ -144,7 +144,7 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 			// update account
 			accountByToken.setDateModified(new Date());
 			accountByToken.setUsername(accountTemp.getUsername());
-			accountByToken.setPassword(accountTemp.getPassword());
+			accountByToken.setPassword(utility.hashStringWithDefaultKey(accountTemp.getPassword()));
 			accountByToken.setFirstName(accountTemp.getFirstName());
 			accountByToken.setLastName(accountTemp.getLastName());
 			accountByToken.setStatus(ACCOUNT_STATUS.ACTIVE);
@@ -289,7 +289,7 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 		if(accountByKeyRecoverPassword == null || password.isEmpty()){
 			return "/404";
 		}
-		accountByKeyRecoverPassword.setPassword(password);
+		accountByKeyRecoverPassword.setPassword(utility.hashStringWithDefaultKey(password));
 		accountByKeyRecoverPassword.setKeyRecoverPassword(null);
 		accountDao.update(accountByKeyRecoverPassword);
 		return "redirect:/";

@@ -15,12 +15,15 @@ import org.springframework.stereotype.Component;
 import com.mhdanh.mytemplate.domain.Account;
 import com.mhdanh.mytemplate.domain.Role;
 import com.mhdanh.mytemplate.service.AccountService;
+import com.mhdanh.mytemplate.utility.Utility;
 
 @Component
 public class SecurityServiceImpl implements AuthenticationProvider{
 
 	@Autowired
 	AccountService accountService;
+	@Autowired
+	Utility utility;
 	
 	@SuppressWarnings("deprecation")
 	@Override
@@ -28,7 +31,7 @@ public class SecurityServiceImpl implements AuthenticationProvider{
 			throws AuthenticationException {
 		
 		String username = auth.getPrincipal().toString();
-		String password = auth.getCredentials().toString();
+		String password = utility.hashStringWithDefaultKey(auth.getCredentials().toString());
 		
 		//check password
 		if(accountService.existUsernameAndPasword(username, password)){
