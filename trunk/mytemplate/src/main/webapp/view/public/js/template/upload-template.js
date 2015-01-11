@@ -52,9 +52,11 @@ $(document).ready(function(){
 	
 	function messageTemplateUpload(){
 		var templateUpload = new FormData();
+		var fileTemplate = $("#file-template-upload")[0].files[0];
 		var fileNameTemplate = $(".txt-name-file-upload").val() + ".zip";
 		var categoryTemplateId = $("#selCategory").val();
 		
+		templateUpload.append("fileTemplate",fileTemplate);
 		templateUpload.append("fileNameTemplate",fileNameTemplate);
 		templateUpload.append("categoryTemplateId",categoryTemplateId);
 		
@@ -68,24 +70,31 @@ $(document).ready(function(){
 				xhr.setRequestHeader(header, token);
 			},
 			success : function(data) {
-				if(data.state == "overwriteyourtemplate"){
-					$("#info-file-overwrite-template").removeClass("mt-display-none");
-				}else if(data.state == "isusedbyothermember"){
-					$("#info-file-overwrite-template").addClass("mt-display-none");
-					$("#error-file-isused-template").removeClass("mt-display-none");
+				if(data.state == "wrongformat"){
+					createModalInformError("Error","Format template not correct");
 				}else{
-					$("#info-file-overwrite-template").addClass("mt-display-none");
-					$("#error-file-isused-template").addClass("mt-display-none");
+					if(data.state == "overwriteyourtemplate"){
+						$("#info-file-overwrite-template").removeClass("mt-display-none");
+					}else if(data.state == "isusedbyothermember"){
+						$("#info-file-overwrite-template").addClass("mt-display-none");
+						$("#error-file-isused-template").removeClass("mt-display-none");
+					}else{
+						$("#info-file-overwrite-template").addClass("mt-display-none");
+						$("#error-file-isused-template").addClass("mt-display-none");
+					}
 				}
+				
 			}
 		});
 	}
 	
 	function submitTemplateUpload(){
 		var templateUpload = new FormData();
+		var fileTemplate = $("#file-template-upload")[0].files[0];
 		var fileNameTemplate = $(".txt-name-file-upload").val() + ".zip";
 		var categoryTemplateId = $("#selCategory").val();
 		
+		templateUpload.append("fileTemplate",fileTemplate);
 		templateUpload.append("fileNameTemplate",fileNameTemplate);
 		templateUpload.append("categoryTemplateId",categoryTemplateId);
 		
@@ -99,11 +108,15 @@ $(document).ready(function(){
 				xhr.setRequestHeader(header, token);
 			},
 			success : function(data) {
-				if(data.state == "canuse" || data.state == "overwriteyourtemplate"){
-					ajaxUploadTemplate();
+				if(data.state == "wrongformat"){
+					createModalInformError("Error","Format template not correct");
 				}else{
-					$("#info-file-overwrite-template").addClass("md-display-none");
-					$("#error-file-isused-template").removeClass("mt-display-none");
+					if(data.state == "canuse" || data.state == "overwriteyourtemplate"){
+						ajaxUploadTemplate();
+					}else{
+						$("#info-file-overwrite-template").addClass("md-display-none");
+						$("#error-file-isused-template").removeClass("mt-display-none");
+					}
 				}
 			}
 		});

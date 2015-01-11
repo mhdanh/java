@@ -55,6 +55,7 @@ private Logger logger = Logger.getLogger(TemplateController.class);
 	@RequestMapping(value = "/ajax/check-template-upload-state",method = RequestMethod.POST)
 	@ResponseBody
 	public Object checkTemplateUploadState(@ModelAttribute("templateUpload") UploadTemplateDTO templateUpload){
-		return templateService.checkkUploadTemplateState(templateUpload.getCategoryTemplateId(), templateUpload.getFileNameTemplate());
+		return templateService.checkFormatAndExistTemplate(templateUpload);
+		
 	}
 }
