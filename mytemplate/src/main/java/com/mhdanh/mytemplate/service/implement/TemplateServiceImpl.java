@@ -18,21 +18,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mhdanh.mytemplate.dao.UploadTemplateDao;
+import com.mhdanh.mytemplate.dao.TemplateDao;
 import com.mhdanh.mytemplate.domain.Category;
-import com.mhdanh.mytemplate.domain.UploadTemplate;
+import com.mhdanh.mytemplate.domain.Template;
 import com.mhdanh.mytemplate.service.CategoryService;
 import com.mhdanh.mytemplate.service.UnzipService;
-import com.mhdanh.mytemplate.service.UploadTemplateService;
+import com.mhdanh.mytemplate.service.TemplateService;
 import com.mhdanh.mytemplate.utility.Utility;
 import com.mhdanh.mytemplate.viewmodel.UploadTemplateDTO;
 
 @Service
-public class UploadTemplateServiceImpl extends
-		CommonServiceImpl<UploadTemplate> implements UploadTemplateService {
+public class TemplateServiceImpl extends
+		CommonServiceImpl<Template> implements TemplateService {
 
 	private final Logger logger = Logger
-			.getLogger(UploadTemplateServiceImpl.class);
+			.getLogger(TemplateServiceImpl.class);
 
 	private final String FOLDER_ZIP_TEMPLATE = "system.url.store.template";
 	private final String FOLDER_IMAGE = "system.url.store.image";
@@ -45,7 +45,7 @@ public class UploadTemplateServiceImpl extends
 	@Autowired
 	UnzipService unzipService;
 	@Autowired
-	UploadTemplateDao uploadTemplateDao;
+	TemplateDao uploadTemplateDao;
 
 	private BufferedImage resizeImage(BufferedImage originalImage, int type) {
 		int thumbnailHeight = Integer.valueOf(utility
@@ -147,7 +147,7 @@ public class UploadTemplateServiceImpl extends
 				// extract zip file to folder template
 				unzipService.unZip(pathToNewZipFile, pathFolderTemplate);
 
-				UploadTemplate updateTemplate = uploadTemplateDao.getUploadTemplateByCategoryAndFileNameOfOwner(categoryTemplateId,fileNameTemplate); 
+				Template updateTemplate = uploadTemplateDao.getUploadTemplateByCategoryAndFileNameOfOwner(categoryTemplateId,fileNameTemplate); 
 				if(updateTemplate != null){
 					//update template
 					updateTemplate.setTitle(titleTemplate);
@@ -156,7 +156,7 @@ public class UploadTemplateServiceImpl extends
 					this.update(updateTemplate);
 				}else if(uploadTemplateDao.getUploadTemplateByCategoryAndFileNameNotOwner(categoryTemplateId,fileNameTemplate) == null){
 					//add new template
-					UploadTemplate newTemplate = new UploadTemplate();
+					Template newTemplate = new Template();
 					newTemplate.setTitle(titleTemplate);
 					newTemplate.setDateCreated(new Date());
 					newTemplate.setFileName(fileNameTemplate);

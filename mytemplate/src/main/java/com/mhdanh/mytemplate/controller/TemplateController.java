@@ -13,15 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mhdanh.mytemplate.service.CategoryService;
 import com.mhdanh.mytemplate.service.UnzipService;
-import com.mhdanh.mytemplate.service.UploadTemplateService;
+import com.mhdanh.mytemplate.service.TemplateService;
 import com.mhdanh.mytemplate.utility.Utility;
 import com.mhdanh.mytemplate.viewmodel.UploadTemplateDTO;
 
 @Controller
-public class ManageFileController {
-
+public class TemplateController {
 	
-	private Logger logger = Logger.getLogger(ManageFileController.class);
+private Logger logger = Logger.getLogger(TemplateController.class);
 	
 	@Autowired
 	Utility utility;
@@ -30,7 +29,7 @@ public class ManageFileController {
 	@Autowired
 	CategoryService categoryService;
 	@Autowired
-	UploadTemplateService uploadTemplateService;
+	TemplateService uploadTemplateService;
 	
 	
 	@RequestMapping(value = "/upload-template-file-page")
@@ -51,9 +50,4 @@ public class ManageFileController {
 	public Object checkTemplateUploadState(@ModelAttribute("templateUpload") UploadTemplateDTO templateUpload){
 		return uploadTemplateService.checkkUploadTemplateState(templateUpload.getCategoryTemplateId(), templateUpload.getFileNameTemplate());
 	}
-
-	
-	
-	
-
 }

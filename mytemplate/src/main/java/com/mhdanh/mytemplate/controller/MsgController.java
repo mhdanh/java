@@ -18,15 +18,13 @@ public class MsgController {
 	@RequestMapping(value = "/ajax/get-msg",method = RequestMethod.POST)
 	@ResponseBody
 	private String getMsg(@RequestParam("key") String key){
-		String msg = utility.getMessage(key);
-		return msg;
+		return utility.getMessage(key);
 	}
 	
 	@RequestMapping(value = "/ajax/get-msg-with-param",method = RequestMethod.POST)
 	@ResponseBody
 	private String getMsgWithParam(@RequestParam("key") String key,@RequestParam("param") Object[] param){
-		String msg = utility.getMessage(key,param);
-		return msg;
+		return utility.getMessage(key,param);
 	}
 	
 }

@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -12,8 +14,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "uploadtemplate")
-public class UploadTemplate {
+@Table(name = "template")
+public class Template {
+	
+	public static enum TEMPLATE_STATUS {WAITING, VIEWED, PUBLISH}
 
 	@Id
 	@GenericGenerator(name = "increment", strategy = "increment")
@@ -50,6 +54,10 @@ public class UploadTemplate {
 
 	@Column
 	private String thumbnail;
+	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private TEMPLATE_STATUS status;
 
 	@ManyToOne(targetEntity = Category.class)
 	private Category category;
@@ -57,7 +65,7 @@ public class UploadTemplate {
 	@ManyToOne(targetEntity = Account.class)
 	private Account owner;
 
-	public UploadTemplate() {
+	public Template() {
 	}
 
 	public int getId() {
@@ -167,4 +175,11 @@ public class UploadTemplate {
 		this.thumbnail = thumbnail;
 	}
 
+	public TEMPLATE_STATUS getStatus() {
+		return status;
+	}
+
+	public void setStatus(TEMPLATE_STATUS status) {
+		this.status = status;
+	}
 }

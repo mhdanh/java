@@ -1,6 +1,5 @@
 package com.mhdanh.mytemplate.test.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -10,7 +9,6 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import org.testng.annotations.Test;
 
 import com.mhdanh.mytemplate.domain.Account;
-import com.mhdanh.mytemplate.domain.Role;
 import com.mhdanh.mytemplate.service.AccountService;
 import com.mhdanh.mytemplate.service.RoleService;
 
@@ -40,11 +38,6 @@ public class AccountTest extends ConfigTest{
 	public void roleTest(){
 		List<Account> accounts = accountService.getAll();
 		System.out.println(accounts.size());
-	}
-	
-	@Test
-	public void transactionTest(){
-		accountService.testtransaction();
 	}
 	
 }
