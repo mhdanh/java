@@ -19,7 +19,7 @@ import com.mhdanh.mytemplate.domain.Account;
 public class AccountDaoImpl extends CommonDaoImpl<Account> implements AccountDao{
 
 	@Autowired
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	@SuppressWarnings("unchecked")
 	@Override

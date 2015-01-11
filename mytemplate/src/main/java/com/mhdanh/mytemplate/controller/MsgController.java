@@ -13,7 +13,7 @@ import com.mhdanh.mytemplate.utility.Utility;
 public class MsgController {
 	
 	@Autowired
-	Utility utility;
+	private Utility utility;
 	
 	@RequestMapping(value = "/ajax/get-msg",method = RequestMethod.POST)
 	@ResponseBody

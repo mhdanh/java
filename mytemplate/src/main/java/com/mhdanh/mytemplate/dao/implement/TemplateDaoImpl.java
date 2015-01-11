@@ -17,9 +17,9 @@ import com.mhdanh.mytemplate.utility.Utility;
 public class TemplateDaoImpl extends CommonDaoImpl<Template> implements TemplateDao{
 
 	@Autowired
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	@Autowired
-	Utility utility;
+	private Utility utility;
 	
 	@Override
 	public Template getUploadTemplateByCategoryAndFileNameOfOwner(
@@ -45,6 +45,13 @@ public class TemplateDaoImpl extends CommonDaoImpl<Template> implements Template
 				.setMaxResults(1)
 				.uniqueResult();
 		return templateNotOwner;
+	}
+
+	@Override
+	public Template getTemplateById(int idTemplate) {
+		return (Template) sessionFactory.getCurrentSession().createCriteria(Template.class)
+				.add(Restrictions.eq("id", idTemplate))
+				.uniqueResult();
 	}
 
 

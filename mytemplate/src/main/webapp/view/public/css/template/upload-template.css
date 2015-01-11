@@ -1,0 +1,19 @@
+.manage-file-index{
+	margin-left:0px;
+	margin-right:0px;
+	-webkit-user-select:none;
+}
+.title-upload-template{
+	color:#555;
+	margin-bottom:25px;
+}
+.wrap-input-and-button-choose-file{
+	margin-bottom:7px;
+}
+
+.btn-upload{
+	color:white;
+}
+#costTemplate{
+	text-align: right;
+}

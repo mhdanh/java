@@ -20,9 +20,9 @@ public class MailServiceImpl implements MailService {
 	Logger logger = Logger.getLogger(MailServiceImpl.class);
 	
 	@Autowired
-	JavaMailSender javaMailSender;
+	private JavaMailSender javaMailSender;
 	@Autowired
-	Utility utility;
+	private Utility utility;
 
 	@Override
 	public void sendHtmlMail(MailSenderDTO mailSender) {

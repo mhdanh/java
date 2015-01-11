@@ -15,7 +15,7 @@ import com.mhdanh.mytemplate.utility.Utility;
 public class ViewImgController {
 	
 	@Autowired
-	Utility utility;
+	private Utility utility;
 	
 	private final String FOLDER_IMAGE = "system.url.store.image";
 	

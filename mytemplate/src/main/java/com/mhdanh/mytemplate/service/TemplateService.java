@@ -1,10 +1,17 @@
 package com.mhdanh.mytemplate.service;
 
+import org.springframework.ui.Model;
+
 import com.mhdanh.mytemplate.domain.Template;
 import com.mhdanh.mytemplate.viewmodel.UploadTemplateDTO;
 
 public interface TemplateService extends CommonService<Template>{
-	boolean uploadTemplate(UploadTemplateDTO uploadTemplate);
+	/**
+	 * 
+	 * @param uploadTemplate
+	 * @return id newtemplate
+	 */
+	int uploadTemplate(UploadTemplateDTO uploadTemplate);
 	/**
 	 * return json object. 
 	 * {
@@ -22,4 +29,5 @@ public interface TemplateService extends CommonService<Template>{
 	 * }
 	 */
 	Object checkkUploadTemplateState(int categoryId,String fileName);
+	String templateDetail(Model model, int idTemplate);
 }

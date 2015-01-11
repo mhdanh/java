@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,14 +24,19 @@ public class TemplateController {
 private Logger logger = Logger.getLogger(TemplateController.class);
 	
 	@Autowired
-	Utility utility;
+	private Utility utility;
 	@Autowired
-	UnzipService unzipService;
+	private UnzipService unzipService;
 	@Autowired
-	CategoryService categoryService;
+	private CategoryService categoryService;
 	@Autowired
-	TemplateService uploadTemplateService;
+	private TemplateService templateService;
 	
+	
+	@RequestMapping(value = "/template-detail/{idtemplate}")
+	public String templateDetailPage(Model model,@PathVariable("idtemplate") int idTemplate){
+		return templateService.templateDetail(model,idTemplate);
+	}
 	
 	@RequestMapping(value = "/upload-template-file-page")
 	public String uploadTemplateFilePage(Model model){
@@ -41,13 +47,14 @@ private Logger logger = Logger.getLogger(TemplateController.class);
 	@RequestMapping(value = "/ajax/upload-template-file-page", method = RequestMethod.POST)
 	@ResponseBody
 	public String uploadTemplateFile(@ModelAttribute("templateUpload") UploadTemplateDTO templateUpload,HttpServletRequest request) {
-		boolean result = uploadTemplateService.uploadTemplate(templateUpload);
-		return String.valueOf(result);
+		int idNewTemplate = templateService.uploadTemplate(templateUpload);
+		String linkToTemplateDetail = utility.getUrlSystem() + "/template-detail/" + idNewTemplate;
+		return linkToTemplateDetail;
 	}
 	
 	@RequestMapping(value = "/ajax/check-template-upload-state",method = RequestMethod.POST)
 	@ResponseBody
 	public Object checkTemplateUploadState(@ModelAttribute("templateUpload") UploadTemplateDTO templateUpload){
-		return uploadTemplateService.checkkUploadTemplateState(templateUpload.getCategoryTemplateId(), templateUpload.getFileNameTemplate());
+		return templateService.checkkUploadTemplateState(templateUpload.getCategoryTemplateId(), templateUpload.getFileNameTemplate());
 	}
 }

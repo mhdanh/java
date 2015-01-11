@@ -18,7 +18,7 @@ import com.mhdanh.mytemplate.service.AccountService;
 public class AccountController {
 
 	@Autowired
-	AccountService accountService;
+	private AccountService accountService;
 
 	@RequestMapping(value = { "/login", "/login/" })
 	private String loginPage() {
