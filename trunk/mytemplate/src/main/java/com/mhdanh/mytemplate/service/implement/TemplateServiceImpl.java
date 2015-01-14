@@ -24,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mhdanh.mytemplate.dao.TemplateDao;
+import com.mhdanh.mytemplate.domain.Account;
 import com.mhdanh.mytemplate.domain.Category;
 import com.mhdanh.mytemplate.domain.Template;
 import com.mhdanh.mytemplate.service.CategoryService;
@@ -211,10 +212,18 @@ public class TemplateServiceImpl extends
 	@Override
 	public String templateDetail(Model model, int idTemplate) {
 		Template templateById = templateDao.getTemplateById(idTemplate);
-		if(templateById == null){
+		Account userLogined = utility.getUserLogined();
+		if(templateById == null) {
 			return "/404";
 		}
+		boolean ownerTemplate = false;
+		if(templateById.getOwner().getId() == userLogined.getId()){
+			ownerTemplate = true;
+		}
+		
 		model.addAttribute("template", templateById);
+		model.addAttribute("ownerTemplate", ownerTemplate);
+		
 		return "/template-detail";
 	}
 

@@ -1,19 +1,13 @@
-.manage-file-index{
-	margin-left:0px;
-	margin-right:0px;
-	-webkit-user-select:none;
-}
-.title-upload-template{
-	color:#555;
-	margin-bottom:25px;
-}
-.wrap-input-and-button-choose-file{
-	margin-bottom:7px;
+.template-detail {
+	max-width: 1000px;
+	margin: auto;
 }
 
-.btn-upload{
-	color:white;
+.template-detail-edit-link {
+	float: right;
+	margin-top: 4px;
 }
-#costTemplate{
-	text-align: right;
+
+.template-tab > li > a {
+	border-radius: 0px ;
 }

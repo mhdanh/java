@@ -2,6 +2,9 @@
 .navbar{
 	border-radius:0px;
 }
+a { cursor: pointer; }
+a:hover { text-decoration: none; }
+
 /* custom modal */
 .modal-content-error{
 	box-shadow: 0 0px 5px rgba(244, 20, 20, 0.5) !important;

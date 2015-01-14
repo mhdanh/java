@@ -16,8 +16,10 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "template")
 public class Template {
-	
-	public static enum TEMPLATE_STATUS {WAITING, VIEWED, PUBLISH}
+
+	public static enum TEMPLATE_STATUS {
+		WAITING, VIEWED, PUBLISH
+	}
 
 	@Id
 	@GenericGenerator(name = "increment", strategy = "increment")
@@ -34,6 +36,9 @@ public class Template {
 	@Column(columnDefinition = "text")
 	private String description;
 
+	@Column(columnDefinition = "text")
+	private String log;
+
 	@Column(nullable = false, unique = true)
 	private String link;
 
@@ -43,18 +48,18 @@ public class Template {
 	@Column
 	private String sellOff;
 
-	@Column(columnDefinition="int default 0")
+	@Column(columnDefinition = "int default 0")
 	private Integer buy;
 
 	@Column
 	private Date dateCreated;
-	
+
 	@Column
 	private Date dateModified;
 
 	@Column
 	private String thumbnail;
-	
+
 	@Column
 	@Enumerated(EnumType.STRING)
 	private TEMPLATE_STATUS status;
@@ -157,7 +162,7 @@ public class Template {
 	}
 
 	public Integer getBuy() {
-		if(buy == null){
+		if (buy == null) {
 			return 0;
 		}
 		return buy;
@@ -182,4 +187,13 @@ public class Template {
 	public void setStatus(TEMPLATE_STATUS status) {
 		this.status = status;
 	}
+
+	public String getLog() {
+		return log;
+	}
+
+	public void setLog(String log) {
+		this.log = log;
+	}
+
 }
