@@ -178,6 +178,7 @@
 				<system.url.store.image>D:/opt/mytemplate/images/</system.url.store.image>
 				<system.email.username>myuiinfo@gmail.com</system.email.username>
 				<system.email.password>Mhdnnd169188</system.email.password>
+				<system.url.store.template.sample>D:/opt/mytemplate/sample/sample-template.zip</system.url.store.template.sample>
 			</properties>
 		</profile>
 		<profile>
@@ -194,6 +195,7 @@
 				<system.url.store.image>C:/opt/mytemplate/images/</system.url.store.image>
 				<system.email.username>myuiinfo@gmail.com</system.email.username>
 				<system.email.password>Mhdnnd169188</system.email.password>
+				<system.url.store.template.sample>C:/opt/mytemplate/sample/sample-template.zip</system.url.store.template.sample>
 			</properties>
 		</profile>
 		<profile>
@@ -237,6 +239,7 @@
 				<system.url.store.image>C:/opt/mytemplate/images/</system.url.store.image>
 				<system.email.username>myuiinfo@gmail.com</system.email.username>
 				<system.email.password>Mhdnnd169188</system.email.password>
+				<system.url.store.template.sample>C:/opt/mytemplate/sample/sample-template.zip</system.url.store.template.sample>
 			</properties>
 		</profile>
 	</profiles>

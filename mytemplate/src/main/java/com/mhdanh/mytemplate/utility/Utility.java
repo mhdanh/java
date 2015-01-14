@@ -225,4 +225,27 @@ public class Utility {
 		}
 	}
 	
+	/**
+	 *  render img for view from phycial storage
+	 */
+	public void downloadFile(HttpServletResponse response,String inputFile,String filename) throws IOException{
+		File file = new File(inputFile);
+		if(file.exists()){
+			FileInputStream inputStream= new FileInputStream(file);
+			ServletOutputStream outStream = response.getOutputStream();
+	        byte[] buffer = new byte[4096];
+	        int bytesRead = -1;
+	        response.setContentType("image/*");
+			response.setHeader("Content-Disposition","attachment;filename="+filename);
+			response.setContentLength((int) file.length());
+	        while ((bytesRead = inputStream.read(buffer)) != -1) {
+	            outStream.write(buffer, 0, bytesRead);
+	        }
+	        inputStream.close();
+	        outStream.close();
+		}else{
+			logger.error("File download not exist");
+		}
+	}
+	
 }
