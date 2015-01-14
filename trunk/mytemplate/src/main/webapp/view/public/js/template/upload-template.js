@@ -71,20 +71,19 @@ $(document).ready(function(){
 			},
 			success : function(data) {
 				if(data.state == "wrongformat"){
-					var msg = "Format template not correct<br/>" +
-							"E.g: You can download sample template or see structure template bellow <br/>" +
-							"<ul>" +
-								"<li>" +
-									"<i class='fa fa-file-archive-o'></i> my-template.zip" +
-									"<ul>" +
-										"<li><i class ='fa fa-folder-open-o'></i> css</li>" +
-										"<li><i class ='fa fa-folder-open-o'></i> js</li>" +
-										"<li><i class ='fa fa-folder-open-o'></i> pages</li>" +
-										"<li><i class ='fa fa-file-code-o'></i> index.html</li>" +
-									"</ul>" +
-								"</li>" + 
-							"<ul>";
-					createModalInformError("Error",msg);
+					var msg = data.msg;
+					var htmlMsg = "<ul class ='eg-template-structure'>" +
+										"<li>" +
+											"<i class='fa fa-file-archive-o'></i> my-template.zip" +
+											"<ul>" +
+												"<li><i class ='fa fa-folder-open-o'></i> css</li>" +
+												"<li><i class ='fa fa-folder-open-o'></i> js</li>" +
+												"<li><i class ='fa fa-folder-open-o'></i> pages</li>" +
+												"<li><i class ='fa fa-file-code-o'></i> index.html</li>" +
+											"</ul>" +
+										"</li>" + 
+									"<ul>";
+					createModalInformError("Error",msg + htmlMsg);
 				}else{
 					if(data.state == "overwriteyourtemplate"){
 						$("#info-file-overwrite-template").removeClass("mt-display-none");
@@ -122,7 +121,19 @@ $(document).ready(function(){
 			},
 			success : function(data) {
 				if(data.state == "wrongformat"){
-					createModalInformError("Error","Format template not correct");
+					var msg = data.msg;
+					var htmlMsg = "<ul class ='eg-template-structure'>" +
+										"<li>" +
+											"<i class='fa fa-file-archive-o'></i> my-template.zip" +
+											"<ul>" +
+												"<li><i class ='fa fa-folder-open-o'></i> css</li>" +
+												"<li><i class ='fa fa-folder-open-o'></i> js</li>" +
+												"<li><i class ='fa fa-folder-open-o'></i> pages</li>" +
+												"<li><i class ='fa fa-file-code-o'></i> index.html</li>" +
+											"</ul>" +
+										"</li>" + 
+									"<ul>";
+					createModalInformError("Error",msg + htmlMsg);
 				}else{
 					if(data.state == "canuse" || data.state == "overwriteyourtemplate"){
 						ajaxUploadTemplate();

@@ -14,6 +14,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
@@ -250,6 +251,9 @@ public class TemplateServiceImpl extends
 		}
 		Map<String, String> wrongFormatTemplate = new HashMap<String, String>();
 		wrongFormatTemplate.put("state","wrongformat");
+		String linkDownloadExample = utility.getUrlSystem() + utility.getMessage("msg.upload-template-file-page.text.link.download.template.example");
+		String msgWrongFormatTempate = utility.getMessage("msg.upload-template-file-page.text.wrongstructure",linkDownloadExample);
+		wrongFormatTemplate.put("msg",msgWrongFormatTempate);
 		return wrongFormatTemplate;
 	}
 }

@@ -1,6 +1,9 @@
 package com.mhdanh.mytemplate.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,11 @@ private Logger logger = Logger.getLogger(TemplateController.class);
 	private TemplateService templateService;
 	
 	
+	@RequestMapping(value = "/template/download-template-sample")
+	public void downloadTemplateSample(HttpServletResponse response) throws IOException{
+		utility.downloadFile(response, utility.getValueFromPropertiesSystemFile("system.url.store.template.sample"), "template-sample.zip");
+	}
+	
 	@RequestMapping(value = "/template-detail/{idtemplate}")
 	public String templateDetailPage(Model model,@PathVariable("idtemplate") int idTemplate){
 		return templateService.templateDetail(model,idTemplate);
@@ -56,6 +64,5 @@ private Logger logger = Logger.getLogger(TemplateController.class);
 	@ResponseBody
 	public Object checkTemplateUploadState(@ModelAttribute("templateUpload") UploadTemplateDTO templateUpload){
 		return templateService.checkFormatAndExistTemplate(templateUpload);
-		
 	}
 }
