@@ -21,6 +21,7 @@
 		<testng.version>6.8.8</testng.version>
 		<jackson.databind.version>2.4.2</jackson.databind.version>
 		<javamail.version>1.4.3</javamail.version>
+		<facebook.java.api>3.0.2</facebook.java.api>
 
 	</properties>
 	<dependencies>
@@ -103,7 +104,6 @@
 			<artifactId>spring-security-web</artifactId>
 			<version>${spring.security}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
@@ -127,9 +127,25 @@
 			<version>${javamail.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-context-support</artifactId>
-		    <version>${spring.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- facebook api -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-facebook</artifactId>
+			<version>1.1.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.4</version>
 		</dependency>
 	</dependencies>
 	<build>
