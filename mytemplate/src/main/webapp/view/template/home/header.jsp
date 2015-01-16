@@ -28,9 +28,7 @@
 						</c:forEach>
 					</ul>
 				</li>
-				<sec:authorize access="isAuthenticated()">
 				<li><a href="<c:url value = 'upload-template-file-page'/>">Upload template</a></li>
-				</sec:authorize>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
