@@ -32,4 +32,28 @@ $(document).ready(function(){
 		    }
 		}
 	});
+	
+	
+	//click login
+	$(document).on("click",".facebook-login-button",function(){
+		FB.login(function(response){
+			if(response.status === "connected"){
+				location.reload();
+			}
+		});
+	});
 });
+
+$(window).load(function(){
+	checkLogin();
+});
+
+function checkLogin(){
+	FB.getLoginStatus(function(response) {
+		if(response.status === 'connected'){
+			FB.api('/me', function(response) {
+		      console.log('Successful login for: ' + response.name);
+		    });
+		}
+	});
+}
