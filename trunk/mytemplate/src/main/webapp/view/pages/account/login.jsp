@@ -37,5 +37,12 @@
 	    </div>
 	</div><!-- end login wrap -->
 	<div class = "mt-clear-both"></div>	
+	<div>
+		<form action="/connect/facebook" method="POST">
+                <button type="submit">Sign in with Facebook</button>
+        </form>
+        <hr/>
+        <h3>Hello, <c:out value="${facebook.fetchUserProfile().firstName}"/>! </h3>
+	</div>
 </div>
 
