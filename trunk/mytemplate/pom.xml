@@ -22,7 +22,7 @@
 		<jackson.databind.version>2.4.2</jackson.databind.version>
 		<javamail.version>1.4.3</javamail.version>
 		<facebook.java.api>3.0.2</facebook.java.api>
-
+		<spring.social.version>1.1.0.RELEASE</spring.social.version>
 	</properties>
 	<dependencies>
 		<!-- java ee for tomcat -->
@@ -135,18 +135,29 @@
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-facebook</artifactId>
-			<version>1.1.0.RELEASE</version>
+			<version>${spring.social.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>1.4</version>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-core</artifactId>
+			<version>${spring.social.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.4</version>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-web</artifactId>
+			<version>${spring.social.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-config</artifactId>
+			<version>${spring.social.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-security</artifactId>
+			<version>${spring.social.version}</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<pluginManagement>
