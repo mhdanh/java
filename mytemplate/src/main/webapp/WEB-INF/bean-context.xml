@@ -64,15 +64,9 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 		        </props>
 		    </property>
 	</bean>
-	<!-- spring face config -->
-	<bean id="connectionFactoryLocator" class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
-    <property name="connectionFactories">
-        <list>
-            <bean class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
-                <constructor-arg value="${system.facebook.appId}" />
-                <constructor-arg value="${system.facebook.appSecret}" />				
-            </bean>
-        </list>
-    </property>
-</bean>
+	<!-- facebook config -->
+	<bean id="facebook" class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
+        <constructor-arg value="${system.facebook.appId}" />
+        <constructor-arg value="${system.facebook.appSecret}" />				
+    </bean>
 </beans>

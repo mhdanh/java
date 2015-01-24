@@ -29,20 +29,13 @@
 		<!-- login  -->
 	    <div class="form-group">
 	        <label><spring:message code = 'msg.login.label.loginbyfacebook'/></label>
-	        <button class = "form-control btn btn-primary mt-button"><i class = "fa fa-facebook-square"></i> Facebook</button>
+	        <a href = "<c:url value='/auth/facebook'/>" class = "form-control btn btn-primary mt-button"><i class = "fa fa-facebook-square"></i> Facebook</a>
 	    </div>
 	    <div class="form-group">
 	        <label><spring:message code = 'msg.login.label.loginbygoogleplus'/></label>
 	        <button class = "form-control btn btn-primary mt-button"><i class="fa fa-google-plus-square"></i> Google Plus</button>
 	    </div>
 	</div><!-- end login wrap -->
-	<div class = "mt-clear-both"></div>	
-	<div>
-		<form action="/connect/facebook" method="POST">
-                <button type="submit">Sign in with Facebook</button>
-        </form>
-        <hr/>
-        <h3>Hello, <c:out value="${facebook.fetchUserProfile().firstName}"/>! </h3>
-	</div>
+	<div class = "mt-clear-both"></div>
 </div>
 
