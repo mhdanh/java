@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.security.MessageDigest;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -36,6 +37,12 @@ public class Utility {
 	private MessageSource messageSource;
 	@Autowired
 	private AccountService accountService;
+
+	public String generatePassword(){
+		Date currentTime = new Date();
+		String newPassword = hashString(String.valueOf(currentTime.getTime()));
+		return newPassword.substring(0, 6);
+	}
 	/**
 	 * 
 	 * @return http://localhost:8080/mytemplate
