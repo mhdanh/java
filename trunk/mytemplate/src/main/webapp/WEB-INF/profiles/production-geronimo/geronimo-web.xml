@@ -20,6 +20,11 @@
 		</dep:hidden-classes>
 	</dep:environment>
 	<web:context-root>/</web:context-root>
+	<web:container-config>
+		<tomcat xmlns="http://geronimo.apache.org/xml/ns/web/tomcat/config-1.0">
+			<host>myui.info</host>
+		</tomcat>
+	</web:container-config>
 	<naming:resource-ref>
 		<naming:ref-name>jdbc/MyDataSource</naming:ref-name>
 		<naming:resource-link>mytemplate</naming:resource-link>
