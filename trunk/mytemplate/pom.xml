@@ -142,21 +142,29 @@
 			<artifactId>spring-social-core</artifactId>
 			<version>${spring.social.version}</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.social</groupId> -->
-<!-- 			<artifactId>spring-social-web</artifactId> -->
-<!-- 			<version>${spring.social.version}</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.social</groupId> -->
+		<!-- <artifactId>spring-social-web</artifactId> -->
+		<!-- <version>${spring.social.version}</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-config</artifactId>
 			<version>${spring.social.version}</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.social</groupId> -->
-<!-- 			<artifactId>spring-social-security</artifactId> -->
-<!-- 			<version>${spring.social.version}</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.social</groupId> -->
+		<!-- <artifactId>spring-social-security</artifactId> -->
+		<!-- <version>${spring.social.version}</version> -->
+		<!-- </dependency> -->
+
+		<!-- google plus -->
+		<dependency>
+			<groupId>com.googlecode.googleplus</groupId>
+			<artifactId>google-plus-java-api</artifactId>
+			<version>0.0.3</version>
+		</dependency>
+
 
 	</dependencies>
 	<build>
@@ -198,7 +206,7 @@
 			</activation>
 			<properties>
 				<database.driver>org.postgresql.Driver</database.driver>
-				<database.url>jdbc:postgresql://127.0.0.1:5432/mytemplate</database.url>
+				<database.url>jdbc:postgresql://localhost:5432/mytemplate</database.url>
 				<database.username>postgres</database.username>
 				<database.password>hydra</database.password>
 				<system.url.store.template>D:/opt/mytemplate/template/</system.url.store.template>
@@ -259,9 +267,9 @@
 			</build>
 			<properties>
 				<database.driver>org.postgresql.Driver</database.driver>
-				<database.url>jdbc:postgresql://192.168.153.128:5432/mytemplate</database.url>
+				<database.url>jdbc:postgresql://localhost:5432/mytemplate</database.url>
 				<database.username>postgres</database.username>
-				<database.password>hydra</database.password>
+				<database.password>Mhdnnd169188</database.password>
 				<system.url.store.template>C:/opt/mytemplate/template/</system.url.store.template>
 				<system.url.store.image>C:/opt/mytemplate/images/</system.url.store.image>
 				<system.email.username>myuiinfo@gmail.com</system.email.username>
