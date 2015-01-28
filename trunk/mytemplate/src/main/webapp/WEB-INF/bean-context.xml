@@ -69,4 +69,11 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
         <constructor-arg value="${system.facebook.appId}" />
         <constructor-arg value="${system.facebook.appSecret}" />				
     </bean>
+    
+    <!-- google plus config -->
+	<bean id="googleplus" class="com.googlecode.googleplus.GooglePlusFactory">
+        <constructor-arg value="${system.googleplus.appId}" />
+        <constructor-arg value="${system.googleplus.appSecret}" />				
+    </bean>
+    
 </beans>

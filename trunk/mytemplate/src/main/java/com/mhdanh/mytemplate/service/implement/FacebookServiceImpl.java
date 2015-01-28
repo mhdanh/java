@@ -209,7 +209,7 @@ public class FacebookServiceImpl implements FacebookService {
 				"msg.login.facebook.generate.password", userProfile.getName(),
 				userProfile.getEmail(), newPassword));
 		mailGeneratePassword.setSubject(utility
-				.getMessage("msg.login.facebook.generate.password.subject"));
+				.getMessage("msg.login.auto.generate.password.subject"));
 		mailGeneratePassword.setTo(userProfile.getEmail());
 		mailService.sendHtmlMail(mailGeneratePassword);
 	}

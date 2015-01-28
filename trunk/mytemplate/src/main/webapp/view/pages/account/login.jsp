@@ -33,7 +33,7 @@
 	    </div>
 	    <div class="form-group">
 	        <label><spring:message code = 'msg.login.label.loginbygoogleplus'/></label>
-	        <button class = "form-control btn btn-primary mt-button"><i class="fa fa-google-plus-square"></i> Google Plus</button>
+	        <a href = "<c:url value='/auth/google'/>" class = "form-control btn btn-primary mt-button"><i class="fa fa-google-plus-square"></i> Google Plus</a>
 	    </div>
 	</div><!-- end login wrap -->
 	<div class = "mt-clear-both"></div>
