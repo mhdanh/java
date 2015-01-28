@@ -49,7 +49,7 @@ public class GooglePlusServiceImpl implements GooglePlusService {
 	public String authGoogle() {
 		OAuth2Parameters oAuthParams = new OAuth2Parameters();
 		oAuthParams
-				.setRedirectUri("http://localhost:8080/auth/google/callback");
+				.setRedirectUri(utility.getUrlSystem() + "/auth/google/callback");
 		oAuthParams.setScope("https://www.googleapis.com/auth/userinfo.email");
 		String url = googlePlusFactory
 				.getOAuthOperations()
