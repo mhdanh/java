@@ -196,6 +196,6 @@ public class GooglePlusServiceImpl implements GooglePlusService {
 		OAuth2Operations oauthOperations = googlePlusFactory
 				.getOAuthOperations();
 		return oauthOperations.exchangeForAccess(authorizationCode,
-				"http://localhost:8080/auth/google/callback", null);
+				utility.getUrlSystem() + "/auth/google/callback", null);
 	}
 }
