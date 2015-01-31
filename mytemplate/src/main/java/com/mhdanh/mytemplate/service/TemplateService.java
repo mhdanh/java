@@ -1,5 +1,9 @@
 package com.mhdanh.mytemplate.service;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,4 +37,6 @@ public interface TemplateService extends CommonService<Template>{
 	String templateDetail(Model model, int idTemplate);
 	boolean checkTemplateFormat(MultipartFile fileTemplate);
 	Object checkFormatAndExistTemplate(UploadTemplateDTO templateUpload);
+	List<Template> getAllTemplatePublished();
+	void downloadTemplateFree(int idTemplate, HttpServletResponse response);
 }

@@ -21,7 +21,14 @@
 							</div><!-- end wrap img and delete -->
 							<div class = "detail-item">
 								<strong class = "cost-item">
-									<c:out value='${template.cost}' escapeXml="true"/>
+									<c:choose>
+										<c:when test="${template.sellOff eq 0}">
+											<spring:message code='msg.upload-template-file-page.text.free'/>
+										</c:when>
+										<c:otherwise>
+											${template.sellOff}	
+										</c:otherwise>
+									</c:choose>
 								</strong>
 								<strong class = "buy-item">
 									<span class = "glyphicon glyphicon-shopping-cart icon"></span>
@@ -30,7 +37,14 @@
 							</div><!-- end detail item -->
 							<div class = "wrap-livedemo-buy">
 								<a href="${template.link}" target="_blank" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.livedemo' /></a>
-								<a href="${template.link}" target="_blank" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.buyme' /></a>
+								<c:choose>
+									<c:when test="${template.sellOff eq 0}">
+										<a href="<c:url value='/template/download-template/${template.id}'/>" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.downloadme' /></a>
+									</c:when>
+									<c:otherwise>
+										<a href="${template.link}" target="_blank" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.buyme' /></a>	
+									</c:otherwise>
+								</c:choose>
 							</div><!-- end purchase button and live demo -->
 						</div>
 					</div>
@@ -50,7 +64,14 @@
 							</div><!-- end wrap img and delete -->
 							<div class = "detail-item">
 								<strong class = "cost-item">
-									${template.cost}
+									<c:choose>
+										<c:when test="${template.sellOff eq 0}">
+											<spring:message code='msg.upload-template-file-page.text.free'/>
+										</c:when>
+										<c:otherwise>
+											${template.sellOff}	
+										</c:otherwise>
+									</c:choose>
 								</strong>
 								<strong class = "buy-item">
 									<span class = "glyphicon glyphicon-shopping-cart icon"></span>
@@ -59,7 +80,14 @@
 							</div><!-- end detail item -->
 							<div class = "wrap-livedemo-buy">
 								<a href="${template.link}" target="_blank" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.livedemo' /></a>
-								<a href="${template.link}" target="_blank" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.buyme' /></a>
+								<c:choose>
+									<c:when test="${template.sellOff eq 0}">
+										<a href="<c:url value='/template/download-template/${template.id}'/>" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.downloadme' /></a>
+									</c:when>
+									<c:otherwise>
+										<a href="${template.link}" target="_blank" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.buyme' /></a>	
+									</c:otherwise>
+								</c:choose>
 							</div><!-- end purchase button and live demo -->
 						</div>
 					</div>

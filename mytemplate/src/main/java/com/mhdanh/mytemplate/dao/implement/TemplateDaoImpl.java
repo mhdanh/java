@@ -1,14 +1,18 @@
 package com.mhdanh.mytemplate.dao.implement;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mhdanh.mytemplate.dao.TemplateDao;
 import com.mhdanh.mytemplate.domain.Template;
+import com.mhdanh.mytemplate.domain.Template.TEMPLATE_STATUS;
 import com.mhdanh.mytemplate.utility.Utility;
 
 @SuppressWarnings("unchecked")
@@ -54,5 +58,11 @@ public class TemplateDaoImpl extends CommonDaoImpl<Template> implements Template
 				.uniqueResult();
 	}
 
-
+	@Override
+	public List<Template> getTemplateByStatus(TEMPLATE_STATUS status) {
+		return sessionFactory.getCurrentSession().createCriteria(Template.class)
+				.add(Restrictions.eq("status", status))
+				.addOrder(Order.desc("dateModified"))
+				.list();
+	}
 }

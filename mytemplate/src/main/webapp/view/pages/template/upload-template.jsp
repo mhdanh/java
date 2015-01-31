@@ -59,7 +59,7 @@
                 <label><spring:message code = 'msg.upload-template-file-page.label.cost'/></label>
                 <div class="input-group">
 					<input type="text"
-						class="form-control  mt-no-border-radius" name="costTemplate" id = "costTemplate">
+						class="form-control  mt-no-border-radius" name="costTemplate" id = "costTemplate" value="0">
 						<span class="input-group-addon mt-no-border-radius">x 1000VND</span>
 				</div>
 				<p class="help-block"><spring:message code = 'msg.upload-template-file-page.text.freetemplate'/>.</p>

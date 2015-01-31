@@ -18,7 +18,11 @@ import org.hibernate.annotations.GenericGenerator;
 public class Template {
 
 	public static enum TEMPLATE_STATUS {
-		WAITING, VIEWED, PUBLISH
+		WAITING, VIEWED, PUBLISHED
+	}
+
+	public static enum UNIT_MONEY {
+		VND
 	}
 
 	@Id
@@ -42,11 +46,15 @@ public class Template {
 	@Column(nullable = false, unique = true)
 	private String link;
 
-	@Column
-	private String cost;
+	@Column(columnDefinition = "int default 0")
+	private Integer cost;
+
+	@Column(columnDefinition = "int default 0")
+	private Integer sellOff;
 
 	@Column
-	private String sellOff;
+	@Enumerated(EnumType.STRING)
+	private UNIT_MONEY unitMoney;
 
 	@Column(columnDefinition = "int default 0")
 	private Integer buy;
@@ -145,20 +153,34 @@ public class Template {
 		this.description = description;
 	}
 
-	public String getCost() {
+	public Integer getCost() {
+		if(cost == null){
+			return 0;
+		}
 		return cost;
 	}
 
-	public void setCost(String cost) {
+	public void setCost(Integer cost) {
 		this.cost = cost;
 	}
 
-	public String getSellOff() {
+	public Integer getSellOff() {
+		if(sellOff == null){
+			return 0;
+		}
 		return sellOff;
 	}
 
-	public void setSellOff(String sellOff) {
+	public void setSellOff(Integer sellOff) {
 		this.sellOff = sellOff;
+	}
+
+	public UNIT_MONEY getUnitMoney() {
+		return unitMoney;
+	}
+
+	public void setUnitMoney(UNIT_MONEY unitMoney) {
+		this.unitMoney = unitMoney;
 	}
 
 	public Integer getBuy() {

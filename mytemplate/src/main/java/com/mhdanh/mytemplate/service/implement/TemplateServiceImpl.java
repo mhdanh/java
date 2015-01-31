@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -27,6 +28,8 @@ import com.mhdanh.mytemplate.dao.TemplateDao;
 import com.mhdanh.mytemplate.domain.Account;
 import com.mhdanh.mytemplate.domain.Category;
 import com.mhdanh.mytemplate.domain.Template;
+import com.mhdanh.mytemplate.domain.Template.TEMPLATE_STATUS;
+import com.mhdanh.mytemplate.domain.Template.UNIT_MONEY;
 import com.mhdanh.mytemplate.service.CategoryService;
 import com.mhdanh.mytemplate.service.UnzipService;
 import com.mhdanh.mytemplate.service.TemplateService;
@@ -78,7 +81,8 @@ public class TemplateServiceImpl extends
 				MultipartFile fileThumbnail = uploadTemplate.getFileThumbnail();
 				String fileNameThumbnail = uploadTemplate
 						.getFileNameThumbnail();
-				String costTemplate = uploadTemplate.getCostTemplate();
+				int costTemplate = uploadTemplate.getCostTemplate();
+				Template.UNIT_MONEY moneyViet = UNIT_MONEY.VND;
 
 				Category categoryBeUploadTo = categoryService
 						.getById(categoryTemplateId);
@@ -159,6 +163,10 @@ public class TemplateServiceImpl extends
 					updateTemplate.setTitle(titleTemplate);
 					updateTemplate.setDateModified(new Date());
 					updateTemplate.setThumbnail(fileAfterHash);
+					updateTemplate.setCost(costTemplate);
+					updateTemplate.setSellOff(costTemplate);
+					updateTemplate.setStatus(Template.TEMPLATE_STATUS.WAITING);
+					updateTemplate.setUnitMoney(moneyViet);
 					this.update(updateTemplate);
 					return updateTemplate.getId();
 				}else if(templateDao.getUploadTemplateByCategoryAndFileNameNotOwner(categoryTemplateId,fileNameTemplate) == null){
@@ -166,8 +174,10 @@ public class TemplateServiceImpl extends
 					Template newTemplate = new Template();
 					newTemplate.setTitle(titleTemplate);
 					newTemplate.setDateCreated(new Date());
+					newTemplate.setDateModified(new Date());
 					newTemplate.setFileName(fileNameTemplate);
 					newTemplate.setCategory(categoryBeUploadTo);
+					newTemplate.setStatus(Template.TEMPLATE_STATUS.WAITING);
 					String link = LINK_TEMPLATE
 							+ utility
 									.convertTextInDatabaseToNormalText(categoryBeUploadTo
@@ -178,6 +188,8 @@ public class TemplateServiceImpl extends
 					newTemplate.setOwner(utility.getUserLogined());
 					newTemplate.setThumbnail(fileAfterHash);
 					newTemplate.setCost(costTemplate);
+					newTemplate.setSellOff(costTemplate);
+					newTemplate.setUnitMoney(moneyViet);;
 					this.add(newTemplate);
 					return newTemplate.getId();
 				}
@@ -264,5 +276,37 @@ public class TemplateServiceImpl extends
 		String msgWrongFormatTempate = utility.getMessage("msg.upload-template-file-page.text.wrongstructure",linkDownloadExample);
 		wrongFormatTemplate.put("msg",msgWrongFormatTempate);
 		return wrongFormatTemplate;
+	}
+
+	@Override
+	public List<Template> getAllTemplatePublished() {
+		return templateDao.getTemplateByStatus(TEMPLATE_STATUS.PUBLISHED);
+	}
+
+	@Override
+	public void downloadTemplateFree(int idTemplate,
+			HttpServletResponse response) {
+		logger.warn("Id template: " + idTemplate);
+		Template templateById = templateDao.getTemplateById(idTemplate);
+		if(templateById != null){
+			if(templateById.getSellOff() == 0){
+				try {
+					final String folderZipTemplate = "system.url.store.template";
+					String pathInputTemplate = utility.getValueFromPropertiesSystemFile(folderZipTemplate)
+							+ utility.convertTextInDatabaseToNormalText(templateById.getCategory().getName())
+							+ "/" + templateById.getFileName();
+					logger.warn("Path input template free:" + pathInputTemplate);
+					utility.downloadFile(response,pathInputTemplate, templateById.getFileName());
+					//update download time
+					Integer plusBuy = templateById.getBuy() + 1;
+					templateById.setBuy(plusBuy);
+					//update template
+					templateDao.update(templateById);
+					logger.warn("Download free template successful");
+				} catch (IOException e) {
+					logger.error("Download free template unsuccessful");
+				}
+			}
+		}
 	}
 }

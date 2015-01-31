@@ -10,7 +10,7 @@ public class UploadTemplateDTO {
 	private MultipartFile fileTemplate;
 	private MultipartFile fileThumbnail;
 	private String fileNameThumbnail;
-	private String costTemplate;
+	private int costTemplate;
 
 	public UploadTemplateDTO() {
 	}
@@ -63,11 +63,11 @@ public class UploadTemplateDTO {
 		this.fileNameThumbnail = fileNameThumbnail;
 	}
 
-	public String getCostTemplate() {
+	public int getCostTemplate() {
 		return costTemplate;
 	}
 
-	public void setCostTemplate(String costTemplate) {
+	public void setCostTemplate(int costTemplate) {
 		this.costTemplate = costTemplate;
 	}
 
