@@ -20,6 +20,18 @@
 		</put-list-attribute>
 	</definition>
 	
+	<!-- admin controller -->
+	<definition name="/admin" extends="homeTemplate">
+		<put-attribute name="title" value="Welcome admin"></put-attribute>
+		<put-attribute name="content" value="/view/pages/admin/index.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/view/public/css/admin/index.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/view/public/js/admin/index.js" />
+		</put-list-attribute>
+	</definition>
+	
 	<!-- index controller -->
 	<!-- 	"/index","/","/index/" -->
 	<definition name="/index" extends="homeTemplate">
