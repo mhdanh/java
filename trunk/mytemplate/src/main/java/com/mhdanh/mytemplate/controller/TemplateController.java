@@ -41,6 +41,11 @@ private Logger logger = Logger.getLogger(TemplateController.class);
 		utility.downloadFile(response, utility.getValueFromPropertiesSystemFile("system.url.store.template.sample"), "template-sample.zip");
 	}
 	
+	@RequestMapping(value = "/template/download-template/{idTemplate}")
+	public void downloadTemplateFree(@PathVariable("idTemplate") int idTemplate,HttpServletResponse response) throws IOException{
+		templateService.downloadTemplateFree(idTemplate,response);
+	}
+	
 	@RequestMapping(value = "/template-detail/{idtemplate}")
 	public String templateDetailPage(Model model,@PathVariable("idtemplate") int idTemplate){
 		return templateService.templateDetail(model,idTemplate);

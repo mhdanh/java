@@ -22,7 +22,7 @@ public class IndexController {
 	
 	@RequestMapping(value={"/index","/","/index/"})
 	public String index(Model model){
-		List<Template> templates = templateService.getAll();
+		List<Template> templates = templateService.getAllTemplatePublished();
 		model.addAttribute("templates", templates);
 		return "/index";
 	}
