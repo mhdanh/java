@@ -163,6 +163,16 @@
 			<groupId>com.googlecode.googleplus</groupId>
 			<artifactId>google-plus-java-api</artifactId>
 			<version>0.0.3</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>httpcore</artifactId>
+					<groupId>org.apache.httpcomponents</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>httpclient</artifactId>
+					<groupId>org.apache.httpcomponents</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 
