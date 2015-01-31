@@ -6,6 +6,7 @@
 			<ul>
 				<li><a href = "" class = "fa fa-globe"> Find Jobs</a></li>
 				<li><a href = "" class = "fa fa-slideshare"> Blog</a></li>
+				<li><a href="https://plus.google.com/110814290957816282578" rel="publisher">Google+</a></li>
 			</ul>
 		</div>
 	</div>
