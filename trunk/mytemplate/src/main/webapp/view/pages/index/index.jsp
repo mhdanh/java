@@ -5,6 +5,28 @@
 	prefix="sec"%>
 
 <div class = "wrapper-content-template">
+	<!-- filter template -->
+	<div class = "wrap-filte-template">
+		<form class="form-inline">
+			<div class="form-group">
+				<label for="exampleInputName2">Choose category:</label>
+				<select class = "form-control mt-no-border-radius">
+					<c:forEach items="${categories}" var = "category">
+						<option value="${category.id}"><spring:message code="${category.name}"/></option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="form-group">
+		    	<label for="exampleInputEmail2"> Filter:</label>
+		    	<select class = "form-control mt-no-border-radius">
+					<c:forEach items="${filters}" var = "filter">
+						<option value="${filter.value}">${filter.displayName}</option>
+					</c:forEach>
+				</select>
+		    </div>
+		    <button type="submit" class="btn btn-danger mt-button">Filter</button>
+		</form>
+	</div><!-- end filter template -->
 	<c:forEach items="${templates}" var="template" varStatus="status">
 		<c:choose>
 			<c:when test="${status.index % 2== 0}">

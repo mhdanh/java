@@ -3,9 +3,10 @@
 	margin:auto;
 	cursor: default;
 }
-.row-content-template{
-	margin-top:40px;
+.wrap-filte-template {
+	margin-top:23px;	
 }
+
 .content-template{
 	background: #e3e3e3;
 	margin-top:20px;

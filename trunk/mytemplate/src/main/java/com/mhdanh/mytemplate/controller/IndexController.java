@@ -1,29 +1,20 @@
 package com.mhdanh.mytemplate.controller;
 
-import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mhdanh.mytemplate.domain.Template;
-import com.mhdanh.mytemplate.service.TemplateService;
+import com.mhdanh.mytemplate.service.IndexService;
 
 @Controller
 public class IndexController {
 	
-	private Logger logger = Logger.getLogger(IndexController.class);
-	
 	@Autowired
-	private TemplateService templateService;
+	private IndexService indexService;
 	
 	@RequestMapping(value={"/index","/","/index/"})
 	public String index(Model model){
-		List<Template> templates = templateService.getAllTemplatePublished();
-		model.addAttribute("templates", templates);
-		return "/index";
+		return indexService.indexPage(model);
 	}
 }
