@@ -41,6 +41,8 @@ public class AdminServiceImpl implements AdminService{
 			for(Template template : templates){
 				//get zip file template
 				String pathZipFileTemplate = utility.getValueFromPropertiesSystemFile(FOLDER_ZIP_TEMPLATE)
+						+ utility.getUserLogined().getUsername()
+						+ "/"
 						+ utility.convertTextInDatabaseToNormalText(template.getCategory().getName())
 						+ "/" + template.getFileName();
 				logger.warn("input Template:" + pathZipFileTemplate);
@@ -48,6 +50,8 @@ public class AdminServiceImpl implements AdminService{
 				if(fileZipTemplate.exists()){
 					//file exist
 					String outPutTemplate = utility.getHtmlWebappPath()
+							+ utility.getUserLogined().getUsername()
+							+ "/"
 							+ utility.convertTextInDatabaseToNormalText(template.getCategory().getName())
 							+ "/"
 							+ utility.getNameWithouExtension(template.getFileName());

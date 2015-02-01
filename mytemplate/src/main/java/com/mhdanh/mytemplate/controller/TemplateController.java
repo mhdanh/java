@@ -59,10 +59,8 @@ private Logger logger = Logger.getLogger(TemplateController.class);
 	
 	@RequestMapping(value = "/ajax/upload-template-file-page", method = RequestMethod.POST)
 	@ResponseBody
-	public String uploadTemplateFile(@ModelAttribute("templateUpload") UploadTemplateDTO templateUpload,HttpServletRequest request) {
-		int idNewTemplate = templateService.uploadTemplate(templateUpload);
-		String linkToTemplateDetail = utility.getUrlSystem() + "/template-detail/" + idNewTemplate;
-		return linkToTemplateDetail;
+	public Object uploadTemplateFile(@ModelAttribute("templateUpload") UploadTemplateDTO templateUpload,HttpServletRequest request) {
+		return templateService.uploadTemplate(templateUpload);
 	}
 	
 	@RequestMapping(value = "/ajax/check-template-upload-state",method = RequestMethod.POST)

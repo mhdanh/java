@@ -30,9 +30,6 @@
 						class="form-control  mt-no-border-radius txt-name-file-upload" name="fileNameTemplate" id = "fileNameTemplate"  autocomplete="off">
 						<label for = "file-template-upload" class="input-group-addon mt-no-border-radius btn btn-primary  btn-upload"><spring:message code = 'msg.upload-template-file-page.button.choosezipfile'/></label>
 				</div>
-				<div id = "error-file-isused-template" class = "error-custom mt-display-none">
-					<label><spring:message code = 'msg.upload-template-file-page.text.isusedbyothermember'/></label>
-				</div>
 				<div id = "info-file-overwrite-template" class = "info-custom mt-display-none">
 					<label><spring:message code = 'msg.upload-template-file-page.text.overwriteyourtemplate'/></label>
 				</div>

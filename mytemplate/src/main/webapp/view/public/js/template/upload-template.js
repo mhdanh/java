@@ -20,7 +20,7 @@ $(document).ready(function(){
 		var costTemplate = $("#costTemplate").val();
 		
 		templateUpload.append("titleTemplate",titleTemplate);
-		templateUpload.append("fileNameTemplate",fileNameTemplate);
+		templateUpload.append("fileNameTemplate",fileNameTemplate.replace(/ /g,'-'));
 		templateUpload.append("categoryTemplateId",categoryTemplateId);
 		templateUpload.append("fileTemplate",fileTemplate);
 		templateUpload.append("fileThumbnail",fileThumbnail);
@@ -42,10 +42,31 @@ $(document).ready(function(){
 				$("#upload-file-button").attr("disabled","disabled");
 				$("#upload-file-button").text("Uploading...");
 			},
-			success : function(linkToTemplateDetail) {
+			success : function(data) {
+				console.log("debug: response from server:");
+				console.log(data);
+				//update load success
+				if(data.state == "uploadsuccess"){
+					window.location.href = data.message;
+				}else if(data.state == "wrongformat"){
+					var msg = data.message;
+					var htmlMsg = "<ul class ='eg-template-structure'>" +
+										"<li>" +
+											"<i class='fa fa-file-archive-o'></i> my-template.zip" +
+											"<ul>" +
+												"<li><i class ='fa fa-folder-open-o'></i> css</li>" +
+												"<li><i class ='fa fa-folder-open-o'></i> js</li>" +
+												"<li><i class ='fa fa-folder-open-o'></i> pages</li>" +
+												"<li><i class ='fa fa-file-code-o'></i> index.html</li>" +
+											"</ul>" +
+										"</li>" + 
+									"<ul>";
+					createModalInformError("Error",msg + htmlMsg);
+				}else if(data.state == "notchoosefile"){
+					createModalInformError("Error","you haven't choose file yet?");
+				}
 				$("#upload-file-button").removeAttr("disabled");
 				$("#upload-file-button").text(labelButtonSumit);
-				window.location.href = linkToTemplateDetail;
 			}
 		});
 	}
@@ -57,7 +78,7 @@ $(document).ready(function(){
 		var categoryTemplateId = $("#selCategory").val();
 		
 		templateUpload.append("fileTemplate",fileTemplate);
-		templateUpload.append("fileNameTemplate",fileNameTemplate);
+		templateUpload.append("fileNameTemplate",fileNameTemplate.replace(/ /g,'-'));
 		templateUpload.append("categoryTemplateId",categoryTemplateId);
 		
 		$.ajax({
@@ -87,61 +108,12 @@ $(document).ready(function(){
 				}else{
 					if(data.state == "overwriteyourtemplate"){
 						$("#info-file-overwrite-template").removeClass("mt-display-none");
-					}else if(data.state == "isusedbyothermember"){
-						$("#info-file-overwrite-template").addClass("mt-display-none");
-						$("#error-file-isused-template").removeClass("mt-display-none");
 					}else{
 						$("#info-file-overwrite-template").addClass("mt-display-none");
 						$("#error-file-isused-template").addClass("mt-display-none");
 					}
 				}
 				
-			}
-		});
-	}
-	
-	function submitTemplateUpload(){
-		var templateUpload = new FormData();
-		var fileTemplate = $("#file-template-upload")[0].files[0];
-		var fileNameTemplate = $(".txt-name-file-upload").val() + ".zip";
-		var categoryTemplateId = $("#selCategory").val();
-		
-		templateUpload.append("fileTemplate",fileTemplate);
-		templateUpload.append("fileNameTemplate",fileNameTemplate);
-		templateUpload.append("categoryTemplateId",categoryTemplateId);
-		
-		$.ajax({
-			url : ctxPath + "/ajax/check-template-upload-state",
-			data : templateUpload,
-			processData : false,
-			contentType : false,
-			method : 'POST',
-			beforeSend:function(xhr){
-				xhr.setRequestHeader(header, token);
-			},
-			success : function(data) {
-				if(data.state == "wrongformat"){
-					var msg = data.msg;
-					var htmlMsg = "<ul class ='eg-template-structure'>" +
-										"<li>" +
-											"<i class='fa fa-file-archive-o'></i> my-template.zip" +
-											"<ul>" +
-												"<li><i class ='fa fa-folder-open-o'></i> css</li>" +
-												"<li><i class ='fa fa-folder-open-o'></i> js</li>" +
-												"<li><i class ='fa fa-folder-open-o'></i> pages</li>" +
-												"<li><i class ='fa fa-file-code-o'></i> index.html</li>" +
-											"</ul>" +
-										"</li>" + 
-									"<ul>";
-					createModalInformError("Error",msg + htmlMsg);
-				}else{
-					if(data.state == "canuse" || data.state == "overwriteyourtemplate"){
-						ajaxUploadTemplate();
-					}else{
-						$("#info-file-overwrite-template").addClass("md-display-none");
-						$("#error-file-isused-template").removeClass("mt-display-none");
-					}
-				}
 			}
 		});
 	}
@@ -215,7 +187,8 @@ $(document).ready(function(){
 	
 	$("#frm-upload-template").validate({
 		submitHandler: function(form) {
-			submitTemplateUpload();
+			ajaxUploadTemplate();
+			//submitTemplateUpload();
 			return false;
 		},
 	  	rules: {

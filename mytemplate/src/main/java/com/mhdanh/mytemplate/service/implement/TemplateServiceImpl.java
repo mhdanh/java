@@ -71,7 +71,7 @@ public class TemplateServiceImpl extends
 	}
 
 	@Override
-	public int uploadTemplate(UploadTemplateDTO uploadTemplate) {
+	public Object uploadTemplate(UploadTemplateDTO uploadTemplate) {
 		if (!uploadTemplate.getFileTemplate().isEmpty()) {
 			try {
 				String titleTemplate = uploadTemplate.getTitleTemplate();
@@ -87,118 +87,150 @@ public class TemplateServiceImpl extends
 				Category categoryBeUploadTo = categoryService
 						.getById(categoryTemplateId);
 
-				// save thumbnail
-				byte[] bytesThumbnail = fileThumbnail.getBytes();
-				File folderImage = new File(
-						utility.getValueFromPropertiesSystemFile(FOLDER_IMAGE));
-				if (!folderImage.exists()) {
-					folderImage.mkdirs();
-				}
-				String pathThumbnailImage = folderImage + File.separator
-						+ fileNameThumbnail;
-				FileOutputStream fosImage = new FileOutputStream(new File(
-						pathThumbnailImage));
-				fosImage.write(bytesThumbnail);
-				fosImage.close();
-				// resize thumbnail
-				String extensionThumbnail = FilenameUtils
-						.getExtension(pathThumbnailImage);
-				BufferedImage originalImage = ImageIO.read(new File(
-						pathThumbnailImage));
-				int typeImage = originalImage.getType() == BufferedImage.TYPE_CUSTOM ? BufferedImage.TYPE_INT_ARGB
-						: originalImage.getType();
-				BufferedImage resizeImage = resizeImage(originalImage,
-						typeImage);
-				ImageIO.write(resizeImage, extensionThumbnail, new File(
-						pathThumbnailImage));
-				// hash file thumbnail
-				File fileThumbnailNeedChangeName = new File(pathThumbnailImage);
-				String fileAfterHash = utility
-						.hashFile(fileThumbnailNeedChangeName)
-						+ "."
-						+ extensionThumbnail;
-				String newFileNameAfterHash = folderImage + File.separator
-						+ fileAfterHash;
-				File newFileNameForThumbnail = new File(newFileNameAfterHash);
-				Files.copy(fileThumbnailNeedChangeName.toPath(),
-						newFileNameForThumbnail.toPath(),StandardCopyOption.REPLACE_EXISTING);
-				// delete old file
-				fileThumbnailNeedChangeName.delete();
+				//check wrong format
+				if(!checkTemplateFormat(fileTemplate)){
+					Map<String, String> wrongFormatTemplate = new HashMap<String, String>();
+					wrongFormatTemplate.put("state","wrongformat");
+					String linkDownloadExample = utility.getUrlSystem() + utility.getMessage("msg.upload-template-file-page.text.link.download.template.example");
+					String msgWrongFormatTempate = utility.getMessage("msg.upload-template-file-page.text.wrongstructure",linkDownloadExample);
+					wrongFormatTemplate.put("message",msgWrongFormatTempate);
+					return wrongFormatTemplate;
+				} else {
+					// save thumbnail
+					byte[] bytesThumbnail = fileThumbnail.getBytes();
+					File folderImage = new File(
+							utility.getValueFromPropertiesSystemFile(FOLDER_IMAGE));
+					if (!folderImage.exists()) {
+						folderImage.mkdirs();
+					}
+					String pathThumbnailImage = folderImage + File.separator
+							+ fileNameThumbnail;
+					FileOutputStream fosImage = new FileOutputStream(new File(
+							pathThumbnailImage));
+					fosImage.write(bytesThumbnail);
+					fosImage.close();
+					// resize thumbnail
+					String extensionThumbnail = FilenameUtils
+							.getExtension(pathThumbnailImage);
+					BufferedImage originalImage = ImageIO.read(new File(
+							pathThumbnailImage));
+					int typeImage = originalImage.getType() == BufferedImage.TYPE_CUSTOM ? BufferedImage.TYPE_INT_ARGB
+							: originalImage.getType();
+					BufferedImage resizeImage = resizeImage(originalImage,
+							typeImage);
+					ImageIO.write(resizeImage, extensionThumbnail, new File(
+							pathThumbnailImage));
+					// hash file thumbnail
+					File fileThumbnailNeedChangeName = new File(pathThumbnailImage);
+					String fileAfterHash = utility
+							.hashFile(fileThumbnailNeedChangeName)
+							+ "."
+							+ extensionThumbnail;
+					String newFileNameAfterHash = folderImage + File.separator
+							+ fileAfterHash;
+					File newFileNameForThumbnail = new File(newFileNameAfterHash);
+					Files.copy(fileThumbnailNeedChangeName.toPath(),
+							newFileNameForThumbnail.toPath(),StandardCopyOption.REPLACE_EXISTING);
+					// delete old file
+					fileThumbnailNeedChangeName.delete();
 
-				byte[] bytesTemplate = fileTemplate.getBytes();
-				String pathFolderTemplate = utility.getHtmlWebappPath()
-						+ utility
-								.convertTextInDatabaseToNormalText(categoryBeUploadTo
-										.getName()) + "/"
-						+ utility.getNameWithouExtension(fileNameTemplate);
+					byte[] bytesTemplate = fileTemplate.getBytes();
+					String pathFolderTemplate = utility.getHtmlWebappPath()
+							+ utility.getUserLogined().getUsername()
+							+ "/"
+							+ utility.convertTextInDatabaseToNormalText(categoryBeUploadTo.getName())
+							+ "/"
+							+ utility.getNameWithouExtension(fileNameTemplate);
 
-				File folderTemplate = new File(pathFolderTemplate);
-				// Create the file on server
-				if (!folderTemplate.exists()) {
-					folderTemplate.mkdirs();
-				}
+					File folderTemplate = new File(pathFolderTemplate);
+					// Create the file on server
+					if (!folderTemplate.exists()) {
+						folderTemplate.mkdirs();
+					}
 
-				// create path to zip file
-				String pathToNewZipFile = utility
-						.getValueFromPropertiesSystemFile(FOLDER_ZIP_TEMPLATE)
-						+ utility
-								.convertTextInDatabaseToNormalText(categoryBeUploadTo
-										.getName()) + "/" + fileNameTemplate;
-				File zipFile = new File(pathToNewZipFile);
-				// create folder zip template if not exist
-				if (!zipFile.getParentFile().exists()) {
-					zipFile.getParentFile().mkdirs();
-				}
+					// create path to zip file
+					String pathToNewZipFile = utility
+							.getValueFromPropertiesSystemFile(FOLDER_ZIP_TEMPLATE)
+							+ utility.getUserLogined().getUsername() 
+							+ "/"
+							+ utility.convertTextInDatabaseToNormalText(categoryBeUploadTo.getName())
+							+ "/"
+							+ fileNameTemplate;
+					File zipFile = new File(pathToNewZipFile);
+					// create folder zip template if not exist
+					if (!zipFile.getParentFile().exists()) {
+						zipFile.getParentFile().mkdirs();
+					}
 
-				FileOutputStream fos = new FileOutputStream(zipFile);
-				fos.write(bytesTemplate);
-				fos.close();
+					FileOutputStream fos = new FileOutputStream(zipFile);
+					fos.write(bytesTemplate);
+					fos.close();
 
-				// extract zip file to folder template
-				unzipService.unZip(pathToNewZipFile, pathFolderTemplate);
+					// extract zip file to folder template
+					unzipService.unZip(pathToNewZipFile, pathFolderTemplate);
 
-				Template updateTemplate = templateDao.getUploadTemplateByCategoryAndFileNameOfOwner(categoryTemplateId,fileNameTemplate); 
-				if(updateTemplate != null){
-					//update template
-					updateTemplate.setTitle(titleTemplate);
-					updateTemplate.setDateModified(new Date());
-					updateTemplate.setThumbnail(fileAfterHash);
-					updateTemplate.setCost(costTemplate);
-					updateTemplate.setSellOff(costTemplate);
-					updateTemplate.setStatus(Template.TEMPLATE_STATUS.WAITING);
-					updateTemplate.setUnitMoney(moneyViet);
-					this.update(updateTemplate);
-					return updateTemplate.getId();
-				}else if(templateDao.getUploadTemplateByCategoryAndFileNameNotOwner(categoryTemplateId,fileNameTemplate) == null){
-					//add new template
-					Template newTemplate = new Template();
-					newTemplate.setTitle(titleTemplate);
-					newTemplate.setDateCreated(new Date());
-					newTemplate.setDateModified(new Date());
-					newTemplate.setFileName(fileNameTemplate);
-					newTemplate.setCategory(categoryBeUploadTo);
-					newTemplate.setStatus(Template.TEMPLATE_STATUS.WAITING);
-					String link = LINK_TEMPLATE
-							+ utility
-									.convertTextInDatabaseToNormalText(categoryBeUploadTo
-											.getName()) + "/"
-							+ utility.getNameWithouExtension(fileNameTemplate)
-							+ "/index.html";
-					newTemplate.setLink(link);
-					newTemplate.setOwner(utility.getUserLogined());
-					newTemplate.setThumbnail(fileAfterHash);
-					newTemplate.setCost(costTemplate);
-					newTemplate.setSellOff(costTemplate);
-					newTemplate.setUnitMoney(moneyViet);;
-					this.add(newTemplate);
-					return newTemplate.getId();
+					Template updateTemplate = templateDao.getUploadTemplateByCategoryAndFileNameOfOwner(categoryTemplateId,fileNameTemplate); 
+					if(updateTemplate != null){
+						//update template
+						updateTemplate.setTitle(titleTemplate);
+						updateTemplate.setDateModified(new Date());
+						updateTemplate.setThumbnail(fileAfterHash);
+						updateTemplate.setCost(costTemplate);
+						updateTemplate.setSellOff(costTemplate);
+						updateTemplate.setStatus(Template.TEMPLATE_STATUS.WAITING);
+						updateTemplate.setUnitMoney(moneyViet);
+						this.update(updateTemplate);
+						
+						Map<String, String> jsonObjectSuccessUpload = new HashMap<String, String>();
+						jsonObjectSuccessUpload.put("state","uploadsuccess");
+						String linkToTemplateDetail = utility.getUrlSystem() + "/template-detail/" + updateTemplate.getId();
+						jsonObjectSuccessUpload.put("message", linkToTemplateDetail);
+						return jsonObjectSuccessUpload;
+					}else {
+						//add new template
+						Template newTemplate = new Template();
+						newTemplate.setTitle(titleTemplate);
+						newTemplate.setDateCreated(new Date());
+						newTemplate.setDateModified(new Date());
+						newTemplate.setFileName(fileNameTemplate);
+						newTemplate.setCategory(categoryBeUploadTo);
+						newTemplate.setStatus(Template.TEMPLATE_STATUS.WAITING);
+						String link = LINK_TEMPLATE
+								+ utility.getUserLogined().getUsername()
+								+ "/"
+								+ utility.convertTextInDatabaseToNormalText(categoryBeUploadTo.getName())
+								+ "/"
+								+ utility.getNameWithouExtension(fileNameTemplate)
+								+ "/index.html";
+						newTemplate.setLink(link);
+						newTemplate.setOwner(utility.getUserLogined());
+						newTemplate.setThumbnail(fileAfterHash);
+						newTemplate.setCost(costTemplate);
+						newTemplate.setSellOff(costTemplate);
+						newTemplate.setUnitMoney(moneyViet);
+						newTemplate.setBuy(0);
+						
+						this.add(newTemplate);
+						
+						Map<String, String> jsonObjectSuccessUpload = new HashMap<String, String>();
+						jsonObjectSuccessUpload.put("state","uploadsuccess");
+						String linkToTemplateDetail = utility.getUrlSystem() + "/template-detail/" + newTemplate.getId();
+						jsonObjectSuccessUpload.put("message", linkToTemplateDetail);
+						return jsonObjectSuccessUpload;
+					}
 				}
 			} catch (Exception e) {
 				logger.error("upload file failed", e);
-				return -1;
+				Map<String, String> jsonObjectError = new HashMap<String, String>();
+				jsonObjectError.put("state","error");
+				jsonObjectError.put("message","exception unexpected");
+				return jsonObjectError;
 			}
 		}
-		return -1;
+		Map<String, String> jsonObjectNotChooseFileYet = new HashMap<String, String>();
+		jsonObjectNotChooseFileYet.put("state","notchoosefile");
+		jsonObjectNotChooseFileYet.put("message","you haven't choose file yet");
+		return jsonObjectNotChooseFileYet;
 	}
 
 	@Override
@@ -208,14 +240,10 @@ public class TemplateServiceImpl extends
 		
 		Map<String, String> jsonObject = new HashMap<String, String>();
 		//check overwriting 
-		if(templateDao.getUploadTemplateByCategoryAndFileNameOfOwner(categoryId, fileName) != null){
+		if (templateDao.getUploadTemplateByCategoryAndFileNameOfOwner(categoryId, fileName) != null){
 			jsonObject.put("state","overwriteyourtemplate");
 			jsonObject.put("overwriteyourtemplate",utility.getMessage(overwriteyourtemplate));
-		//check is use by other member
-		}else if(templateDao.getUploadTemplateByCategoryAndFileNameNotOwner(categoryId, fileName) != null){
-			jsonObject.put("state","isusedbyothermember");
-			jsonObject.put("overwriteyourtemplate",utility.getMessage(isusedbyothermember));
-		}else{
+		} else {
 			jsonObject.put("state","canuse");
 		}
 		return jsonObject;
