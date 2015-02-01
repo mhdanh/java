@@ -12,11 +12,33 @@ import com.mhdanh.mytemplate.viewmodel.UploadTemplateDTO;
 
 public interface TemplateService extends CommonService<Template>{
 	/**
-	 * 
-	 * @param uploadTemplate
-	 * @return id newtemplate
+	 * return json object. 
+	 * {
+	 * 	state:isusedbyothermember,
+	 * 	message:file name is used by other member of this category	
+	 * }
+	 * or
+	 * {
+	 * 	state:overwriteyourtemplate,
+	 * 	message:you are overwriting your template on this category	
+	 * }
+	 * or
+	 * {
+	 * 	state:wrongformat,
+	 * 	message:message wrong format
+	 * }
+	 * or
+	 * {
+	 * 	state:uploadsuccess,
+	 * 	message:link to template detail: /template-detail/{idtemplate}
+	 * }
+	 * or
+	 * {
+	 * 	state:error,
+	 * 	message:exception unexpected
+	 * }
 	 */
-	int uploadTemplate(UploadTemplateDTO uploadTemplate);
+	Object uploadTemplate(UploadTemplateDTO uploadTemplate);
 	/**
 	 * return json object. 
 	 * {
