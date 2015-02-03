@@ -34,6 +34,7 @@ import com.mhdanh.mytemplate.service.CategoryService;
 import com.mhdanh.mytemplate.service.UnzipService;
 import com.mhdanh.mytemplate.service.TemplateService;
 import com.mhdanh.mytemplate.utility.Utility;
+import com.mhdanh.mytemplate.viewmodel.LazyLoadTemplateFilterIndex;
 import com.mhdanh.mytemplate.viewmodel.UploadTemplateDTO;
 
 @Service
@@ -336,5 +337,11 @@ public class TemplateServiceImpl extends
 				}
 			}
 		}
+	}
+
+	@Override
+	public List<Template> getLazyTemplatePublished(
+			LazyLoadTemplateFilterIndex lazyLoadingCategory) {
+		return  templateDao.getLazyTemplatePublished(lazyLoadingCategory);
 	}
 }
