@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mhdanh.mytemplate.domain.Template;
+import com.mhdanh.mytemplate.viewmodel.LazyLoadTemplateFilterIndex;
 import com.mhdanh.mytemplate.viewmodel.UploadTemplateDTO;
 
 public interface TemplateService extends CommonService<Template>{
@@ -61,4 +62,6 @@ public interface TemplateService extends CommonService<Template>{
 	Object checkFormatAndExistTemplate(UploadTemplateDTO templateUpload);
 	List<Template> getAllTemplatePublished();
 	void downloadTemplateFree(int idTemplate, HttpServletResponse response);
+	List<Template> getLazyTemplatePublished(
+			LazyLoadTemplateFilterIndex lazyLoadingCategory);
 }

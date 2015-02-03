@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -14,6 +15,8 @@ import com.mhdanh.mytemplate.dao.TemplateDao;
 import com.mhdanh.mytemplate.domain.Template;
 import com.mhdanh.mytemplate.domain.Template.TEMPLATE_STATUS;
 import com.mhdanh.mytemplate.utility.Utility;
+import com.mhdanh.mytemplate.viewmodel.HardCode;
+import com.mhdanh.mytemplate.viewmodel.LazyLoadTemplateFilterIndex;
 
 @SuppressWarnings("unchecked")
 @Transactional
@@ -64,5 +67,44 @@ public class TemplateDaoImpl extends CommonDaoImpl<Template> implements Template
 				.add(Restrictions.eq("status", status))
 				.addOrder(Order.desc("dateModified"))
 				.list();
+	}
+
+	@Override
+	public List<Template> getLazyTemplatePublished(
+			LazyLoadTemplateFilterIndex lazyLoadingTemplate) {
+		Criteria lazyLoadTemplateCriteria = sessionFactory.getCurrentSession()
+				.createCriteria(Template.class)
+				.add(Restrictions.eq("status", TEMPLATE_STATUS.PUBLISHED));
+		Integer zero = 0;
+		if(lazyLoadingTemplate.getIdCategory() != zero) {
+			lazyLoadTemplateCriteria.add(Restrictions.eq("category.id", lazyLoadingTemplate.getIdCategory()));
+		}
+		
+		if(HardCode.topDownload.equals(lazyLoadingTemplate.getValueFilter())){
+			lazyLoadTemplateCriteria.addOrder(Order.desc("buy"));
+		}
+		
+		if(HardCode.topFreeDownload.equals(lazyLoadingTemplate.getValueFilter())){
+			lazyLoadTemplateCriteria.add(Restrictions.eq("sellOff", zero));
+			lazyLoadTemplateCriteria.addOrder(Order.desc("buy"));
+		}
+		
+		if(HardCode.topPremiumDownload.equals(lazyLoadingTemplate.getValueFilter())){
+			lazyLoadTemplateCriteria.add(Restrictions.not(Restrictions.eq("sellOff", zero)));
+			lazyLoadTemplateCriteria.addOrder(Order.desc("buy"));
+		}
+		
+		if(HardCode.FreeNewest.equals(lazyLoadingTemplate.getValueFilter())){
+			lazyLoadTemplateCriteria.add(Restrictions.eq("sellOff", zero));
+			lazyLoadTemplateCriteria.addOrder(Order.desc("dateModified"));
+		}
+		
+		if(HardCode.PremiumNewest.equals(lazyLoadingTemplate.getValueFilter())){
+			lazyLoadTemplateCriteria.add(Restrictions.not(Restrictions.eq("sellOff", zero)));
+			lazyLoadTemplateCriteria.addOrder(Order.desc("dateModified"));
+		}
+		
+		lazyLoadTemplateCriteria.setMaxResults(lazyLoadingTemplate.getStep());
+		return lazyLoadTemplateCriteria.list();
 	}
 }

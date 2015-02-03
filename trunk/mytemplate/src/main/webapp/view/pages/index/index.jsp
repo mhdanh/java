@@ -7,10 +7,11 @@
 <div class = "wrapper-content-template">
 	<!-- filter template -->
 	<div class = "wrap-filte-template">
-		<form class="form-inline">
+		<form class="form-inline" name="valueFilter" method="get">
 			<div class="form-group">
 				<label for="exampleInputName2">Choose category:</label>
-				<select class = "form-control mt-no-border-radius">
+				<select class = "form-control mt-no-border-radius" name = "idCategory">
+					<option value="0"><spring:message code="msg.index.text.all"/></option>
 					<c:forEach items="${categories}" var = "category">
 						<option value="${category.id}"><spring:message code="${category.name}"/></option>
 					</c:forEach>
@@ -18,7 +19,7 @@
 			</div>
 			<div class="form-group">
 		    	<label for="exampleInputEmail2"> Filter:</label>
-		    	<select class = "form-control mt-no-border-radius">
+		    	<select class = "form-control mt-no-border-radius" name = "valueFilter">
 					<c:forEach items="${filters}" var = "filter">
 						<option value="${filter.value}">${filter.displayName}</option>
 					</c:forEach>
