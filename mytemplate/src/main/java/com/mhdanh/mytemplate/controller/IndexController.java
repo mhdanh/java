@@ -19,4 +19,9 @@ public class IndexController {
 	public String index(Model model,@ModelAttribute("valueFilter") LazyLoadTemplateFilterIndex valueFilter){
 		return indexService.indexPage(model,valueFilter);
 	}
+	
+	@RequestMapping(value={"/ajax/index-load-more"})
+	public String indexLoadMore(Model model,@ModelAttribute("valueFilter") LazyLoadTemplateFilterIndex valueFilter){
+		return indexService.indexLoadMore(model,valueFilter);
+	}
 }

@@ -8,4 +8,6 @@ public interface IndexService {
 
 	String indexPage(Model model, LazyLoadTemplateFilterIndex valueFilter);
 
+	String indexLoadMore(Model model, LazyLoadTemplateFilterIndex valueFilter);
+
 }
