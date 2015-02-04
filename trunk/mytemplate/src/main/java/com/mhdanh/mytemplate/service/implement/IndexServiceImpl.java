@@ -36,6 +36,7 @@ public class IndexServiceImpl implements IndexService{
 		model.addAttribute("filters", filters);
 		model.addAttribute("templates", templates);
 		model.addAttribute("categories", categories);
+		model.addAttribute("lazyLoading",lazyLoadingTemplate);
 		return "/index";
 	}
 
@@ -78,6 +79,13 @@ public class IndexServiceImpl implements IndexService{
 		filters.add(filterPremiumNewest);
 		
 		return filters;
+	}
+
+	@Override
+	public String indexLoadMore(Model model,
+			LazyLoadTemplateFilterIndex valueFilter) {
+		System.out.println("load more");
+		return null;
 	}
 
 }
