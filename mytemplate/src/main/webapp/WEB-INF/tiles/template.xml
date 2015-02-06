@@ -44,6 +44,11 @@
 			<add-attribute value="/view/public/js/index/index.js" />
 		</put-list-attribute>
 	</definition>
+	
+	<!-- /ajax/index-load-more -->
+	<definition name="/ajax/index-load-more" template = "/view/pages/index/ajax-index-load-more.jsp">
+	</definition>
+	
 
 	<!-- account controller -->
 	<definition name="/login" extends="homeTemplate">

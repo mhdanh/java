@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -23,10 +24,13 @@ import com.mhdanh.mytemplate.viewmodel.LazyLoadTemplateFilterIndex;
 @Repository
 public class TemplateDaoImpl extends CommonDaoImpl<Template> implements TemplateDao{
 
+	private static final Logger logger = Logger.getLogger(TemplateDaoImpl.class);
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	@Autowired
 	private Utility utility;
+	
 	
 	@Override
 	public Template getUploadTemplateByCategoryAndFileNameOfOwner(
@@ -104,7 +108,26 @@ public class TemplateDaoImpl extends CommonDaoImpl<Template> implements Template
 			lazyLoadTemplateCriteria.addOrder(Order.desc("dateModified"));
 		}
 		
+		lazyLoadTemplateCriteria.setFirstResult(lazyLoadingTemplate.getPage() * lazyLoadingTemplate.getStep());
 		lazyLoadTemplateCriteria.setMaxResults(lazyLoadingTemplate.getStep());
 		return lazyLoadTemplateCriteria.list();
+	}
+
+	@Override
+	public int countTemplateByStatus(TEMPLATE_STATUS statusTemplate) {
+		logger.warn("begin count template by status");
+		try {
+			String hqlCountTemplateByStatus = "SELECT count(*) FROM Template template"
+					+ " WHERE template.status = :templateStatus";
+			Long totalRowTemplateByStatus =  (Long)sessionFactory.getCurrentSession()
+					.createQuery(hqlCountTemplateByStatus)
+					.setParameter("templateStatus", statusTemplate)
+					.uniqueResult();
+			return totalRowTemplateByStatus.intValue();
+		} catch (Exception e) {
+			System.out.println("error count template by status unsuccessful: " + e);
+			logger.error("error count template by status unsuccessful: ",e);
+			return 0;
+		}
 	}
 }

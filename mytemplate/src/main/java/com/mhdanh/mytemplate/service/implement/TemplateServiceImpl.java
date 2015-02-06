@@ -344,4 +344,9 @@ public class TemplateServiceImpl extends
 			LazyLoadTemplateFilterIndex lazyLoadingCategory) {
 		return  templateDao.getLazyTemplatePublished(lazyLoadingCategory);
 	}
+
+	@Override
+	public int countTotalTemplatePublished() {
+		return templateDao.countTemplateByStatus(TEMPLATE_STATUS.PUBLISHED);
+	}
 }

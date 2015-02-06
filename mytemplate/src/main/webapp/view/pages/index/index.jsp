@@ -125,12 +125,14 @@
 			<!-- enclose div if odd size -->
 			</div>
 		</c:if>
-		<!-- param load more page -->
-		<input type = "hidden" id = "current-page" value = "${lazyLoading.page}"/>
-		<input type = "hidden" id = "current-step" value = "${lazyLoading.step}"/>
-		<input type = "hidden" id = "current-category-id" value = "${lazyLoading.idCategory}"/>
-		<input type = "hidden" id = "current-value-filter" value = "${lazyLoading.valueFilter}"/>
-		
+		<div class = "div-wrap-save-info-filter mt-display-none">
+			<!-- param load more page -->
+			<input type = "hidden" id = "current-page" value = "${lazyLoading.page}"/>
+			<input type = "hidden" id = "current-step" value = "${lazyLoading.step}"/>
+			<input type = "hidden" id = "current-category-id" value = "${lazyLoading.idCategory}"/>
+			<input type = "hidden" id = "current-value-filter" value = "${lazyLoading.valueFilter}"/>
+			<input type = "hidden" id = "total-template-published" value = "${totalTemplatePublished}" />
+		</div>
 	</div><!-- end wrap content index -->
 	<div class = "index-wrap-loadmore">
 		<button class = "btn btn-danger mt-button" id = 'load-more-button'><spring:message code = "msg.index.text.loadmore"/></button>
