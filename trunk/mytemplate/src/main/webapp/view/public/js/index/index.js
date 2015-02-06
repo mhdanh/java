@@ -34,9 +34,17 @@ $(document).ready(function(){
 				$(".div-wrap-save-info-filter").remove();
 				//append data
 				$(".index-wrap-content-load-template").append(data);
+				//hide button load more
+				hideButtonLoadMore();
 			}
 		});//end ajax
 		
 	});//end function load more
 	
 });//end ready
+hideButtonLoadMore(){
+	var totalPage = parseInt($(".total-template-published").val());
+	var currentPage = parseInt($(".current-page").val());
+	var step = parseInt($(".current-step").val());
+	
+}

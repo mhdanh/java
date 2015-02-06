@@ -132,6 +132,7 @@
 			<input type = "hidden" id = "current-category-id" value = "${lazyLoading.idCategory}"/>
 			<input type = "hidden" id = "current-value-filter" value = "${lazyLoading.valueFilter}"/>
 			<input type = "hidden" id = "total-template-published" value = "${totalTemplatePublished}" />
+			<input type = "hidden" id = "index-step-load" value = "${step}" />
 		</div>
 	</div><!-- end wrap content index -->
 	<div class = "index-wrap-loadmore">
