@@ -39,6 +39,7 @@ public class IndexServiceImpl implements IndexService{
 		model.addAttribute("categories", categories);
 		model.addAttribute("lazyLoading",lazyLoadingTemplate);
 		model.addAttribute("totalTemplatePublished", totalTemplatePublished);
+		model.addAttribute("step", lazyLoadingTemplate.getStep());
 		return "/index";
 	}
 
