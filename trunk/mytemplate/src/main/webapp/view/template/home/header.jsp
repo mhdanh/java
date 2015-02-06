@@ -28,7 +28,7 @@
 						</c:forEach>
 					</ul>
 				</li>
-				<li><a href="<c:url value = 'upload-template-file-page'/>">Upload template</a></li>
+				<li><a href="<c:url value = '/upload-template-file-page'/>">Upload template</a></li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
