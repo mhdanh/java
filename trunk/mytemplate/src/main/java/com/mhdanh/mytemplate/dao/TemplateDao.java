@@ -3,6 +3,7 @@ package com.mhdanh.mytemplate.dao;
 import java.util.List;
 
 import com.mhdanh.mytemplate.domain.Template;
+import com.mhdanh.mytemplate.domain.Template.TEMPLATE_STATUS;
 import com.mhdanh.mytemplate.viewmodel.LazyLoadTemplateFilterIndex;
 
 public interface TemplateDao extends CommonDao<Template>{
@@ -12,4 +13,5 @@ public interface TemplateDao extends CommonDao<Template>{
 	List<Template> getTemplateByStatus(Template.TEMPLATE_STATUS status);
 	List<Template> getLazyTemplatePublished(
 			LazyLoadTemplateFilterIndex lazyLoadingCategory);
+	int countTemplateByStatus(TEMPLATE_STATUS statusTemplate);
 }

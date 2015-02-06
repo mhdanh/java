@@ -31,18 +31,20 @@ public class IndexServiceImpl implements IndexService{
 	public String indexPage(Model model,LazyLoadTemplateFilterIndex lazyLoadingTemplate) {
 		lazyLoadingTemplate = defaultLazyLoadingCategory(lazyLoadingTemplate);
 		List<Template> templates = templateService.getLazyTemplatePublished(lazyLoadingTemplate);
+		int totalTemplatePublished = templateService.countTotalTemplatePublished();
 		List<Category> categories = categoryDao.getAll();
 		List<FilterModel> filters = createFilters();
 		model.addAttribute("filters", filters);
 		model.addAttribute("templates", templates);
 		model.addAttribute("categories", categories);
 		model.addAttribute("lazyLoading",lazyLoadingTemplate);
+		model.addAttribute("totalTemplatePublished", totalTemplatePublished);
 		return "/index";
 	}
 
 	private LazyLoadTemplateFilterIndex defaultLazyLoadingCategory(LazyLoadTemplateFilterIndex lazyLoadingTemplate) {
 		if(lazyLoadingTemplate.getStep() == 0){
-			int itemOnPage = 10;
+			int itemOnPage = HardCode.itemOnPageIndex;
 			lazyLoadingTemplate.setStep(itemOnPage);
 		}
 		if(lazyLoadingTemplate.getValueFilter() == null){
@@ -84,8 +86,14 @@ public class IndexServiceImpl implements IndexService{
 	@Override
 	public String indexLoadMore(Model model,
 			LazyLoadTemplateFilterIndex valueFilter) {
-		System.out.println("load more");
-		return null;
+		int nextPage = valueFilter.getPage() + 1;
+		valueFilter.setPage(nextPage);
+		List<Template> templates = templateService.getLazyTemplatePublished(valueFilter);
+		int totalTemplatePublished = templateService.countTotalTemplatePublished();
+		model.addAttribute("templates", templates);
+		model.addAttribute("lazyLoading", valueFilter);
+		model.addAttribute("totalTemplatePublished", totalTemplatePublished);
+		return "/ajax/index-load-more";
 	}
 
 }

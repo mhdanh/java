@@ -12,6 +12,12 @@ import com.mhdanh.mytemplate.viewmodel.LazyLoadTemplateFilterIndex;
 import com.mhdanh.mytemplate.viewmodel.UploadTemplateDTO;
 
 public interface TemplateService extends CommonService<Template>{
+	
+	List<Template> getAllTemplatePublished();
+	int countTotalTemplatePublished();
+	void downloadTemplateFree(int idTemplate, HttpServletResponse response);
+	boolean checkTemplateFormat(MultipartFile fileTemplate);
+	
 	/**
 	 * return json object. 
 	 * {
@@ -58,10 +64,7 @@ public interface TemplateService extends CommonService<Template>{
 	 */
 	Object checkkUploadTemplateState(int categoryId,String fileName);
 	String templateDetail(Model model, int idTemplate);
-	boolean checkTemplateFormat(MultipartFile fileTemplate);
 	Object checkFormatAndExistTemplate(UploadTemplateDTO templateUpload);
-	List<Template> getAllTemplatePublished();
-	void downloadTemplateFree(int idTemplate, HttpServletResponse response);
 	List<Template> getLazyTemplatePublished(
 			LazyLoadTemplateFilterIndex lazyLoadingCategory);
 }

@@ -30,7 +30,10 @@ $(document).ready(function(){
 				$("#upload-file-button").attr("disabled","disabled");
 			},
 			success : function(data) {
-				console.log(data);
+				//renew save data info filter
+				$(".div-wrap-save-info-filter").remove();
+				//append data
+				$(".index-wrap-content-load-template").append(data);
 			}
 		});//end ajax
 		
