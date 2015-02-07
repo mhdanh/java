@@ -13,7 +13,14 @@
 				<select class = "form-control mt-no-border-radius" name = "idCategory">
 					<option value="0"><spring:message code="msg.index.text.all"/></option>
 					<c:forEach items="${categories}" var = "category">
-						<option value="${category.id}"><spring:message code="${category.name}"/></option>
+						<c:choose>
+							<c:when test="${category.id eq lazyLoading.idCategory}">
+								<option value="${category.id}" selected><spring:message code="${category.name}"/></option>
+							</c:when>
+							<c:otherwise>
+								<option value="${category.id}"><spring:message code="${category.name}"/></option>	
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
 				</select>
 			</div>
@@ -21,7 +28,14 @@
 		    	<label for="exampleInputEmail2"> Filter:</label>
 		    	<select class = "form-control mt-no-border-radius" name = "valueFilter">
 					<c:forEach items="${filters}" var = "filter">
-						<option value="${filter.value}">${filter.displayName}</option>
+						<c:choose>
+							<c:when test="${filter.value eq lazyLoading.valueFilter}">
+								<option value="${filter.value}" selected>${filter.displayName}</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${filter.value}">${filter.displayName}</option>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
 				</select>
 		    </div>
@@ -83,7 +97,7 @@
 								<div class = "wrap-imag-viewdetail">
 									<img src="<c:url value='/viewimg/${template.thumbnail}'/>" class="img-thumbnail" alt="Cinque Terre" width="420" height="236">
 									<div class = "overlay-view-detail-button">
-										<button class = 'view-detail-button'><spring:message code = 'msg.upload-template-file-page.label.viewdetail'/></button>
+										<a href = "<c:url value = '/template-detail/${template.id}'/>" class = 'view-detail-button' target="_blank"><spring:message code = 'msg.upload-template-file-page.label.viewdetail'/></a>
 									</div>
 								</div><!-- end wrap img and delete -->
 								<div class = "detail-item">
@@ -135,7 +149,9 @@
 			<input type = "hidden" id = "index-step-load" value = "${step}" />
 		</div>
 	</div><!-- end wrap content index -->
-	<div class = "index-wrap-loadmore">
-		<button class = "btn btn-danger mt-button" id = 'load-more-button'><spring:message code = "msg.index.text.loadmore"/></button>
-	</div>
+	<c:if test="${totalTemplatePublished gt (lazyLoading.page + 1) * lazyLoading.step}">
+		<div class = "index-wrap-loadmore">
+			<button class = "btn btn-danger mt-button" id = 'load-more-button'><spring:message code = "msg.index.text.loadmore"/></button>
+		</div>
+	</c:if>
 </div>

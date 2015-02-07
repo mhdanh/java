@@ -31,7 +31,7 @@ public class IndexServiceImpl implements IndexService{
 	public String indexPage(Model model,LazyLoadTemplateFilterIndex lazyLoadingTemplate) {
 		lazyLoadingTemplate = defaultLazyLoadingCategory(lazyLoadingTemplate);
 		List<Template> templates = templateService.getLazyTemplatePublished(lazyLoadingTemplate);
-		int totalTemplatePublished = templateService.countTotalTemplatePublished();
+		int totalTemplatePublished = templateService.countTotalTemplatePublishedAndLazyLoadinTemplate(lazyLoadingTemplate);
 		List<Category> categories = categoryDao.getAll();
 		List<FilterModel> filters = createFilters();
 		model.addAttribute("filters", filters);
@@ -71,13 +71,18 @@ public class IndexServiceImpl implements IndexService{
 		filterTopPremium.setDisplayName("Top premium download");
 		filters.add(filterTopPremium);
 		
+		FilterModel filterNewest = new FilterModel();
+		filterNewest.setValue(HardCode.newest);
+		filterNewest.setDisplayName("Template Newest");
+		filters.add(filterNewest);
+		
 		FilterModel filterFreeNewest = new FilterModel();
-		filterFreeNewest.setValue(HardCode.FreeNewest);
+		filterFreeNewest.setValue(HardCode.freeNewest);
 		filterFreeNewest.setDisplayName("Template Free Newest");
 		filters.add(filterFreeNewest);
 		
 		FilterModel filterPremiumNewest = new FilterModel();
-		filterPremiumNewest.setValue(HardCode.PremiumNewest);
+		filterPremiumNewest.setValue(HardCode.premiumNewest);
 		filterPremiumNewest.setDisplayName("Template Premium Newest");
 		filters.add(filterPremiumNewest);
 		
@@ -90,7 +95,7 @@ public class IndexServiceImpl implements IndexService{
 		int nextPage = valueFilter.getPage() + 1;
 		valueFilter.setPage(nextPage);
 		List<Template> templates = templateService.getLazyTemplatePublished(valueFilter);
-		int totalTemplatePublished = templateService.countTotalTemplatePublished();
+		int totalTemplatePublished = templateService.countTotalTemplatePublishedAndLazyLoadinTemplate(valueFilter);
 		model.addAttribute("templates", templates);
 		model.addAttribute("lazyLoading", valueFilter);
 		model.addAttribute("totalTemplatePublished", totalTemplatePublished);

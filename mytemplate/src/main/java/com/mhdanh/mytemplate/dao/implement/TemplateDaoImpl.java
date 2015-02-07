@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -98,12 +99,16 @@ public class TemplateDaoImpl extends CommonDaoImpl<Template> implements Template
 			lazyLoadTemplateCriteria.addOrder(Order.desc("buy"));
 		}
 		
-		if(HardCode.FreeNewest.equals(lazyLoadingTemplate.getValueFilter())){
+		if(HardCode.newest.equals(lazyLoadingTemplate.getValueFilter())){
+			lazyLoadTemplateCriteria.addOrder(Order.desc("dateModified"));
+		}
+		
+		if(HardCode.freeNewest.equals(lazyLoadingTemplate.getValueFilter())){
 			lazyLoadTemplateCriteria.add(Restrictions.eq("sellOff", zero));
 			lazyLoadTemplateCriteria.addOrder(Order.desc("dateModified"));
 		}
 		
-		if(HardCode.PremiumNewest.equals(lazyLoadingTemplate.getValueFilter())){
+		if(HardCode.premiumNewest.equals(lazyLoadingTemplate.getValueFilter())){
 			lazyLoadTemplateCriteria.add(Restrictions.not(Restrictions.eq("sellOff", zero)));
 			lazyLoadTemplateCriteria.addOrder(Order.desc("dateModified"));
 		}
@@ -129,5 +134,44 @@ public class TemplateDaoImpl extends CommonDaoImpl<Template> implements Template
 			logger.error("error count template by status unsuccessful: ",e);
 			return 0;
 		}
+	}
+
+	@Override
+	public int countTotalTemplatePublishedAndLazyLoadinTemplate(
+			LazyLoadTemplateFilterIndex lazyLoadingTemplate) {
+		logger.warn("begin count total template published by lazy loading template");
+		try {
+			Criteria lazyLoadTemplateCriteria = sessionFactory.getCurrentSession()
+					.createCriteria(Template.class)
+					.add(Restrictions.eq("status", TEMPLATE_STATUS.PUBLISHED));
+			Integer zero = 0;
+			if(lazyLoadingTemplate.getIdCategory() != zero) {
+				lazyLoadTemplateCriteria.add(Restrictions.eq("category.id", lazyLoadingTemplate.getIdCategory()));
+			}
+			
+			if(HardCode.topFreeDownload.equals(lazyLoadingTemplate.getValueFilter())){
+				lazyLoadTemplateCriteria.add(Restrictions.eq("sellOff", zero));
+			}
+			
+			if(HardCode.topPremiumDownload.equals(lazyLoadingTemplate.getValueFilter())){
+				lazyLoadTemplateCriteria.add(Restrictions.not(Restrictions.eq("sellOff", zero)));
+			}
+			
+			if(HardCode.freeNewest.equals(lazyLoadingTemplate.getValueFilter())){
+				lazyLoadTemplateCriteria.add(Restrictions.eq("sellOff", zero));
+			}
+			
+			if(HardCode.premiumNewest.equals(lazyLoadingTemplate.getValueFilter())){
+				lazyLoadTemplateCriteria.add(Restrictions.not(Restrictions.eq("sellOff", zero)));
+			}
+			lazyLoadTemplateCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			Long totalRow = (Long) lazyLoadTemplateCriteria.setProjection(Projections.rowCount()).uniqueResult();
+			return totalRow.intValue();
+		} catch (Exception e) {
+			System.out.println("error count total template published by lazy loading template: " + e);
+			logger.error("error count total template published by lazy loading template:",e);
+			return 0;
+		}
+		
 	}
 }

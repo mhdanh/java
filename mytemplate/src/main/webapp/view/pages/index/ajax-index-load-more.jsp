@@ -77,10 +77,9 @@
 								class="img-thumbnail" alt="Cinque Terre" width="420"
 								height="236">
 							<div class="overlay-view-detail-button">
-								<button class='view-detail-button'>
-									<spring:message
-										code='msg.upload-template-file-page.label.viewdetail' />
-								</button>
+								<a href="<c:url value = '/template-detail/${template.id}'/>"
+										class='view-detail-button' target="_blank"><spring:message
+											code='msg.upload-template-file-page.label.viewdetail' /></a>
 							</div>
 						</div>
 						<!-- end wrap img and delete -->
