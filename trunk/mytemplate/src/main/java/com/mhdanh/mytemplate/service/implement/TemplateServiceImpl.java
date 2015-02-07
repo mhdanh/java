@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mhdanh.mytemplate.dao.AccountDao;
 import com.mhdanh.mytemplate.dao.TemplateDao;
 import com.mhdanh.mytemplate.domain.Account;
 import com.mhdanh.mytemplate.domain.Category;
@@ -258,7 +259,7 @@ public class TemplateServiceImpl extends
 			return "/404";
 		}
 		boolean ownerTemplate = false;
-		if(templateById.getOwner().getId() == userLogined.getId()){
+		if(userLogined != null && templateById.getOwner().getId() == userLogined.getId()){
 			ownerTemplate = true;
 		}
 		
@@ -315,25 +316,26 @@ public class TemplateServiceImpl extends
 	@Override
 	public void downloadTemplateFree(int idTemplate,
 			HttpServletResponse response) {
-		logger.warn("Id template: " + idTemplate);
+		logger.warn("Begin download template id: " + idTemplate);
 		Template templateById = templateDao.getTemplateById(idTemplate);
 		if(templateById != null){
 			if(templateById.getSellOff() == 0){
 				try {
 					final String folderZipTemplate = "system.url.store.template";
 					String pathInputTemplate = utility.getValueFromPropertiesSystemFile(folderZipTemplate)
+							+ templateById.getOwner().getUsername()
+							+ "/"
 							+ utility.convertTextInDatabaseToNormalText(templateById.getCategory().getName())
 							+ "/" + templateById.getFileName();
-					logger.warn("Path input template free:" + pathInputTemplate);
 					utility.downloadFile(response,pathInputTemplate, templateById.getFileName());
 					//update download time
 					Integer plusBuy = templateById.getBuy() + 1;
 					templateById.setBuy(plusBuy);
 					//update template
 					templateDao.update(templateById);
-					logger.warn("Download free template successful");
 				} catch (IOException e) {
-					logger.error("Download free template unsuccessful");
+					System.out.println("Download free template unsuccessful:" + e);
+					logger.error("Download free template unsuccessful",e);
 				}
 			}
 		}
@@ -348,5 +350,11 @@ public class TemplateServiceImpl extends
 	@Override
 	public int countTotalTemplatePublished() {
 		return templateDao.countTemplateByStatus(TEMPLATE_STATUS.PUBLISHED);
+	}
+
+	@Override
+	public int countTotalTemplatePublishedAndLazyLoadinTemplate(
+			LazyLoadTemplateFilterIndex lazyLoadingTemplate) {
+		return templateDao.countTotalTemplatePublishedAndLazyLoadinTemplate(lazyLoadingTemplate);
 	}
 }

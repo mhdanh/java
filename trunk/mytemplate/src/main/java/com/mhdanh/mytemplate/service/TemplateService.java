@@ -67,4 +67,6 @@ public interface TemplateService extends CommonService<Template>{
 	Object checkFormatAndExistTemplate(UploadTemplateDTO templateUpload);
 	List<Template> getLazyTemplatePublished(
 			LazyLoadTemplateFilterIndex lazyLoadingCategory);
+	int countTotalTemplatePublishedAndLazyLoadinTemplate(
+			LazyLoadTemplateFilterIndex lazyLoadingTemplate);
 }
