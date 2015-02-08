@@ -32,6 +32,17 @@
 		</put-list-attribute>
 	</definition>
 	
+	<definition name="/admin/manage-template" extends="homeTemplate">
+		<put-attribute name="title" value="Manage template"></put-attribute>
+		<put-attribute name="content" value="/view/pages/admin/manage-template.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/view/public/css/admin/manage-template.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/view/public/js/admin/manage-template.js" />
+		</put-list-attribute>
+	</definition>
+	
 	<!-- index controller -->
 	<!-- 	"/index","/","/index/" -->
 	<definition name="/index" extends="homeTemplate">

@@ -1,5 +1,6 @@
 package com.mhdanh.mytemplate.dao.implement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -173,5 +174,20 @@ public class TemplateDaoImpl extends CommonDaoImpl<Template> implements Template
 			return 0;
 		}
 		
+	}
+
+	@Override
+	public List<Template> getNewestTemplate() {
+		logger.warn("begin template dao get newest templates");
+		try {
+			return sessionFactory.getCurrentSession()
+					.createCriteria(Template.class)
+					.addOrder(Order.desc("dateModified"))
+					.list();
+		} catch (Exception e) {
+			System.out.println("error get newest template:" + e);
+			logger.error("error get newest template:",e);
+			return new ArrayList<>();
+		}
 	}
 }

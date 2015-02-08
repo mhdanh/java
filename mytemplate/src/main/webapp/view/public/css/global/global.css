@@ -9,6 +9,11 @@ a:hover { text-decoration: none; }
 .modal-content-error{
 	box-shadow: 0 0px 5px rgba(244, 20, 20, 0.5) !important;
 }
+.modal-vertical-centered {
+  transform: translate(0, 50%) !important;
+  -ms-transform: translate(0, 50%) !important; /* IE 9 */
+  -webkit-transform: translate(0, 50%) !important; /* Safari and Chrome */
+}
 
 .mt-no-border-radius{border-radius:0px;}
 .mt-no-margin-bottom{margin-bottom:0px;}
