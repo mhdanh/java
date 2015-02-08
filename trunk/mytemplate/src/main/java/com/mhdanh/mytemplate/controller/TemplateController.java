@@ -35,6 +35,10 @@ private Logger logger = Logger.getLogger(TemplateController.class);
 	@Autowired
 	private TemplateService templateService;
 	
+	@RequestMapping(value = "/template/my-template")
+	public String myTemplate(Model model) throws IOException{
+		return templateService.myTemplate(model);
+	}
 	
 	@RequestMapping(value = "/template/download-template-sample")
 	public void downloadTemplateSample(HttpServletResponse response) throws IOException{

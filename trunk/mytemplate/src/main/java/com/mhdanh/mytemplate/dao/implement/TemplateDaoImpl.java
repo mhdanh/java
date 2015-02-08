@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mhdanh.mytemplate.dao.TemplateDao;
+import com.mhdanh.mytemplate.domain.Account;
 import com.mhdanh.mytemplate.domain.Template;
 import com.mhdanh.mytemplate.domain.Template.TEMPLATE_STATUS;
 import com.mhdanh.mytemplate.utility.Utility;
@@ -187,6 +188,23 @@ public class TemplateDaoImpl extends CommonDaoImpl<Template> implements Template
 		} catch (Exception e) {
 			System.out.println("error get newest template:" + e);
 			logger.error("error get newest template:",e);
+			return new ArrayList<>();
+		}
+	}
+
+	@Override
+	public List<Template> getTemplateNewestByOwner(
+			Account userLogined) {
+		logger.warn("begin daoimpl get template newest by owner");
+		try {
+			return sessionFactory.getCurrentSession()
+					.createCriteria(Template.class)
+					.add(Restrictions.eqOrIsNull("owner.id", userLogined.getId()))
+					.addOrder(Order.desc("dateModified"))
+					.list();
+		} catch (Exception e) {
+			System.out.println("error get template newest by owner unsuccessful" + e);
+			logger.error("error get template newest by owner unsuccessful",e);
 			return new ArrayList<>();
 		}
 	}

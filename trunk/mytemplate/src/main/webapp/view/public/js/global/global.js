@@ -19,6 +19,18 @@
 //	});
 //};
 
+function createModalConfirmYesNo(title, body, action) {
+	$("#modal-confirm-yes-no-title").html(title);
+	$("#modal-confirm-yes-no-body").html(body);
+	$("#modal-confirm-yes-no").modal("show");
+	$(".modal-confirm-yes-button").on("click",function(){
+		//action
+		action();
+		//hide confirm modal
+		$("#modal-confirm-yes-no").modal("hide");
+	});
+}
+
 function createModalInformError(title, body) {
 	$("#modal-inform-error-title").html(title);
 	$("#modal-inform-error-body").html(body);

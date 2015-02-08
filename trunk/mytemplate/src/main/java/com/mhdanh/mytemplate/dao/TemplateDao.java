@@ -2,6 +2,7 @@ package com.mhdanh.mytemplate.dao;
 
 import java.util.List;
 
+import com.mhdanh.mytemplate.domain.Account;
 import com.mhdanh.mytemplate.domain.Template;
 import com.mhdanh.mytemplate.domain.Template.TEMPLATE_STATUS;
 import com.mhdanh.mytemplate.viewmodel.LazyLoadTemplateFilterIndex;
@@ -17,4 +18,5 @@ public interface TemplateDao extends CommonDao<Template>{
 	int countTotalTemplatePublishedAndLazyLoadinTemplate(
 			LazyLoadTemplateFilterIndex lazyLoadingTemplate);
 	List<Template> getNewestTemplate();
+	List<Template> getTemplateNewestByOwner(Account userLogined);
 }

@@ -1,0 +1,7 @@
+.my-template{padding:15px;cursor: default;}
+.tb-my-template-col-id{width:30px;text-align: center;}
+.tb-my-template-col-cost{width:100px;text-align:center;}
+.tb-my-template-col-status{width:80px;text-align:center;}
+.tb-my-template-col-date-modified{width:130px;text-align: center;}
+.tb-my-template-col-owner{width:80px;text-align:center;}
+.tb-my-template-col-action{width:120px;text-align: center;}

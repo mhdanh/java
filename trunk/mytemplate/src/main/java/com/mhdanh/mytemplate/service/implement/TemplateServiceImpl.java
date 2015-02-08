@@ -357,4 +357,19 @@ public class TemplateServiceImpl extends
 			LazyLoadTemplateFilterIndex lazyLoadingTemplate) {
 		return templateDao.countTotalTemplatePublishedAndLazyLoadinTemplate(lazyLoadingTemplate);
 	}
+
+	@Override
+	public String myTemplate(Model model) {
+		logger.warn("begin my template page");
+		try {
+			Account userLogined = utility.getUserLogined();
+			List<Template> myTemplates = templateDao.getTemplateNewestByOwner(userLogined);
+			model.addAttribute("myTemplates", myTemplates);
+			return "/template/my-template";
+		} catch (Exception e) {
+			System.out.println("error init my template unsuccessful: " +e);
+			logger.error("error init my template unsuccessful:", e);
+			return "/404";
+		}
+	}
 }

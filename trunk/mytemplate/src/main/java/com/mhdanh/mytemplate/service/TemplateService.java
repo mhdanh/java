@@ -69,4 +69,5 @@ public interface TemplateService extends CommonService<Template>{
 			LazyLoadTemplateFilterIndex lazyLoadingCategory);
 	int countTotalTemplatePublishedAndLazyLoadinTemplate(
 			LazyLoadTemplateFilterIndex lazyLoadingTemplate);
+	String myTemplate(Model model);
 }

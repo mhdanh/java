@@ -36,6 +36,7 @@
 				<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">${my:getUserLogined().username} <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
+						<li><a href="<c:url value='/template/my-template'/> ">My Template</a></li>
 						<li><a href="#">Account info</a></li>
 						<li class="divider"></li>
 						<li><a href="#">
