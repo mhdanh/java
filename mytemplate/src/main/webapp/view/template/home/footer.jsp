@@ -11,6 +11,25 @@
 <!-- 		</div> -->
 <!-- 	</div> -->
 <!-- </footer> -->
+<!-- modal confirm yes no-->
+<div class="modal" id = "modal-confirm-yes-no">
+	<div class="modal-dialog modal-vertical-centered">
+		<div class="modal-content mt-no-border-radius modal-confirm-yes-no-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id = "modal-confirm-yes-no-title"></h4>
+			</div>
+			<div class="modal-body" id = "modal-confirm-yes-no-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary mt-button modal-confirm-yes-button"><spring:message code = "msg.button.yes"/></button>
+				<button type="button" class="btn btn-default mt-button" data-dismiss="modal"><spring:message code = "msg.button.close"/></button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <!-- modal inform error -->
 <div class="modal" id = "modal-inform-error">
 	<div class="modal-dialog modal-vertical-centered">
