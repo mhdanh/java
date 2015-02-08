@@ -1,19 +1,19 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<footer class="footer">
-	<div class = "row">
-		<div class = "col-md-4">
-			<ul>
-				<li><a href = "" class = "fa fa-globe"> Find Jobs</a></li>
-				<li><a href = "" class = "fa fa-slideshare"> Blog</a></li>
-				<li><a href="https://plus.google.com/110814290957816282578" rel="publisher">Google+</a></li>
-			</ul>
-		</div>
-	</div>
-</footer>
+<!-- <footer class="footer"> -->
+<!-- 	<div class = "row"> -->
+<!-- 		<div class = "col-md-4"> -->
+<!-- 			<ul> -->
+<!-- 				<li><a href = "" class = "fa fa-globe"> Find Jobs</a></li> -->
+<!-- 				<li><a href = "" class = "fa fa-slideshare"> Blog</a></li> -->
+<!-- 				<li><a href="https://plus.google.com/110814290957816282578" rel="publisher">Google+</a></li> -->
+<!-- 			</ul> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </footer> -->
 <!-- modal inform error -->
 <div class="modal" id = "modal-inform-error">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-vertical-centered">
 		<div class="modal-content mt-no-border-radius modal-content-error">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">

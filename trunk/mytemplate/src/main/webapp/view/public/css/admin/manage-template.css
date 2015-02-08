@@ -1,0 +1,7 @@
+.manage-template{padding:15px;cursor: default;}
+.tb-manage-template-col-id{width:30px;text-align: center;}
+.tb-manage-template-col-cost{width:100px;text-align:center;}
+.tb-manage-template-col-status{width:80px;text-align:center;}
+.tb-manage-template-col-date-modified{width:130px;text-align: center;}
+.tb-manage-template-col-owner{width:80px;text-align:center;}
+.tb-manage-template-col-action{width:120px;text-align: center;}

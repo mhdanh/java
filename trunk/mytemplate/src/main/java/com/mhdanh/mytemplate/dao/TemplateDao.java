@@ -16,4 +16,5 @@ public interface TemplateDao extends CommonDao<Template>{
 	int countTemplateByStatus(TEMPLATE_STATUS statusTemplate);
 	int countTotalTemplatePublishedAndLazyLoadinTemplate(
 			LazyLoadTemplateFilterIndex lazyLoadingTemplate);
+	List<Template> getNewestTemplate();
 }
