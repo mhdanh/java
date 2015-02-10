@@ -1,0 +1,79 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-4.0.xsd
+http://www.springframework.org/schema/mvc 
+http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<!-- upload file -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- setting maximum upload size -->
+		<property name="maxUploadSize" value="100000000" />
+	</bean>
+
+	<!-- resource bundle -->
+	<!-- Add bean in application context -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:language/msg"></property>
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+
+	<!-- Define a locale change interceptor -->
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="lang"></property>
+	</bean>
+
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang" />
+		</bean>
+	</mvc:interceptors>
+
+	<!-- Define localResolver -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="en"></property>
+	</bean>
+
+	<bean id="handlerMapping"
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<ref bean="localeChangeInterceptor" />
+		</property>
+	</bean>
+	
+	<!-- Application context  -->
+	<bean id="springContext" class="com.mhdanh.mytemplate.utility.SpringContext" />
+	<!-- email config -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="${system.email.username}" />
+		<property name="password" value="${system.email.password}" />
+		    <property name="javaMailProperties">
+		    	<props>
+			        <prop key="mail.smtp.auth">true</prop>
+			        <prop key="mail.smtp.starttls.enable">true</prop>
+		        </props>
+		    </property>
+	</bean>
+	<!-- facebook config -->
+	<bean id="facebook" class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
+        <constructor-arg value="${system.facebook.appId}" />
+        <constructor-arg value="${system.facebook.appSecret}" />				
+    </bean>
+    
+    <!-- google plus config -->
+	<bean id="googleplus" class="com.googlecode.googleplus.GooglePlusFactory">
+        <constructor-arg value="${system.googleplus.appId}" />
+        <constructor-arg value="${system.googleplus.appSecret}" />				
+    </bean>
+    
+</beans>

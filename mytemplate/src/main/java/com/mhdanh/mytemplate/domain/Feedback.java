@@ -47,6 +47,23 @@ public class Feedback {
 	@Column
 	private Date dateCreated;
 
+	@Override
+	public boolean equals(Object o){
+		if(o == null) {
+			return false;
+		}
+		if(!(o instanceof Feedback)) {
+			return false;
+		}
+		Feedback otherFeedback = (Feedback) o;
+		return this.getId() == otherFeedback.getId();
+	}
+	
+	@Override
+	public int hashCode(){
+		return this.getId();
+	}
+	
 	public Feedback() {
 		
 	}

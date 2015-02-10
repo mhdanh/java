@@ -27,6 +27,22 @@ public class Category {
 	@Column(name = "name",unique = true,nullable = false)
 	private String name;
 
+	@Override
+	public boolean equals(Object o){
+		if(o == null) {
+			return false;
+		}
+		if(!(o instanceof Category)) {
+			return false;
+		}
+		Category otherCategory = (Category) o;
+		return this.getId() == otherCategory.getId();
+	}
+	
+	@Override
+	public int hashCode(){
+		return this.getId();
+	}
 
 	public Category() {
 	}

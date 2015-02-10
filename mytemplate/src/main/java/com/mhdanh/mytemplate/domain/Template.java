@@ -78,6 +78,23 @@ public class Template {
 	@ManyToOne(targetEntity = Account.class)
 	private Account owner;
 
+	@Override
+	public boolean equals(Object o){
+		if(o == null) {
+			return false;
+		}
+		if(!(o instanceof Template)) {
+			return false;
+		}
+		Template otherTemplate= (Template) o;
+		return this.getId() == otherTemplate.getId();
+	}
+	
+	@Override
+	public int hashCode(){
+		return this.getId();
+	}
+	
 	public Template() {
 	}
 
