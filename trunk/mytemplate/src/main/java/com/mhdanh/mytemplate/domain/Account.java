@@ -68,6 +68,23 @@ public class Account {
 	@Cascade(value = { CascadeType.DELETE })
 	private List<Role> roles;
 
+	@Override
+	public boolean equals(Object o){
+		if(o == null) {
+			return false;
+		}
+		if(!(o instanceof Account)) {
+			return false;
+		}
+		Account otherAccount = (Account) o;
+		return this.getId() == otherAccount.getId();
+	}
+	
+	@Override
+	public int hashCode(){
+		return this.getId();
+	}
+	
 	public Account() {
 	}
 

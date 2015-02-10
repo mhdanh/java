@@ -31,6 +31,23 @@ public class Role {
 	@ManyToMany(mappedBy = "roles")
 	private List<Account> accounts;
 	
+	@Override
+	public boolean equals(Object o){
+		if(o == null) {
+			return false;
+		}
+		if(!(o instanceof Role)) {
+			return false;
+		}
+		Role otherRole= (Role) o;
+		return this.getId() == otherRole.getId();
+	}
+	
+	@Override
+	public int hashCode(){
+		return this.getId();
+	}
+	
 	public Role() {
 		
 	}
