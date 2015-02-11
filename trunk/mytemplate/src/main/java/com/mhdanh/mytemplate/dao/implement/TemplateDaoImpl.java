@@ -208,4 +208,9 @@ public class TemplateDaoImpl extends CommonDaoImpl<Template> implements Template
 			return new ArrayList<>();
 		}
 	}
+
+	@Override
+	public void deleteTemplate(Template templateById) {
+		sessionFactory.getCurrentSession().delete(templateById);
+	}
 }

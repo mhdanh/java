@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mhdanh.mytemplate.dao.CommonDao;
 
 @Repository
-@Transactional
 public abstract class CommonDaoImpl<T> extends HibernateDaoSupport implements
 		CommonDao<T> {
 

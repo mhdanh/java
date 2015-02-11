@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mhdanh.mytemplate.service.CategoryService;
@@ -34,6 +35,12 @@ private Logger logger = Logger.getLogger(TemplateController.class);
 	private CategoryService categoryService;
 	@Autowired
 	private TemplateService templateService;
+	
+	@RequestMapping(value = "/template/delete-template")
+	@ResponseBody
+	public Object deleteTemplate(@RequestParam("idTemplate") int idTemplate){
+		return templateService.deleteTemplate(idTemplate);
+	}
 	
 	@RequestMapping(value = "/template/my-template")
 	public String myTemplate(Model model) throws IOException{

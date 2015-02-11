@@ -8,7 +8,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -72,10 +73,12 @@ public class Template {
 	@Enumerated(EnumType.STRING)
 	private TEMPLATE_STATUS status;
 
-	@ManyToOne(targetEntity = Category.class)
+	@OneToOne
+	@JoinColumn(name = "categoryId")
 	private Category category;
 
-	@ManyToOne(targetEntity = Account.class)
+	@OneToOne
+	@JoinColumn(name = "ownerId")
 	private Account owner;
 
 	@Override

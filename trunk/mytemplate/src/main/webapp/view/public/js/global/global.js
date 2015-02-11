@@ -24,10 +24,12 @@ function createModalConfirmYesNo(title, body, action) {
 	$("#modal-confirm-yes-no-body").html(body);
 	$("#modal-confirm-yes-no").modal("show");
 	$(".modal-confirm-yes-button").on("click",function(){
+		console.log("click");
 		//action
 		action();
 		//hide confirm modal
 		$("#modal-confirm-yes-no").modal("hide");
+		$(".modal-confirm-yes-button").unbind("click");
 	});
 }
 
