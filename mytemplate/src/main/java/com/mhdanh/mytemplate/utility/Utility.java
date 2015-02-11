@@ -264,5 +264,19 @@ public class Utility {
 			logger.error("File download not exist");
 		}
 	}
+	public boolean deleteFile(String pathInputTemplate) {
+		logger.warn("begin delete file in utiliti");
+		try {
+			File fileDelete = new File(pathInputTemplate);
+			fileDelete.delete();
+			return true;
+		} catch (Exception e) {
+			System.out.println("error delete file unsuccessful" + e);
+			logger.error("error delete file unsuccessful",e);
+			return false;
+		}
+		
+		
+	}
 	
 }

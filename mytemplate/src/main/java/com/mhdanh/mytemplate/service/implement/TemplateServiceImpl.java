@@ -21,6 +21,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +40,7 @@ import com.mhdanh.mytemplate.viewmodel.LazyLoadTemplateFilterIndex;
 import com.mhdanh.mytemplate.viewmodel.UploadTemplateDTO;
 
 @Service
+@Transactional
 public class TemplateServiceImpl extends
 		CommonServiceImpl<Template> implements TemplateService {
 
@@ -371,5 +373,39 @@ public class TemplateServiceImpl extends
 			logger.error("error init my template unsuccessful:", e);
 			return "/404";
 		}
+	}
+
+	@Override
+	public Object deleteTemplate(int idTemplate) {
+		logger.warn("begin delete template");
+		Map<String, String> resultJson = new HashMap<>();
+		try {
+			Template templateById = templateDao.getTemplateById(idTemplate);
+			Account userLogined = utility.getUserLogined();
+			if(userLogined == null || templateById.getOwner() == null || templateById.getOwner().getId() != userLogined.getId()){
+				resultJson.put("state", "false");
+				resultJson.put("msg", utility.getMessage("msg.login.text.not.login"));
+				return resultJson;
+			}
+			final String folderZipTemplate = "system.url.store.template";
+			String pathInputTemplate = utility.getValueFromPropertiesSystemFile(folderZipTemplate)
+					+ templateById.getOwner().getUsername()
+					+ "/"
+					+ utility.convertTextInDatabaseToNormalText(templateById.getCategory().getName())
+					+ "/" + templateById.getFileName();
+			if(utility.deleteFile(pathInputTemplate)){
+				templateDao.deleteTemplate(templateById);
+			}
+			resultJson.put("state", "true");
+			return resultJson;
+		} catch (Exception e) {
+			System.out.println("error delete template unsuccessful");
+			e.printStackTrace();
+			logger.error("error delete template unsuccessful",e);
+			resultJson.put("state", "false");
+			resultJson.put("msg", utility.getMessage("msg.template.my-temlate.text.delete.unsuccess"));
+			return resultJson;
+		}
+		
 	}
 }

@@ -9,10 +9,12 @@ import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mhdanh.mytemplate.service.UnzipService;
 
 @Service
+@Transactional
 public class UnzipServiceImpl implements UnzipService{
 
 	@Override

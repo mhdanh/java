@@ -19,4 +19,5 @@ public interface TemplateDao extends CommonDao<Template>{
 			LazyLoadTemplateFilterIndex lazyLoadingTemplate);
 	List<Template> getNewestTemplate();
 	List<Template> getTemplateNewestByOwner(Account userLogined);
+	void deleteTemplate(Template templateById);
 }

@@ -16,6 +16,7 @@ import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.googlecode.googleplus.GooglePlusFactory;
 import com.googlecode.googleplus.Plus;
@@ -32,6 +33,7 @@ import com.mhdanh.mytemplate.utility.Utility;
 import com.mhdanh.mytemplate.viewmodel.MailSenderDTO;
 
 @Service
+@Transactional
 public class GooglePlusServiceImpl implements GooglePlusService {
 
 	@Autowired

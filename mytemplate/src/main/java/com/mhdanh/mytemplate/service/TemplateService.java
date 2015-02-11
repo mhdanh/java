@@ -70,4 +70,10 @@ public interface TemplateService extends CommonService<Template>{
 	int countTotalTemplatePublishedAndLazyLoadinTemplate(
 			LazyLoadTemplateFilterIndex lazyLoadingTemplate);
 	String myTemplate(Model model);
+	/**
+	 * 
+	 * @param idTemplate
+	 * @return json {state:true,msg:ddd}
+	 */
+	Object deleteTemplate(int idTemplate);
 }

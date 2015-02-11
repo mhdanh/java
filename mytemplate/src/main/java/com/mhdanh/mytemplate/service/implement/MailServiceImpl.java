@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mhdanh.mytemplate.service.MailService;
 import com.mhdanh.mytemplate.utility.Utility;
 import com.mhdanh.mytemplate.viewmodel.MailSenderDTO;
 
 @Service
+@Transactional
 public class MailServiceImpl implements MailService {
 	Logger logger = Logger.getLogger(MailServiceImpl.class);
 	

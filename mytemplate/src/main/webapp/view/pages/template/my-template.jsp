@@ -17,7 +17,7 @@
 		</thead>
 		<tbody>
 			<c:forEach var="myTemplate" items="${myTemplates}">
-				<tr>
+				<tr data-id-template = "${myTemplate.id}">
 					<td class = "tb-my-template-col-id">${myTemplate.id}</td>
 					<td class = "tb-my-template-col-text"><a href="<c:url value = '/${myTemplate.link}'/>" target="_blank" title = "<spring:message code = 'msg.template.my-temlate.text.live.demo'/>">${myTemplate.title}</a></td>
 					<td class = "tb-my-template-col-cost">${myTemplate.sellOff}k</td>
