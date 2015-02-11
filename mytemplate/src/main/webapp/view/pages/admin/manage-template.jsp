@@ -40,6 +40,11 @@
 					</td>
 				</tr>
 			</c:forEach>
+			<c:if test="${empty newestTemplates}">
+				<tr>
+					<td colspan="7"><spring:message code = "msg.template.my-temlate.text.notemplate"/></td>
+				</tr>
+			</c:if>
 		</tbody>
 	</table>
 </div>
