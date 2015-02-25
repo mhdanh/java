@@ -22,6 +22,8 @@ a:hover { text-decoration: none; }
 .mt-hidden-complete{visibility: hidden;height:0px;}
 .mt-no-padding-left{padding-left:0px;}
 .mt-clear-both{clear:both;}
+.mt-float-left{float:left;}
+.mt-float-right{float:right;}
 .error-custom{
 	margin-top:3px;
 	margin-bottom:3px;
