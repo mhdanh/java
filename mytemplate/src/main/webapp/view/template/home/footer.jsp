@@ -1,16 +1,31 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<!-- <footer class="footer"> -->
-<!-- 	<div class = "row"> -->
-<!-- 		<div class = "col-md-4"> -->
-<!-- 			<ul> -->
-<!-- 				<li><a href = "" class = "fa fa-globe"> Find Jobs</a></li> -->
-<!-- 				<li><a href = "" class = "fa fa-slideshare"> Blog</a></li> -->
-<!-- 				<li><a href="https://plus.google.com/110814290957816282578" rel="publisher">Google+</a></li> -->
-<!-- 			</ul> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </footer> -->
+<footer class="footer">
+	<div class = "wrap-footer-row">
+		<div class = "footer-top">
+			<ul class = "footer-top-ul-left">
+				<li><a href=""><spring:message code = "msg.layout.about"/></a></li>
+				<li><a href=""><spring:message code = "msg.layout.feedback"/></a></li>
+			</ul>
+			<ul class = "footer-top-ul-right">
+				<li><a href="">English</a></li>
+				<li><a href="">|</a></li>
+				<li><a href="">Tiếng Việt</a></li>
+			</ul>
+			<div class = "mt-clear-both"></div>
+		</div><!-- end footer top -->
+		<div class = "footer-bottom">
+			<ul class = "footer-bottom-ul-left">
+				<li>myui.info</li>
+			</ul>
+			<ul class = "footer-bottom-ul-right-icon-social">
+				<li><a href=""><i class="fa fa-facebook-square"></i></a></li>
+				<li><a href=""><i class="fa fa-google-plus-square"></i></a></li>
+			</ul>
+			<div class = "mt-clear-both"></div>
+		</div><!-- end footer bottom -->
+	</div>
+</footer>
 <!-- modal confirm yes no-->
 <div class="modal" id = "modal-confirm-yes-no">
 	<div class="modal-dialog modal-vertical-centered">

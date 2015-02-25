@@ -1,54 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>Archetype Created Web Application</display-name>
-  
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>WEB-INF/application-context.xml</param-value>
-  </context-param>
-  <context-param>
-   <param-name>propertiesLocation</param-name>
-   <param-value>classpath:system.properties, classpath:jdbc.properties</param-value>
+  	<display-name>Archetype Created Web Application</display-name>
+  	<context-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>WEB-INF/application-context.xml</param-value>
+  	</context-param>
+  	<context-param>
+   		<param-name>propertiesLocation</param-name>
+   		<param-value>classpath:system.properties, classpath:jdbc.properties</param-value>
 	</context-param>
-  <listener>
-    <listener-class>
+  	<listener>
+    	<listener-class>
         org.springframework.web.context.ContextLoaderListener
-   </listener-class>
-  </listener>
-  <servlet>
-    <servlet-name>dispatcher</servlet-name>
-    <servlet-class>
+   		</listener-class>
+  	</listener>
+  	<servlet>
+    	<servlet-name>dispatcher</servlet-name>
+    	<servlet-class>
                   org.springframework.web.servlet.DispatcherServlet
-    </servlet-class>
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>WEB-INF/servlet-context.xml</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>dispatcher</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
+    	</servlet-class>
+    	<init-param>
+      		<param-name>contextConfigLocation</param-name>
+      		<param-value>WEB-INF/servlet-context.xml</param-value>
+    	</init-param>
+    	<load-on-startup>1</load-on-startup>
+  	</servlet>
+  	<servlet-mapping>
+    	<servlet-name>dispatcher</servlet-name>
+    	<url-pattern>/</url-pattern>
+  	</servlet-mapping>
   
-  <!-- open session -->
-  <filter>
+  	<!-- open session -->
+  	<filter>
       <filter-name>hibernateFilter</filter-name>
       <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
       <init-param>
          <param-name>sessionFactoryBeanName</param-name>
          <param-value>sessionFactory</param-value>         
       </init-param>      
-   </filter>
+   	</filter>
 
-   <filter-mapping>
-     <filter-name>hibernateFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-   </filter-mapping>
-   <!-- spring security -->
-   <filter>
+   	<filter-mapping>
+     	<filter-name>hibernateFilter</filter-name>
+    	<url-pattern>/*</url-pattern>
+    	<dispatcher>REQUEST</dispatcher>
+    	<dispatcher>FORWARD</dispatcher>
+   	</filter-mapping>
+   	<!-- spring security -->
+   	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
 			</filter-class>
@@ -58,22 +57,35 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<listener>
-	   <listener-class>
+	   	<listener-class>
 	     org.springframework.security.web.session.HttpSessionEventPublisher
-	   </listener-class>
-	 </listener>
+		</listener-class>
+	</listener>
 	<session-config>
-	  <session-timeout>15</session-timeout>
+	  	<session-timeout>15</session-timeout>
 	</session-config>
-  <!-- data source -->
-  <resource-ref>
-    <res-ref-name>jdbc/MyDataSource</res-ref-name>
-    <res-type>javax.sql.DataSource</res-type>
-    <res-auth>Container</res-auth>
-    <res-sharing-scope>Shareable</res-sharing-scope>
-  </resource-ref>
-  <!-- get full link -->
-  <listener>
-    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-</listener>
+  	<!-- data source -->
+  	<resource-ref>
+    	<res-ref-name>jdbc/MyDataSource</res-ref-name>
+    	<res-type>javax.sql.DataSource</res-type>
+    	<res-auth>Container</res-auth>
+    	<res-sharing-scope>Shareable</res-sharing-scope>
+  	</resource-ref>
+  	<!-- utf 8 -->
+	<filter>
+	    <filter-name>SetCharacterEncodingFilter</filter-name>
+	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	    <init-param>
+	        <param-name>encoding</param-name>
+	        <param-value>UTF8</param-value>
+	    </init-param>
+	    <init-param>
+	        <param-name>forceEncoding</param-name>
+	        <param-value>true</param-value>
+	    </init-param>
+	</filter>
+  	<!-- get full link -->
+  	<listener>
+    	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
 </web-app>
