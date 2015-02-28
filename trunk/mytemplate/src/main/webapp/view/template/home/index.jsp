@@ -32,7 +32,9 @@
 <body>
 					
 	<tiles:insertAttribute name = "header" />
-	<tiles:insertAttribute name = "content" />
+	<div class = "main-content">
+		<tiles:insertAttribute name = "content" />
+	</div>
 	<tiles:insertAttribute name = "footer" />
 	
 	<!-- javascript global -->

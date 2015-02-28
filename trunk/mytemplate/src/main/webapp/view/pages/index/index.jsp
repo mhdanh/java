@@ -64,7 +64,7 @@
 												<spring:message code='msg.upload-template-file-page.text.free'/>
 											</c:when>
 											<c:otherwise>
-												${template.sellOff}	
+												${template.sellOff}${template.unitMoney}	
 											</c:otherwise>
 										</c:choose>
 									</strong>
@@ -80,7 +80,7 @@
 											<a href="<c:url value='/template/download-template/${template.id}'/>" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.downloadme' /></a>
 										</c:when>
 										<c:otherwise>
-											<a href="${template.link}" target="_blank" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.buyme' /></a>	
+											<a href="<c:url value = '/template-detail/${template.id}'/>" target="_blank" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.buyme' /></a>	
 										</c:otherwise>
 									</c:choose>
 								</div><!-- end purchase button and live demo -->
@@ -107,7 +107,7 @@
 												<spring:message code='msg.upload-template-file-page.text.free'/>
 											</c:when>
 											<c:otherwise>
-												${template.sellOff}	
+												${template.sellOff}${template.unitMoney}	
 											</c:otherwise>
 										</c:choose>
 									</strong>
@@ -123,7 +123,7 @@
 											<a href="<c:url value='/template/download-template/${template.id}'/>" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.downloadme' /></a>
 										</c:when>
 										<c:otherwise>
-											<a href="${template.link}" target="_blank" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.buyme' /></a>	
+											<a href="<c:url value = '/template-detail/${template.id}'/>" target="_blank" class = "btn btn-primary mt-button"><spring:message code = 'msg.upload-template-file-page.label.buyme' /></a>	
 										</c:otherwise>
 									</c:choose>
 								</div><!-- end purchase button and live demo -->

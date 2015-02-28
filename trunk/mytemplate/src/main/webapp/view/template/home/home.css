@@ -1,3 +1,11 @@
+html,body {
+	height: 100%;
+}
+.main-content {
+	min-height: calc(100% - 52px - 71px); 
+	padding-top:20px;
+}
+
 /* style for header menu */
 @media ( min-width : 768px) {
 	/*.dropdown:hover .dropdown-menu {
@@ -101,7 +109,7 @@
 	position: relative;
 	bottom:0;
 	width: 100%;
-	background: black;
+	background: #333;
 }
 .wrap-footer-row {
 	max-width: 1000px;
@@ -110,7 +118,7 @@
 }
 
 .footer-top {
-	border-bottom: 1px groove red;
+	border-bottom: 1px groove #aaa;
 }
 .footer-top-ul-left {
 	float:left;
@@ -147,10 +155,14 @@
 .footer-bottom-ul-left {
 	float:left;
 	margin-bottom:0px;
+	list-style: none;
+	padding-left:0px;
+	color:#f0f0f0;
 }
 .footer-bottom-ul-right-icon-social {
 	float:right;
 	margin-bottom : 0px;
+	margin-top:3px;
 }
 
 .footer-bottom-ul-right-icon-social li{
