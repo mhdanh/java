@@ -10,13 +10,14 @@
 			<ul class = "footer-top-ul-right">
 				<li><a href="">English</a></li>
 				<li><a href="">|</a></li>
-				<li><a href="">Tiếng Việt</a></li>
+				<li><a href=""><spring:message code = "msg.layout.vietnamese"/></a></li>
 			</ul>
 			<div class = "mt-clear-both"></div>
 		</div><!-- end footer top -->
 		<div class = "footer-bottom">
 			<ul class = "footer-bottom-ul-left">
-				<li>myui.info</li>
+				<li><a href="">myui.info</a> &copy; 2015 | Rights Reserved.</li>
+				<li><spring:message code = "msg.layout.otherproduct"/>: <a href="http://dainguu.blogspot.com/" target="_blank" title="<spring:message code = "msg.layout.kienthucit"/>"><spring:message code = "msg.layout.kienthucit"/></a> - <a href ="http://vieccantho.com/jobs/" title = "<spring:message code = "msg.layout.vieccantho"/>"><spring:message code = "msg.layout.vieccantho"/></a></li>
 			</ul>
 			<ul class = "footer-bottom-ul-right-icon-social">
 				<li><a href=""><i class="fa fa-facebook-square"></i></a></li>
