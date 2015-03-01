@@ -76,4 +76,8 @@ public interface TemplateService extends CommonService<Template>{
 	 * @return json {state:true,msg:ddd}
 	 */
 	Object deleteTemplate(int idTemplate);
+	String pageEditDescriptionTemplate(Model model, int idTemplate);
+	String editDescriptionTemplate(int idTemplate, String description);
+	String editLogTemplate(int idTemplate, String log);
+	String pageEditLogTemplate(Model model, int idTemplate);
 }

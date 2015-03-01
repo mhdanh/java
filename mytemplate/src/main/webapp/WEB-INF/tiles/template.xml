@@ -178,6 +178,33 @@
 	</definition>
 
 	<!-- template controller -->
+	
+	<definition name="/template/edit-log-page" extends="homeTemplate">
+		<put-attribute name="title" value="Edit Log Template"></put-attribute>
+		<put-attribute name="content" value="/view/pages/template/edit-log.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/view/public/css/lib/summernote.css" />
+			<add-attribute value="/view/public/css/template/edit-log.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/view/public/js/lib/summernote.js" />
+			<add-attribute value="/view/public/js/template/edit-log.js" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/template/edit-description-page" extends="homeTemplate">
+		<put-attribute name="title" value="Edit Description Template"></put-attribute>
+		<put-attribute name="content" value="/view/pages/template/edit-description.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/view/public/css/lib/summernote.css" />
+			<add-attribute value="/view/public/css/template/edit-description.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/view/public/js/lib/summernote.js" />
+			<add-attribute value="/view/public/js/template/edit-description.js" />
+		</put-list-attribute>
+	</definition>
+	
 	<definition name="/template/my-template" extends="homeTemplate">
 		<put-attribute name="title" value="My template"></put-attribute>
 		<put-attribute name="content" value="/view/pages/template/my-template.jsp"></put-attribute>

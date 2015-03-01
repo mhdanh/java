@@ -20,16 +20,36 @@
 				<!-- Tab panes -->
 	  			<div class="tab-content">
 	    			<div class="tab-pane active" id="template-description">
-	    				<a class = "fa fa-pencil-square-o template-detail-edit-link"></a>
+	    				<c:if test = "${ownerTemplate}">
+	    					<a href = "<c:url value = '/template/edit-description-page/${template.id}'/>" class = "fa fa-pencil-square-o template-detail-edit-link"></a>
+	    				</c:if>
+	    				
 	    				${template.description}
-	    				not description
 	    			</div>
 	    			<div class="tab-pane" id="template-log">
-	    				<a class = "fa fa-pencil-square-o template-detail-edit-link"></a>
+	    				<c:if test = "${ownerTemplate}">
+		    				<a href = "<c:url value = '/template/edit-log-page/${template.id}'/>" class = "fa fa-pencil-square-o template-detail-edit-link"></a>
+	    				</c:if>
 	    				${template.log}
-	    				not log
 	    			</div>
-	    			<div class="tab-pane" id="template-comment">messages</div>
+	    			<div class="tab-pane" id="template-comment">
+	    				<ul>
+	    					<c:forEach items="${parentComments}" var="parentComment">
+	    						<li>
+	    							${parentComment.content}
+	    							<ul>
+	    								<c:forEach items="${parentComment.childComments}" var="childComment">
+	    									<li>
+	    										${childComment.content}
+	    									</li>
+	    								</c:forEach>
+	    							</ul>
+	    						</li>
+	    					</c:forEach>
+	    				</ul>
+	    				
+	    			
+	    			</div>
 	  			</div>
 			</div><!-- end description -->
 		</div><!-- end left block -->
