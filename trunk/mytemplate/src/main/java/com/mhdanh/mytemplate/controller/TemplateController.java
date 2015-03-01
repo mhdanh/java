@@ -36,6 +36,26 @@ private Logger logger = Logger.getLogger(TemplateController.class);
 	@Autowired
 	private TemplateService templateService;
 	
+	@RequestMapping(value = "/template/edit-log/{idTemplate}")
+	public String editLogTemplate(@PathVariable("idTemplate") int idTemplate,@RequestParam("log") String log){
+		return templateService.editLogTemplate(idTemplate,log);
+	}
+	
+	@RequestMapping(value = "/template/edit-log-page/{idTemplate}")
+	public String pageEditLogTemplate(Model model,@PathVariable("idTemplate") int idTemplate){
+		return templateService.pageEditLogTemplate(model,idTemplate);
+	}
+	
+	@RequestMapping(value = "/template/edit-description/{idTemplate}")
+	public String editDescriptionTemplate(@PathVariable("idTemplate") int idTemplate,@RequestParam("description") String description){
+		return templateService.editDescriptionTemplate(idTemplate,description);
+	}
+	
+	@RequestMapping(value = "/template/edit-description-page/{idTemplate}")
+	public String pageEditDescriptionTemplate(Model model,@PathVariable("idTemplate") int idTemplate){
+		return templateService.pageEditDescriptionTemplate(model,idTemplate);
+	}
+	
 	@RequestMapping(value = "/template/delete-template")
 	@ResponseBody
 	public Object deleteTemplate(@RequestParam("idTemplate") int idTemplate){

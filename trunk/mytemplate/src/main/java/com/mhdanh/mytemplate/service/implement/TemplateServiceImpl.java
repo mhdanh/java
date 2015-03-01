@@ -26,9 +26,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mhdanh.mytemplate.dao.AccountDao;
+import com.mhdanh.mytemplate.dao.CommentTemplateDao;
 import com.mhdanh.mytemplate.dao.TemplateDao;
 import com.mhdanh.mytemplate.domain.Account;
 import com.mhdanh.mytemplate.domain.Category;
+import com.mhdanh.mytemplate.domain.CommentTemplate;
 import com.mhdanh.mytemplate.domain.Template;
 import com.mhdanh.mytemplate.domain.Template.TEMPLATE_STATUS;
 import com.mhdanh.mytemplate.domain.Template.UNIT_MONEY;
@@ -59,6 +61,8 @@ public class TemplateServiceImpl extends
 	private UnzipService unzipService;
 	@Autowired
 	private TemplateDao templateDao;
+	@Autowired
+	private CommentTemplateDao commentTemplateDao;
 
 	private BufferedImage resizeImage(BufferedImage originalImage, int type) {
 		int thumbnailHeight = Integer.valueOf(utility
@@ -265,6 +269,9 @@ public class TemplateServiceImpl extends
 			ownerTemplate = true;
 		}
 		
+		List<CommentTemplate> parentComments = commentTemplateDao.getCommentsParentByTemplate(templateById);
+		
+		model.addAttribute("parentComments", parentComments);
 		model.addAttribute("template", templateById);
 		model.addAttribute("ownerTemplate", ownerTemplate);
 		
@@ -408,4 +415,76 @@ public class TemplateServiceImpl extends
 		}
 		
 	}
+
+	@Override
+	public String pageEditDescriptionTemplate(Model model,int idTemplate) {
+		try {
+			Account userLogined = utility.getUserLogined();
+			Template templateById = templateDao.getTemplateById(idTemplate);
+			if(templateById == null || userLogined == null || !userLogined.equals(templateById.getOwner())){
+				return "/404";
+			}
+			model.addAttribute("template", templateById);
+			return "/template/edit-description-page";
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("error edit description template page", e);
+			return "/404";
+		}
+		
+	}
+
+	@Override
+	public String editDescriptionTemplate(int idTemplate, String description) {
+		try {
+			Account userLogined = utility.getUserLogined();
+			Template templateById = templateDao.getTemplateById(idTemplate);
+			if(templateById == null || userLogined == null || !userLogined.equals(templateById.getOwner())){
+				return "/404";
+			}
+			templateById.setDescription(description);
+			templateDao.update(templateById);
+			return "redirect:/template-detail/" + idTemplate;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("edit description unsuccessful ",e);
+			return "/404";
+		}
+	}
+
+	@Override
+	public String editLogTemplate(int idTemplate, String log) {
+		try {
+			Account userLogined = utility.getUserLogined();
+			Template templateById = templateDao.getTemplateById(idTemplate);
+			if(templateById == null || userLogined == null || !userLogined.equals(templateById.getOwner())){
+				return "/404";
+			}
+			templateById.setLog(log);
+			templateDao.update(templateById);
+			return "redirect:/template-detail/" + idTemplate;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("edit log unsuccessful ",e);
+			return "/404";
+		}
+	}
+
+	@Override
+	public String pageEditLogTemplate(Model model, int idTemplate) {
+		try {
+			Account userLogined = utility.getUserLogined();
+			Template templateById = templateDao.getTemplateById(idTemplate);
+			if(templateById == null || userLogined == null || !userLogined.equals(templateById.getOwner())){
+				return "/404";
+			}
+			model.addAttribute("template", templateById);
+			return "/template/edit-log-page";
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("error edit log template page", e);
+			return "/404";
+		}
+	}
+	
 }
