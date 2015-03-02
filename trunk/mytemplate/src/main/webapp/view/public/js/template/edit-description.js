@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	//init summernote
-	$(".editorDescription").summernote();
-	//submit form
+	$(".editorDescription").summernote({
+		height:300,
+	});
 });//end ready
