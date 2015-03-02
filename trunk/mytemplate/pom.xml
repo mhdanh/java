@@ -23,6 +23,8 @@
 		<javamail.version>1.4.3</javamail.version>
 		<facebook.java.api>3.0.2</facebook.java.api>
 		<spring.social.version>1.1.0.RELEASE</spring.social.version>
+		<google.plus.java.api.version>0.0.3</google.plus.java.api.version>
+		<json.simple.version>1.1.1</json.simple.version>
 	</properties>
 	<dependencies>
 		<!-- java ee for tomcat -->
@@ -142,27 +144,16 @@
 			<artifactId>spring-social-core</artifactId>
 			<version>${spring.social.version}</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.social</groupId> -->
-		<!-- <artifactId>spring-social-web</artifactId> -->
-		<!-- <version>${spring.social.version}</version> -->
-		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-config</artifactId>
 			<version>${spring.social.version}</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.social</groupId> -->
-		<!-- <artifactId>spring-social-security</artifactId> -->
-		<!-- <version>${spring.social.version}</version> -->
-		<!-- </dependency> -->
-
 		<!-- google plus -->
 		<dependency>
 			<groupId>com.googlecode.googleplus</groupId>
 			<artifactId>google-plus-java-api</artifactId>
-			<version>0.0.3</version>
+			<version>${google.plus.java.api.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>httpcore</artifactId>
@@ -174,6 +165,13 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>${json.simple.version}</version>
+		</dependency>
+
 
 
 	</dependencies>
@@ -218,7 +216,7 @@
 				<database.driver>org.postgresql.Driver</database.driver>
 				<database.url>jdbc:postgresql://localhost:5432/mytemplate</database.url>
 				<database.username>postgres</database.username>
-				<database.password>hydra</database.password>
+				<database.password>123456</database.password>
 				<system.url.store.template>D:/opt/mytemplate/template/</system.url.store.template>
 				<system.url.store.image>D:/opt/mytemplate/images/</system.url.store.image>
 				<system.email.username>myuiinfo@gmail.com</system.email.username>
