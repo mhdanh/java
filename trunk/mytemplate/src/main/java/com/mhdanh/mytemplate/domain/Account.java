@@ -62,6 +62,9 @@ public class Account {
 
 	@Column
 	private Date dateModified;
+	
+	@Column(columnDefinition = "int default 0")
+	private Integer totalMoney;
 
 	@ManyToMany(targetEntity = Role.class)
 	@JoinTable(name = "account_role", joinColumns = { @JoinColumn(name = "account_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
@@ -182,5 +185,13 @@ public class Account {
 
 	public void setKeyRecoverPassword(String keyRecoverPassword) {
 		this.keyRecoverPassword = keyRecoverPassword;
+	}
+
+	public Integer getTotalMoney() {
+		return totalMoney;
+	}
+
+	public void setTotalMoney(Integer totalMoney) {
+		this.totalMoney = totalMoney;
 	}
 }
