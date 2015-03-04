@@ -22,8 +22,8 @@ public class RechargeController {
 	}
 	
 	@RequestMapping(value = "/recharge/card-add", method = RequestMethod.POST)
-	private String cardAdd(@ModelAttribute("frmRecharge") RechargeCardModel rechargeCard) {
-		return rechargeService.cardAdd(rechargeCard);
+	private String cardAdd(Model model, @ModelAttribute("frmRecharge") RechargeCardModel rechargeCard) {
+		return rechargeService.cardAdd(model,rechargeCard);
 	}
 	
 }

@@ -9,6 +9,6 @@ public interface RechargeService extends CommonService<Recharge>{
 
 	String cardPage(Model model);
 
-	String cardAdd(RechargeCardModel rechargeCard);
+	String cardAdd(Model model, RechargeCardModel rechargeCard);
 	
 }
