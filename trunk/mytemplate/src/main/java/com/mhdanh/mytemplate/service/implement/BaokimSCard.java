@@ -50,7 +50,7 @@ public class BaokimSCard {
 
 	private static final Logger logger = Logger.getLogger(BaokimSCard.class);
 	
-	//Merchant cần cấu hình các tham số sau đây
+	//Merchant cáº§n cáº¥u hÃ¬nh cÃ¡c tham sá»‘ sau Ä‘Ã¢y
 	private final String BAOKIM_CARD_API = "https://www.baokim.vn/the-cao/restFul/send";
     private final String HTTP_USERNAME = "merchant_16544";
     private final String HTTP_PASSWORD = "16544nQrMNVv71BSEJUIKWO68zagicG8C4P";
@@ -68,10 +68,10 @@ public class BaokimSCard {
     public RechargeCardResponseModel rechargeCard(String supplier, String seri, String pincode) {
     	try {
     	RechargeCardResponseModel responseRechargeCard = new RechargeCardResponseModel();
-		String[] rs = this.send("VIETEL", "852585585", "897654654");
+		String[] rs = this.send(supplier, seri, pincode);
         String responseCode=rs[0];
 		String responseBody=rs[1];
-		//Xử lý dữ liệu trả về dạng json
+		//Xá»­ lÃ½ dá»¯ liá»‡u tráº£ vá»� dáº¡ng json
 			JSONParser parser=new JSONParser();
 			Object obj = parser.parse(responseBody);
 			JSONObject jsonObject = (JSONObject) obj;
@@ -119,7 +119,7 @@ public class BaokimSCard {
 	        mapA.put("data_sign", data_sign);
 	        String data = this.createRequestUrl(mapA);
 	        
-	        //Post dữ liệu thẻ
+	        //Post dá»¯ liá»‡u tháº»
 			return this.doPost(data);
 			
 		} catch (IOException e) {
@@ -307,12 +307,12 @@ public class BaokimSCard {
      */
     public static void main(String[] args) {
         BaokimSCard bksc = new BaokimSCard();
-        String[] rs = bksc.send("VIETEL", "sdafas dfas", "adsfasdfsd");
+        String[] rs = bksc.send("VIETEL", "92593748545", "0926969951884");
         
         String responseCode=rs[0];
 		String responseBody=rs[1];
 		
-		//Xử lý dữ liệu trả về dạng json
+		//Xá»­ lÃ½ dá»¯ liá»‡u tráº£ vá»� dáº¡ng json
 		try {
 			JSONParser parser=new JSONParser();
 			Object obj;
@@ -320,12 +320,12 @@ public class BaokimSCard {
 		
 			JSONObject jsonObject = (JSONObject) obj;
 			if(!responseCode.equals("200")){
-				//TODO: xử lý khi Bảo kim trả về lỗi
+				//TODO: xá»­ lÃ½ khi Báº£o kim tráº£ vá»� lá»—i
 				System.out.println("response code: "+responseCode);
 				System.out.println("transaction_id: "+jsonObject.get("transaction_id"));
 				System.out.println("error message: "+jsonObject.get("errorMessage"));
 			}else{
-				//TODO: xử lý khi Bảo kim trả về thành công
+				//TODO: xá»­ lÃ½ khi Báº£o kim tráº£ vá»� thÃ nh cÃ´ng
 				System.out.println("response code: "+responseCode);
 				System.out.println("transaction_id: "+jsonObject.get("transaction_id"));
 				System.out.println("amount: "+jsonObject.get("amount"));
