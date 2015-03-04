@@ -63,6 +63,8 @@ public class TemplateServiceImpl extends
 	private TemplateDao templateDao;
 	@Autowired
 	private CommentTemplateDao commentTemplateDao;
+	@Autowired
+	private AccountDao accountDao;
 
 	private BufferedImage resizeImage(BufferedImage originalImage, int type) {
 		int thumbnailHeight = Integer.valueOf(utility
@@ -486,5 +488,70 @@ public class TemplateServiceImpl extends
 			return "/404";
 		}
 	}
-	
+
+	@Override
+	public void buyTemplateDirect(int idTemplate, HttpServletResponse response) {
+		try {
+			Account userLogined = utility.getUserLogined();
+			Integer currentMoney = userLogined.getTotalMoney();
+			if(userLogined != null) {
+				Template templateById = templateDao.getTemplateById(idTemplate);
+				if(templateById != null){
+					if(templateById.getSellOff() != 0) {
+						if(currentMoney >= templateById.getSellOff()) {
+							final String folderZipTemplate = "system.url.store.template";
+							String pathInputTemplate = utility.getValueFromPropertiesSystemFile(folderZipTemplate)
+									+ templateById.getOwner().getUsername()
+									+ "/"
+									+ utility.convertTextInDatabaseToNormalText(templateById.getCategory().getName())
+									+ "/" + templateById.getFileName();
+							utility.downloadFile(response,pathInputTemplate, templateById.getFileName());
+							//substract money in account
+							Integer moneyAfterDownloadTemplate = currentMoney - templateById.getSellOff();
+							userLogined.setTotalMoney(moneyAfterDownloadTemplate);
+							accountDao.update(userLogined);
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("error buyTemplateDirect ",e);
+		}
+		
+	}
+
+	@Override
+	public String checkBuyTemplateDirect(Model model, int idTemplate) {
+		Account userLogined = utility.getUserLogined();
+		boolean error = false;
+		String strError = "";
+		if(userLogined == null) {
+			strError = utility.getMessage("msg.login.text.not.login");
+			error = true;
+		} else {
+			Integer currentMoney = userLogined.getTotalMoney();
+			Template templateById = templateDao.getTemplateById(idTemplate);
+			if(templateById == null) {
+				strError = utility.getMessage("msg.template.check.buy.direct.not.exist");
+				error = true;
+			} else {
+				if(templateById.getSellOff() == 0) {
+					strError = utility.getMessage("msg.template.check.buy.direct.notpremium");
+					error = true;
+				} else {
+					if(currentMoney < templateById.getSellOff()) {
+						strError = utility.getMessage("msg.template.check.buy.direct.not.enough.money");
+						error = true;
+					}
+				}
+			}
+		}
+		if(error) {
+			model.addAttribute("error", strError);
+			return "/template/check/buy/direct/";
+		}
+		return "redirect:/template/buy/direct/" + idTemplate;
+	}
+
 }

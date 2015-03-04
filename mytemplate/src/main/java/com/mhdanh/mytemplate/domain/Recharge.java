@@ -14,12 +14,16 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "history_recharge")
-public class HistoryRecharge {
+public class Recharge {
 
 	public static enum RechargeType {
 		CARD
 	}
-
+	
+	public static enum CardType {
+		VIETTEL, MOBI, VINA, GATE, VTC
+	}
+	
 	@Id
 	@GenericGenerator(name = "increment", strategy = "increment")
 	@GeneratedValue(generator = "increment")
@@ -34,12 +38,15 @@ public class HistoryRecharge {
 
 	@Column
 	private RechargeType type;
+	
+	@Column
+	private CardType cardType;
 
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	private Account recharger;
 
-	public HistoryRecharge() {
+	public Recharge() {
 	}
 
 	@Override
@@ -47,10 +54,10 @@ public class HistoryRecharge {
 		if(o == null) {
 			return false;
 		}
-		if(!(o instanceof HistoryRecharge)) {
+		if(!(o instanceof Recharge)) {
 			return false;
 		}
-		HistoryRecharge otherHistoryRecharge = (HistoryRecharge) o;
+		Recharge otherHistoryRecharge = (Recharge) o;
 		return this.getId() == otherHistoryRecharge.getId();
 	}
 	
@@ -98,6 +105,12 @@ public class HistoryRecharge {
 	public void setRecharger(Account recharger) {
 		this.recharger = recharger;
 	}
-	
-	
+
+	public CardType getCardType() {
+		return cardType;
+	}
+
+	public void setCardType(CardType cardType) {
+		this.cardType = cardType;
+	}
 }
