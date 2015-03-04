@@ -19,9 +19,8 @@ public class Recharge {
 	public static enum RechargeType {
 		CARD
 	}
-	
 	public static enum CardType {
-		VIETTEL, MOBI, VINA, GATE, VTC
+		VIETEL, MOBI, VINA, GATE, VTC, VNM
 	}
 	
 	@Id
