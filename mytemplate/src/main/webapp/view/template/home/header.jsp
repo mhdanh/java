@@ -42,7 +42,7 @@
 						<li><a href="<c:url value='/recharge/card-page'/>"><spring:message code = "msg.recharge.card.title"/></a></li>
 						<li class="divider"></li>
 						<li><a href="#">
-							<form name='logoutForm' action="<c:url value='j_spring_security_logout' />" method='POST'>
+							<form name='logoutForm' action="<c:url value='/j_spring_security_logout' />" method='POST'>
 								<input type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
 								<button type="submit" class = "link-button-sign-out">Sign out</button>
