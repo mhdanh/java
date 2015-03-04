@@ -8,5 +8,7 @@ import com.mhdanh.mytemplate.domain.Template;
 public interface CommentTemplateDao extends CommonDao<CommentTemplate>{
 
 	List<CommentTemplate> getCommentsParentByTemplate(Template templateById);
+
+	CommentTemplate getCommentTemplateById(Integer idCommentParent);
 	
 }

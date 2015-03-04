@@ -20,6 +20,7 @@ import com.mhdanh.mytemplate.service.CategoryService;
 import com.mhdanh.mytemplate.service.UnzipService;
 import com.mhdanh.mytemplate.service.TemplateService;
 import com.mhdanh.mytemplate.utility.Utility;
+import com.mhdanh.mytemplate.viewmodel.CommentTemplateModel;
 import com.mhdanh.mytemplate.viewmodel.UploadTemplateDTO;
 
 @Controller
@@ -35,6 +36,12 @@ private Logger logger = Logger.getLogger(TemplateController.class);
 	private CategoryService categoryService;
 	@Autowired
 	private TemplateService templateService;
+	
+	@RequestMapping(value = "/ajax/template/comment-template",method = RequestMethod.POST)
+	@ResponseBody
+	public Object ajaxCommentTemplate(@ModelAttribute("commentTemplate") CommentTemplateModel commentModel) throws IOException{
+		return templateService.ajaxCommentTemplate(commentModel);
+	}
 	
 	@RequestMapping(value = "/template/check/buy/direct/{idTemplate}")
 	public String checkBuyTemplateDirect(Model model, @PathVariable("idTemplate") int idTemplate) throws IOException{

@@ -38,6 +38,7 @@ import com.mhdanh.mytemplate.service.CategoryService;
 import com.mhdanh.mytemplate.service.UnzipService;
 import com.mhdanh.mytemplate.service.TemplateService;
 import com.mhdanh.mytemplate.utility.Utility;
+import com.mhdanh.mytemplate.viewmodel.CommentTemplateModel;
 import com.mhdanh.mytemplate.viewmodel.LazyLoadTemplateFilterIndex;
 import com.mhdanh.mytemplate.viewmodel.UploadTemplateDTO;
 
@@ -552,6 +553,24 @@ public class TemplateServiceImpl extends
 			return "/template/check/buy/direct/";
 		}
 		return "redirect:/template/buy/direct/" + idTemplate;
+	}
+
+	@Override
+	public Object ajaxCommentTemplate(CommentTemplateModel commentModel) {
+		Account userLogined = utility.getUserLogined();
+		if(userLogined != null) {
+			Template templateById = templateDao.getTemplateById(commentModel.getIdTemplate());
+			CommentTemplate parentComment = commentTemplateDao.getCommentTemplateById(commentModel.getIdCommentParent());
+			
+			CommentTemplate commentTemplate = new CommentTemplate();
+			commentTemplate.setDateCreated(new Date());
+			commentTemplate.setContent(commentModel.getContentComment());
+			commentTemplate.setParentComment(parentComment);
+			commentTemplate.setTemplate(templateById);
+			commentTemplateDao.save(commentTemplate);
+			
+		}
+		return null;
 	}
 
 }

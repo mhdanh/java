@@ -33,6 +33,11 @@
 	    				${template.log}
 	    			</div>
 	    			<div class="tab-pane" id="template-comment">
+	    				<div class="form-group wrap-text-comment-parent">
+	    					<textarea class="form-control" id = "ta-comment" rows="3"></textarea>
+	    					<button class="btn btn-primary  mt-button" id = "btn-comment" data-template-id = "${template.id}"><spring:message code = 'msg.template.detail.button.comment'/></button>
+			            </div>
+			            
 	    				<ul>
 	    					<c:forEach items="${parentComments}" var="parentComment">
 	    						<li>
@@ -48,7 +53,6 @@
 	    					</c:forEach>
 	    				</ul>
 	    				
-	    			
 	    			</div>
 	  			</div>
 			</div><!-- end description -->
