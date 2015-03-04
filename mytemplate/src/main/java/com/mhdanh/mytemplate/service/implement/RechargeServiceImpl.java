@@ -45,7 +45,7 @@ public class RechargeServiceImpl extends
 	}
 
 	@Override
-	public String cardAdd(RechargeCardModel rechargeCardModel) {
+	public String cardAdd(Model model,RechargeCardModel rechargeCardModel) {
 		try {
 			if(rechargeCardModel != null
 					&& !rechargeCardModel.getTypeCard().isEmpty()
@@ -69,9 +69,10 @@ public class RechargeServiceImpl extends
 						userLogined.setTotalMoney(totalMoney);
 						accountDao.update(userLogined);
 					}
-					return "redirect:/";
 				}
+				model.addAttribute("responseRecharge", responseRecharge);
 				logger.warn("error message recharge: " + responseRecharge.getErrorMessage());
+				return "/recharge/card-add";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
