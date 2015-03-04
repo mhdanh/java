@@ -36,6 +36,16 @@ private Logger logger = Logger.getLogger(TemplateController.class);
 	@Autowired
 	private TemplateService templateService;
 	
+	@RequestMapping(value = "/template/check/buy/direct/{idTemplate}")
+	public String checkBuyTemplateDirect(Model model, @PathVariable("idTemplate") int idTemplate) throws IOException{
+		return templateService.checkBuyTemplateDirect(model,idTemplate);
+	}
+	
+	@RequestMapping(value = "/template/buy/direct/{idTemplate}")
+	public void buyTemplateDirect(@PathVariable("idTemplate") int idTemplate,HttpServletResponse response) throws IOException{
+		templateService.buyTemplateDirect(idTemplate,response);
+	}
+	
 	@RequestMapping(value = "/template/edit-log/{idTemplate}")
 	public String editLogTemplate(@PathVariable("idTemplate") int idTemplate,@RequestParam("log") String log){
 		return templateService.editLogTemplate(idTemplate,log);

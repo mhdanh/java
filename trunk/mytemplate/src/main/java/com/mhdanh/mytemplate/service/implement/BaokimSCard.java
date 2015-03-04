@@ -1,3 +1,4 @@
+package com.mhdanh.mytemplate.service.implement;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -30,24 +31,33 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.mhdanh.mytemplate.viewmodel.RechargeCardResponseModel;
 
 /**
  *
  * @author HieuNguyen
  */
+@Service
+@Transactional
 public class BaokimSCard {
 
+	private static final Logger logger = Logger.getLogger(BaokimSCard.class);
+	
 	//Merchant cần cấu hình các tham số sau đây
-    private final String BAOKIM_CARD_API = "https://www.baokim.vn/the-cao/restFul/send";
-    private final String HTTP_USERNAME = "test_12537";
-    private final String HTTP_PASSWORD = "9dj3mmarjms46n2n3jhdsdsadasq369";
-    private final String API_USERNAME = "API_USERNAME";
-    private final String API_PASSWORD = "API_PASSWORD";
-    private final String SECURE_CODE = "SECURE_CODE";
-    private final String MERCHANT_ID = "MERCHANT_ID";
+	private final String BAOKIM_CARD_API = "https://www.baokim.vn/the-cao/restFul/send";
+    private final String HTTP_USERNAME = "merchant_16544";
+    private final String HTTP_PASSWORD = "16544nQrMNVv71BSEJUIKWO68zagicG8C4P";
+    private final String API_USERNAME = "myuiinfo";
+    private final String API_PASSWORD = "myuiinfoMDHG75arfsDGjjd";
+    private final String SECURE_CODE = "9c4d1ab9d6771b88";
+    private final String MERCHANT_ID = "16544";
     
     private final String HMAC_SHA1_ALGORITHM = "HmacSHA1";
     private String supplier;
@@ -55,7 +65,36 @@ public class BaokimSCard {
     private String pincode;
     private String transaction_id;
 
-    public String[] send(String supplier, String seri, String pincode) {
+    public RechargeCardResponseModel rechargeCard(String supplier, String seri, String pincode) {
+    	try {
+    	RechargeCardResponseModel responseRechargeCard = new RechargeCardResponseModel();
+		String[] rs = this.send("VIETEL", "852585585", "897654654");
+        String responseCode=rs[0];
+		String responseBody=rs[1];
+		//Xử lý dữ liệu trả về dạng json
+			JSONParser parser=new JSONParser();
+			Object obj = parser.parse(responseBody);
+			JSONObject jsonObject = (JSONObject) obj;
+			if(!responseCode.equals("200")){
+				//save error state
+				responseRechargeCard.setResponseCode(responseCode);
+				responseRechargeCard.setTransactionId(String.valueOf(jsonObject.get("transaction_id")));
+				responseRechargeCard.setErrorMessage(String.valueOf(jsonObject.get("errorMessage")));
+			}else{
+				//save success state
+				responseRechargeCard.setResponseCode(responseCode);
+				responseRechargeCard.setTransactionId(String.valueOf(jsonObject.get("transaction_id")));
+				responseRechargeCard.setAmount(Integer.valueOf(String.valueOf(jsonObject.get("amount"))));
+			}
+			return responseRechargeCard;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("rechargeCard error",e);
+			return null;
+		}
+    }
+    
+    private String[] send(String supplier, String seri, String pincode) {
     	try {
 	        this.supplier = supplier;
 	        this.seri = seri;
@@ -87,16 +126,19 @@ public class BaokimSCard {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			String[] rs={"500",e.getMessage()};
+			logger.error("send error",e);
 	    	return rs;
 		} catch (InvalidKeyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			String[] rs={"500",e.getMessage()};
+			logger.error("send error",e);
 	    	return rs;
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			String[] rs={"500",e.getMessage()};
+			logger.error("send error",e);
 	    	return rs;
 		}
     }
@@ -253,8 +295,11 @@ public class BaokimSCard {
                     });
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error("installAllTrustManager error",e);
         }
     }
+    
+    
 
     /**
      * @param args the command line arguments
@@ -262,7 +307,7 @@ public class BaokimSCard {
      */
     public static void main(String[] args) {
         BaokimSCard bksc = new BaokimSCard();
-        String[] rs = bksc.send("VIETEL", "852585585", "897654654");
+        String[] rs = bksc.send("VIETEL", "sdafas dfas", "adsfasdfsd");
         
         String responseCode=rs[0];
 		String responseBody=rs[1];

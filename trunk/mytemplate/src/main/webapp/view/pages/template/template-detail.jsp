@@ -54,7 +54,7 @@
 			</div><!-- end description -->
 		</div><!-- end left block -->
 		<div class = "col-md-4">
-			right block
+			<a href = "<c:url value ='/template/check/buy/direct/${template.id}'/>">Buy me direct</a>
 		</div><!-- end left block -->
 	</div>	
 </div>

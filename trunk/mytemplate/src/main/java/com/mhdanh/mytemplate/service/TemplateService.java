@@ -80,4 +80,6 @@ public interface TemplateService extends CommonService<Template>{
 	String editDescriptionTemplate(int idTemplate, String description);
 	String editLogTemplate(int idTemplate, String log);
 	String pageEditLogTemplate(Model model, int idTemplate);
+	void buyTemplateDirect(int idTemplate, HttpServletResponse response);
+	String checkBuyTemplateDirect(Model model, int idTemplate);
 }
