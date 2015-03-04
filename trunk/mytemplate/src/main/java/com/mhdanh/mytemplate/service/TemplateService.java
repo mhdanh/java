@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mhdanh.mytemplate.domain.Template;
+import com.mhdanh.mytemplate.viewmodel.CommentTemplateModel;
 import com.mhdanh.mytemplate.viewmodel.LazyLoadTemplateFilterIndex;
 import com.mhdanh.mytemplate.viewmodel.UploadTemplateDTO;
 
@@ -82,4 +83,5 @@ public interface TemplateService extends CommonService<Template>{
 	String pageEditLogTemplate(Model model, int idTemplate);
 	void buyTemplateDirect(int idTemplate, HttpServletResponse response);
 	String checkBuyTemplateDirect(Model model, int idTemplate);
+	Object ajaxCommentTemplate(CommentTemplateModel commentModel);
 }

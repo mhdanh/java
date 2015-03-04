@@ -15,3 +15,17 @@
 .template-tab > li > a {
 	border-radius: 0px ;
 }
+
+/*style for comment*/
+
+.wrap-text-comment-parent {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: right;
+}
+.wrap-text-comment-parent #ta-comment {
+	border-radius: 0px;
+	resize: vertical;
+	margin-bottom: 10px;
+}
+

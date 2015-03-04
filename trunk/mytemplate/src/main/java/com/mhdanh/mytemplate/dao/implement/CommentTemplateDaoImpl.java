@@ -42,4 +42,16 @@ public class CommentTemplateDaoImpl extends CommonDaoImpl<CommentTemplate> imple
 		}
 		return new ArrayList<>();
 	}
+
+	@Override
+	public CommentTemplate getCommentTemplateById(Integer idCommentParent) {
+		try {
+			return (CommentTemplate) sessionFactory.getCurrentSession()
+					.get(CommentTemplate.class, idCommentParent);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("get getCommentTemplateById unsuccessful",e);
+		}
+		return null;
+	}
 }

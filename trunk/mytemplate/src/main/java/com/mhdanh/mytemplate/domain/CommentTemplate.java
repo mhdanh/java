@@ -28,7 +28,7 @@ public class CommentTemplate {
 
 	@Column(columnDefinition = "text")
 	private String content;
-	
+
 	@Column
 	private Date dateCreated;
 
@@ -97,6 +97,14 @@ public class CommentTemplate {
 
 	public void setChildComments(List<CommentTemplate> childComments) {
 		this.childComments = childComments;
+	}
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 
 	@Override
