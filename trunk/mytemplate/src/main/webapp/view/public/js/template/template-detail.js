@@ -7,7 +7,7 @@ $(document).ready(function(){
 	$(document).on("click","#btn-comment",function(){
 		var contentComment = $("#ta-comment").val();
 		var idTemplate = $(this).attr("data-template-id");
-		
+		var btn = $(this);
 		var commentTemplate = new FormData();
 		commentTemplate.append("contentComment",contentComment);
 		commentTemplate.append("idTemplate",idTemplate);
@@ -21,8 +21,10 @@ $(document).ready(function(){
 			method : 'POST',
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(header, token);
+				$(btn).attr("disabled","disabled");
 			},
 			success : function(data) {
+				$(btn).removeAttr("disabled");
 				if(data.state == "true") {
 					//add data for form frmAddCommentAfterSaveSuccess
 					var commenterName = $("#txtNameCommenter").val();
@@ -52,7 +54,7 @@ $(document).ready(function(){
 	$(document).on("click", ".btn-sub-comment", function(e){
 		var contentComment = $(this).parent().find(".ta-sub-comment").val();
 		var idTemplate = $("#txtTemplateId").val();
-		
+		var btn = $(this);
 		var commentTemplate = new FormData();
 		commentTemplate.append("contentComment",contentComment);
 		commentTemplate.append("idTemplate",idTemplate);
@@ -66,17 +68,21 @@ $(document).ready(function(){
 			method : 'POST',
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(header, token);
+				$(btn).attr("disabled","disabled");
 			},
 			success : function(data) {
+				$(btn).removeAttr("disabled");
 				if(data.state == "true") {
 					//add data for form frmAddCommentAfterSaveSuccess
 					var commenterName = $("#txtNameCommenter").val();
 					$("#frmAddSubCommentAfterSaveSuccess").find(".header-comment-name").text(commenterName);
 					$("#frmAddSubCommentAfterSaveSuccess").find(".body-comment-child").text(contentComment);
 					//add comment parent
-					$(".wrap-list-comment").prepend($("#frmAddSubCommentAfterSaveSuccess").html());
+					$(btn).parents(".wrap-comment-parent").find(".list-comment-child").prepend($("#frmAddSubCommentAfterSaveSuccess").html());
 					//clear data text comment on editor
 					$(".ta-sub-comment").val("");
+					//remove all form
+					$(".footer-comment-rely").next().remove();
 				}
 			}
 		});

@@ -563,16 +563,21 @@ public class TemplateServiceImpl extends
 			if(userLogined != null) {
 				Template templateById = templateDao.getTemplateById(commentModel.getIdTemplate());
 				CommentTemplate parentComment = commentTemplateDao.getCommentTemplateById(commentModel.getIdCommentParent());
+
+				if(commentModel.getContentComment().trim().isEmpty()){
+					resultJson.put("state", "false");
+				} else {
+					CommentTemplate commentTemplate = new CommentTemplate();
+					commentTemplate.setDateCreated(new Date());
+					commentTemplate.setContent(commentModel.getContentComment());
+					commentTemplate.setParentComment(parentComment);
+					commentTemplate.setTemplate(templateById);
+					commentTemplate.setCommenter(userLogined);
+					commentTemplateDao.save(commentTemplate);
+					resultJson.put("state", "true");
+					resultJson.put("idCommentParent",commentTemplate.getId());
+				}
 				
-				CommentTemplate commentTemplate = new CommentTemplate();
-				commentTemplate.setDateCreated(new Date());
-				commentTemplate.setContent(commentModel.getContentComment());
-				commentTemplate.setParentComment(parentComment);
-				commentTemplate.setTemplate(templateById);
-				commentTemplate.setCommenter(userLogined);
-				commentTemplateDao.save(commentTemplate);
-				resultJson.put("state", "true");
-				resultJson.put("idCommentParent",commentTemplate.getId());
 			}
 			return resultJson;
 		} catch (Exception e) {

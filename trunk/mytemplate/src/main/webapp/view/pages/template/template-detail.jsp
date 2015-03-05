@@ -47,7 +47,7 @@
 				            				<span class = "header-comment-time">${parentComment.dateToString}</span>
 				            			</div><!-- end header-comment-parent -->
 				            			<div class = "body-comment-parent">
-				            				${parentComment.content}
+				            				<c:out value="${parentComment.content}" escapeXml="false"/>
 				            			</div><!-- end body-comment-parent -->
 				            			<div class = "footer-comment-parent">
 				            				<a href = "#" class = "footer-comment-rely" data-id-parent-comment = "${parentComment.id}">Rely</a>
@@ -61,7 +61,7 @@
 				            						<span class = "header-comment-time">${childComment.dateToString}</span>
 						            			</div><!-- end header-comment-child -->
 						            			<div class = "body-comment-child">
-						            				${childComment.content}
+						            				<c:out value = "${childComment.content}" escapeXml="false"/>
 						            			</div><!-- end body-comment-child -->
 						            		</div><!-- end comment-child -->
 					            		</c:forEach>
@@ -96,17 +96,21 @@
 
 <!-- form add new comment parent by javascript  -->
 <div id = "frmAddCommentAfterSaveSuccess" class = "mt-display-none">
-	<div class = "comment-parent">
-		<div class = "header-comment-parent">
-			<span class = "header-comment-name"></span>
-			<span class = "header-comment-time">Today</span>
-		</div><!-- end header-comment-parent -->
-		<div class = "body-comment-parent">
-		</div><!-- end body-comment-parent -->
-		<div class = "footer-comment-parent">
-			<a href = "#" class = "footer-comment-rely" data-id-parent-comment = "">Rely</a>
+	<div class = "wrap-comment-parent">
+		<div class = "comment-parent">
+			<div class = "header-comment-parent">
+				<span class = "header-comment-name"></span>
+				<span class = "header-comment-time">Today</span>
+			</div><!-- end header-comment-parent -->
+			<div class = "body-comment-parent">
+			</div><!-- end body-comment-parent -->
+			<div class = "footer-comment-parent">
+				<a href = "#" class = "footer-comment-rely" data-id-parent-comment = "">Rely</a>
+			</div>
+		</div><!-- end comment-parent -->
+		<div class="list-comment-child">
 		</div>
-	</div><!-- end comment-parent -->
+	</div><!-- end wrap-comment-parent -->
 </div><!-- end  frmAddCommentAfterSaveSuccess-->
 <!-- form sub comment -->
 <div id = "frmSubComment" class = "mt-display-none">
