@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.log4j.Logger;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,7 +21,9 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "commentTemplate")
 public class CommentTemplate {
-
+	
+	private static final Logger logger = Logger.getLogger(CommentTemplate.class);
+	
 	@Id
 	@GenericGenerator(name = "increment", strategy = "increment")
 	@GeneratedValue(generator = "increment")
@@ -57,45 +60,53 @@ public class CommentTemplate {
 	 * @return like 3 days ago
 	 */
 	public String getDateToString() {
-		String strDate = "";
-		Calendar currentDate = Calendar.getInstance();
-		int dayAfterSubtract = (int) Math
-				.floor((currentDate.getTimeInMillis() - this.dateCreated
-						.getTime()) / (1000 * 60 * 60 * 24));
+		try {
+			if(this.dateCreated != null){
+				String strDate = "";
+				Calendar currentDate = Calendar.getInstance();
+				int dayAfterSubtract = (int) Math
+						.floor((currentDate.getTimeInMillis() - this.dateCreated
+								.getTime()) / (1000 * 60 * 60 * 24));
 
-		if (Math.floor(dayAfterSubtract / 7) < 1) {
-			if (dayAfterSubtract == 0) {
-				strDate = "Today";
-			} else if (dayAfterSubtract == 1) {
-				strDate = "Yesterday";
-			} else {
-				strDate = dayAfterSubtract + " days ago";
+				if (Math.floor(dayAfterSubtract / 7) < 1) {
+					if (dayAfterSubtract == 0) {
+						strDate = "Today";
+					} else if (dayAfterSubtract == 1) {
+						strDate = "Yesterday";
+					} else {
+						strDate = dayAfterSubtract + " days ago";
+					}
+				} else if (Math.floor(dayAfterSubtract / 7) >= 1
+						&& Math.floor(dayAfterSubtract / 30) < 1) {
+					int week = (int) Math.floor(dayAfterSubtract / 7);
+					if (week == 1) {
+						strDate = "Last week";
+					} else {
+						strDate = week + " weeks ago";
+					}
+				} else if (Math.floor(dayAfterSubtract / 30) >= 1
+						&& Math.floor(dayAfterSubtract / 365) < 1) {
+					int month = (int) Math.floor(dayAfterSubtract / 30);
+					if (month == 1) {
+						strDate = "Last month";
+					} else {
+						strDate = month + " months ago";
+					}
+				} else if (Math.floor(dayAfterSubtract / 365) >= 1) {
+					int year = (int) Math.floor(dayAfterSubtract / 365);
+					if (year == 1) {
+						strDate = "Last year";
+					} else {
+						strDate = year + " years ago";
+					}
+				}
+				return strDate;
 			}
-		} else if (Math.floor(dayAfterSubtract / 7) >= 1
-				&& Math.floor(dayAfterSubtract / 30) < 1) {
-			int week = (int) Math.floor(dayAfterSubtract / 7);
-			if (week == 1) {
-				strDate = "Last week";
-			} else {
-				strDate = week + " weeks ago";
-			}
-		} else if (Math.floor(dayAfterSubtract / 30) >= 1
-				&& Math.floor(dayAfterSubtract / 365) < 1) {
-			int month = (int) Math.floor(dayAfterSubtract / 30);
-			if (month == 1) {
-				strDate = "Last month";
-			} else {
-				strDate = month + " months ago";
-			}
-		} else if (Math.floor(dayAfterSubtract / 365) >= 1) {
-			int year = (int) Math.floor(dayAfterSubtract / 365);
-			if (year == 1) {
-				strDate = "Last year";
-			} else {
-				strDate = year + " years ago";
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("error getDateToString");
 		}
-		return strDate;
+		return "";
 	}
 
 	public int getId() {

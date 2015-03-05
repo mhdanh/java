@@ -56,6 +56,7 @@ public class RechargeServiceImpl extends
 				Integer currentMoney = userLogined.getTotalMoney();
 				//check recharge successful
 				RechargeCardResponseModel responseRecharge = baokimSCard.rechargeCard(rechargeCardModel.getTypeCard(), rechargeCardModel.getSeriNumber(), rechargeCardModel.getPinCode());
+				logger.warn("****************Nap Tien Before Success**************************\nTransactionid: " + responseRecharge.getTransactionId() + "\n" + "Seri:" + rechargeCardModel.getSeriNumber() + "\n" + "Pincode:" + rechargeCardModel.getPinCode());
 				if("200".equals(responseRecharge.getResponseCode())) {
 					Integer moneyRecharge = responseRecharge.getAmount();
 					Recharge rechargeCard = new Recharge();
