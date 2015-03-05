@@ -38,23 +38,36 @@
 	    					<button class="btn btn-primary  mt-button" id = "btn-comment" data-template-id = "${template.id}"><spring:message code = 'msg.template.detail.button.comment'/></button>
 			            </div>
 			            
-	    				<ul>
-	    					<c:forEach items="${parentComments}" var="parentComment">
-	    						<li>
-	    							${parentComment.content}
-	    							<ul>
-	    								<c:forEach items="${parentComment.childComments}" var="childComment">
-	    									<li>
-	    										${childComment.content}
-	    									</li>
-	    								</c:forEach>
-	    							</ul>
-	    						</li>
-	    					</c:forEach>
-	    				</ul>
-	    				
-	    			</div>
-	  			</div>
+			            <div class = "wrap-list-comment">
+			            	<c:forEach items="${parentComments}" var="parentComment">
+				            	<div class = "wrap-comment-parent">
+				            		<div class = "comment-parent">
+				            			<div class = "header-comment-parent">
+				            				<span>${parentComment.commenter.firstName} ${parentComment.commenter.lastName}</span>
+				            				<span>${parentComment.dateCreated}</span> <strong>${parentComment.dateToString}</strong>
+				            			</div><!-- end header-comment-parent -->
+				            			<div class = "body-comment-parent">
+				            				${parentComment.content}
+				            			</div><!-- end body-comment-parent -->
+				            		</div><!-- end comment-parent -->
+				            		<div class = "list-comment-child">
+				            			<c:forEach items="${parentComment.childComments}" var="childComment">
+					            			<div class = "comment-child">
+						            			<div class = "header-comment-child">
+						            				<span>${childComment.commenter.firstName} ${childComment.commenter.lastName}</span>
+				            						<span>${childComment.dateCreated}</span>
+						            			</div><!-- end header-comment-child -->
+						            			<div class = "body-comment-child">
+						            				${childComment.content}
+						            			</div><!-- end body-comment-child -->
+						            		</div><!-- end comment-child -->
+					            		</c:forEach>
+				            		</div><!-- end list-comment-child -->
+				            	</div><!-- end wrap-comment-parent -->
+			            	</c:forEach>
+			            </div><!-- end wrap-list-comment -->
+	    			</div><!-- end template-comment -->
+	  			</div><!-- tab-content -->
 			</div><!-- end description -->
 		</div><!-- end left block -->
 		<div class = "col-md-4">
