@@ -28,4 +28,21 @@
 	resize: vertical;
 	margin-bottom: 10px;
 }
+.comment-parent {
+	border-bottom: 1px solid #eaeaea;
+}
+.header-comment-name {
+	font-weight: bold;
+}
+.header-comment-time {
+	color: #ccc;
+	font-size: 0.9em;
+}
+.footer-comment-rely {
+	font-size: 0.9em;
+	color: #337ab7;
+}
 
+.wrap-sub-comment-parent {
+	margin-left: 100px;
+}

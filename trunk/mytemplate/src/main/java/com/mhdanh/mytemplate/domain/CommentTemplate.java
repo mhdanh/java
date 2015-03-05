@@ -1,5 +1,6 @@
 package com.mhdanh.mytemplate.domain;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -47,18 +48,55 @@ public class CommentTemplate {
 	@OneToMany(mappedBy = "parentComment")
 	@Cascade(value = CascadeType.DELETE)
 	private List<CommentTemplate> childComments;
-	
+
 	public CommentTemplate() {
 	}
-	
+
 	/**
 	 * 
 	 * @return like 3 days ago
 	 */
 	public String getDateToString() {
-		return String.valueOf(this.dateCreated.getTime());
+		String strDate = "";
+		Calendar currentDate = Calendar.getInstance();
+		int dayAfterSubtract = (int) Math
+				.floor((currentDate.getTimeInMillis() - this.dateCreated
+						.getTime()) / (1000 * 60 * 60 * 24));
+
+		if (Math.floor(dayAfterSubtract / 7) < 1) {
+			if (dayAfterSubtract == 0) {
+				strDate = "Today";
+			} else if (dayAfterSubtract == 1) {
+				strDate = "Yesterday";
+			} else {
+				strDate = dayAfterSubtract + " days ago";
+			}
+		} else if (Math.floor(dayAfterSubtract / 7) >= 1
+				&& Math.floor(dayAfterSubtract / 30) < 1) {
+			int week = (int) Math.floor(dayAfterSubtract / 7);
+			if (week == 1) {
+				strDate = "Last week";
+			} else {
+				strDate = week + " weeks ago";
+			}
+		} else if (Math.floor(dayAfterSubtract / 30) >= 1
+				&& Math.floor(dayAfterSubtract / 365) < 1) {
+			int month = (int) Math.floor(dayAfterSubtract / 30);
+			if (month == 1) {
+				strDate = "Last month";
+			} else {
+				strDate = month + " months ago";
+			}
+		} else if (Math.floor(dayAfterSubtract / 365) >= 1) {
+			int year = (int) Math.floor(dayAfterSubtract / 365);
+			if (year == 1) {
+				strDate = "Last year";
+			} else {
+				strDate = year + " years ago";
+			}
+		}
+		return strDate;
 	}
-	
 
 	public int getId() {
 		return id;

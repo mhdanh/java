@@ -34,7 +34,7 @@
 	    			</div>
 	    			<div class="tab-pane" id="template-comment">
 	    				<div class="form-group wrap-text-comment-parent">
-	    					<textarea class="form-control" id = "ta-comment" rows="3"></textarea>
+	    					<textarea class="form-control" id = "ta-comment" rows="2"></textarea>
 	    					<button class="btn btn-primary  mt-button" id = "btn-comment" data-template-id = "${template.id}"><spring:message code = 'msg.template.detail.button.comment'/></button>
 			            </div>
 			            
@@ -43,19 +43,26 @@
 				            	<div class = "wrap-comment-parent">
 				            		<div class = "comment-parent">
 				            			<div class = "header-comment-parent">
-				            				<span>${parentComment.commenter.firstName} ${parentComment.commenter.lastName}</span>
-				            				<span>${parentComment.dateCreated}</span> <strong>${parentComment.dateToString}</strong>
+				            				<span class = "header-comment-name">${parentComment.commenter.firstName} ${parentComment.commenter.lastName}</span>
+				            				<span class = "header-comment-time">${parentComment.dateToString}</span>
 				            			</div><!-- end header-comment-parent -->
 				            			<div class = "body-comment-parent">
 				            				${parentComment.content}
 				            			</div><!-- end body-comment-parent -->
+				            			<div class = "footer-comment-parent">
+				            				<span class = "footer-comment-rely">Rely</span>
+				            				<div class="form-group wrap-sub-comment-parent">
+						    					<textarea class="form-control" id = "ta-comment" rows="2"></textarea>
+						    					<button class="btn btn-primary  mt-button" id = "btn-comment" data-template-id = "${template.id}"><spring:message code = 'msg.template.detail.button.comment'/></button>
+								            </div>
+				            			</div>
 				            		</div><!-- end comment-parent -->
 				            		<div class = "list-comment-child">
 				            			<c:forEach items="${parentComment.childComments}" var="childComment">
 					            			<div class = "comment-child">
 						            			<div class = "header-comment-child">
-						            				<span>${childComment.commenter.firstName} ${childComment.commenter.lastName}</span>
-				            						<span>${childComment.dateCreated}</span>
+						            				<span class = "header-comment-name">${childComment.commenter.firstName} ${childComment.commenter.lastName}</span>
+				            						<span class = "header-comment-time">${childComment.dateToString}</span>
 						            			</div><!-- end header-comment-child -->
 						            			<div class = "body-comment-child">
 						            				${childComment.content}
