@@ -567,8 +567,8 @@ public class TemplateServiceImpl extends
 			commentTemplate.setContent(commentModel.getContentComment());
 			commentTemplate.setParentComment(parentComment);
 			commentTemplate.setTemplate(templateById);
+			commentTemplate.setCommenter(userLogined);
 			commentTemplateDao.save(commentTemplate);
-			
 		}
 		return null;
 	}
