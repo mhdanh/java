@@ -75,7 +75,7 @@ public class BaokimSCard {
 			JSONParser parser=new JSONParser();
 			Object obj = parser.parse(responseBody);
 			JSONObject jsonObject = (JSONObject) obj;
-			if(!responseCode.equals("200")){
+			if(!"200".equals(responseCode)){
 				//save error state
 				responseRechargeCard.setResponseCode(responseCode);
 				responseRechargeCard.setTransactionId(String.valueOf(jsonObject.get("transaction_id")));
@@ -172,7 +172,7 @@ public class BaokimSCard {
         
         InputStream is;
         String responseCode=String.valueOf(request.getResponseCode());
-        if (responseCode == "200") {
+        if ("200".equals(responseCode)) {
             is = request.getInputStream();
         } else {
             is = request.getErrorStream();
