@@ -47,9 +47,18 @@ public class CommentTemplate {
 	@OneToMany(mappedBy = "parentComment")
 	@Cascade(value = CascadeType.DELETE)
 	private List<CommentTemplate> childComments;
-
+	
 	public CommentTemplate() {
 	}
+	
+	/**
+	 * 
+	 * @return like 3 days ago
+	 */
+	public String getDateToString() {
+		return String.valueOf(this.dateCreated.getTime());
+	}
+	
 
 	public int getId() {
 		return id;
