@@ -63,6 +63,7 @@ public class RechargeServiceImpl extends
 					rechargeCard.setMoney(moneyRecharge);
 					rechargeCard.setCardType(CardType.valueOf(rechargeCardModel.getTypeCard()));
 					rechargeCard.setRecharger(userLogined);
+					rechargeCard.setTransactionId(responseRecharge.getTransactionId());
 					if(rechargeDao.save(rechargeCard)) {
 						//update total money
 						Integer totalMoney = currentMoney + moneyRecharge;
