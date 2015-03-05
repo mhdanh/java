@@ -19,10 +19,11 @@ public class Recharge {
 	public static enum RechargeType {
 		CARD
 	}
+
 	public static enum CardType {
 		VIETEL, MOBI, VINA, GATE, VTC, VNM
 	}
-	
+
 	@Id
 	@GenericGenerator(name = "increment", strategy = "increment")
 	@GeneratedValue(generator = "increment")
@@ -37,9 +38,12 @@ public class Recharge {
 
 	@Column
 	private RechargeType type;
-	
+
 	@Column
 	private CardType cardType;
+
+	@Column
+	private String transactionId;
 
 	@ManyToOne
 	@JoinColumn(name = "account_id")
@@ -49,22 +53,22 @@ public class Recharge {
 	}
 
 	@Override
-	public boolean equals(Object o){
-		if(o == null) {
+	public boolean equals(Object o) {
+		if (o == null) {
 			return false;
 		}
-		if(!(o instanceof Recharge)) {
+		if (!(o instanceof Recharge)) {
 			return false;
 		}
 		Recharge otherHistoryRecharge = (Recharge) o;
 		return this.getId() == otherHistoryRecharge.getId();
 	}
-	
+
 	@Override
-	public int hashCode(){
+	public int hashCode() {
 		return this.getId();
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -112,4 +116,13 @@ public class Recharge {
 	public void setCardType(CardType cardType) {
 		this.cardType = cardType;
 	}
+
+	public String getTransactionId() {
+		return transactionId;
+	}
+
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
+
 }
