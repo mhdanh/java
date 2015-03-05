@@ -557,20 +557,29 @@ public class TemplateServiceImpl extends
 
 	@Override
 	public Object ajaxCommentTemplate(CommentTemplateModel commentModel) {
-		Account userLogined = utility.getUserLogined();
-		if(userLogined != null) {
-			Template templateById = templateDao.getTemplateById(commentModel.getIdTemplate());
-			CommentTemplate parentComment = commentTemplateDao.getCommentTemplateById(commentModel.getIdCommentParent());
-			
-			CommentTemplate commentTemplate = new CommentTemplate();
-			commentTemplate.setDateCreated(new Date());
-			commentTemplate.setContent(commentModel.getContentComment());
-			commentTemplate.setParentComment(parentComment);
-			commentTemplate.setTemplate(templateById);
-			commentTemplate.setCommenter(userLogined);
-			commentTemplateDao.save(commentTemplate);
+		Map<String, Object> resultJson = new HashMap<>();
+		try {
+			Account userLogined = utility.getUserLogined();
+			if(userLogined != null) {
+				Template templateById = templateDao.getTemplateById(commentModel.getIdTemplate());
+				CommentTemplate parentComment = commentTemplateDao.getCommentTemplateById(commentModel.getIdCommentParent());
+				
+				CommentTemplate commentTemplate = new CommentTemplate();
+				commentTemplate.setDateCreated(new Date());
+				commentTemplate.setContent(commentModel.getContentComment());
+				commentTemplate.setParentComment(parentComment);
+				commentTemplate.setTemplate(templateById);
+				commentTemplate.setCommenter(userLogined);
+				commentTemplateDao.save(commentTemplate);
+				resultJson.put("state", "true");
+				resultJson.put("idCommentParent",commentTemplate.getId());
+			}
+			return resultJson;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("error ajaxCommentTemplate ",e);
+			resultJson.put("state", "false");
+			return resultJson;
 		}
-		return null;
 	}
-
 }

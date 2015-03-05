@@ -35,7 +35,7 @@
 	    			<div class="tab-pane" id="template-comment">
 	    				<div class="form-group wrap-text-comment-parent">
 	    					<textarea class="form-control" id = "ta-comment" rows="2"></textarea>
-	    					<button class="btn btn-primary  mt-button" id = "btn-comment" data-template-id = "${template.id}"><spring:message code = 'msg.template.detail.button.comment'/></button>
+	    					<button class="btn btn-primary  mt-button btn-sm" id = "btn-comment" data-template-id = "${template.id}"><spring:message code = 'msg.template.detail.button.comment'/></button>
 			            </div>
 			            
 			            <div class = "wrap-list-comment">
@@ -50,11 +50,7 @@
 				            				${parentComment.content}
 				            			</div><!-- end body-comment-parent -->
 				            			<div class = "footer-comment-parent">
-				            				<span class = "footer-comment-rely">Rely</span>
-				            				<div class="form-group wrap-sub-comment-parent">
-						    					<textarea class="form-control" id = "ta-comment" rows="2"></textarea>
-						    					<button class="btn btn-primary  mt-button" id = "btn-comment" data-template-id = "${template.id}"><spring:message code = 'msg.template.detail.button.comment'/></button>
-								            </div>
+				            				<a href = "#" class = "footer-comment-rely" data-id-parent-comment = "${parentComment.id}">Rely</a>
 				            			</div>
 				            		</div><!-- end comment-parent -->
 				            		<div class = "list-comment-child">
@@ -82,3 +78,41 @@
 		</div><!-- end left block -->
 	</div>	
 </div>
+<!-- html for javascript -->
+<input type = "hidden" value = "${template.id}" id = "txtTemplateId"/>
+<input type = "hidden" value = "${template.owner.firstName} ${template.owner.lastName}" id = "txtNameCommenter"/>
+
+<!-- form add new sub comment parent by js -->
+<div id = "frmAddSubCommentAfterSaveSuccess" class = "mt-display-none">
+	<div class = "comment-child">
+		<div class = "header-comment-child">
+			<span class = "header-comment-name"></span>
+			<span class = "header-comment-time">Today</span>
+		</div><!-- end header-comment-child -->
+		<div class = "body-comment-child">
+		</div><!-- end body-comment-child -->
+	</div><!-- end comment-child -->
+</div>
+
+<!-- form add new comment parent by javascript  -->
+<div id = "frmAddCommentAfterSaveSuccess" class = "mt-display-none">
+	<div class = "comment-parent">
+		<div class = "header-comment-parent">
+			<span class = "header-comment-name"></span>
+			<span class = "header-comment-time">Today</span>
+		</div><!-- end header-comment-parent -->
+		<div class = "body-comment-parent">
+		</div><!-- end body-comment-parent -->
+		<div class = "footer-comment-parent">
+			<a href = "#" class = "footer-comment-rely" data-id-parent-comment = "">Rely</a>
+		</div>
+	</div><!-- end comment-parent -->
+</div><!-- end  frmAddCommentAfterSaveSuccess-->
+<!-- form sub comment -->
+<div id = "frmSubComment" class = "mt-display-none">
+	<div class="form-group wrap-sub-comment-parent">
+		<textarea class="form-control ta-sub-comment" rows="2"></textarea>
+		<button class="btn btn-primary  mt-button btn-sm btn-sub-comment"><spring:message code = 'msg.template.detail.button.comment'/></button>
+    </div>
+</div>
+

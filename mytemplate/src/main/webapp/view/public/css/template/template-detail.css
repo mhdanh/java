@@ -17,7 +17,9 @@
 }
 
 /*style for comment*/
-
+.wrap-list-comment {
+	cursor: default;
+}
 .wrap-text-comment-parent {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -44,5 +46,25 @@
 }
 
 .wrap-sub-comment-parent {
-	margin-left: 100px;
+	margin-left: 10%;
+	text-align: right;
+}
+
+.wrap-sub-comment-parent .ta-sub-comment{
+	border-radius: 0px;
+	margin-bottom: 10px;
+}
+
+.list-comment-child {
+	margin-left: 10%;
+	margin-top: 7px;
+}
+
+.comment-child {
+	background: #fafafa;
+	border-bottom: 1px solid #eaeaea;
+	padding: 5px;
+}
+.comment-child:last-child {
+	border:none;
 }
