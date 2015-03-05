@@ -506,6 +506,7 @@ public class TemplateServiceImpl extends
 									+ "/"
 									+ utility.convertTextInDatabaseToNormalText(templateById.getCategory().getName())
 									+ "/" + templateById.getFileName();
+							//TODO check template exist
 							utility.downloadFile(response,pathInputTemplate, templateById.getFileName());
 							//substract money in account
 							Integer moneyAfterDownloadTemplate = currentMoney - templateById.getSellOff();
