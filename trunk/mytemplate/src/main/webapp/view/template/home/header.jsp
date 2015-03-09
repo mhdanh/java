@@ -21,11 +21,9 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle multi-level" data-toggle="dropdown">Template</a>
+					<a href="#" class="dropdown-toggle multi-level" data-toggle="dropdown"><spring:message code = "msg.recharge.card.title"/></a>
 					<ul class="dropdown-menu dropdown-menu-with-arrow" role="menu">
-						<c:forEach var="category" items="${my:getCategories()}">
-							<li><a href="<c:url value='/view-layout/${category.id}'/>"><spring:message code='${category.name}'/></a></li>
-						</c:forEach>
+						<li><a href="<c:url value='/recharge/card-page'/>"><spring:message code='msg.layout.recharge.by.mobile.card'/></a></li>
 					</ul>
 				</li>
 				<li><a href="<c:url value = '/upload-template-file-page'/>">Upload template</a></li>
