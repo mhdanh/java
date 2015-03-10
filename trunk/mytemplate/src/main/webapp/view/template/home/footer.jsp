@@ -1,4 +1,5 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <footer class="footer">
 	<div class = "wrap-footer-row">
@@ -8,9 +9,9 @@
 				<li><a href=""><spring:message code = "msg.layout.feedback"/></a></li>
 			</ul>
 			<ul class = "footer-top-ul-right">
-				<li><a href="">English</a></li>
+				<li><a href="<c:url value = '?lang=en'/>">English</a></li>
 				<li><a href="">|</a></li>
-				<li><a href=""><spring:message code = "msg.layout.vietnamese"/></a></li>
+				<li><a href="<c:url value = '?lang=vi'/>"><spring:message code = "msg.layout.vietnamese"/></a></li>
 			</ul>
 			<div class = "mt-clear-both"></div>
 		</div><!-- end footer top -->

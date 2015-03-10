@@ -75,6 +75,8 @@
 		</div><!-- end left block -->
 		<div class = "col-md-4">
 			<a href = "<c:url value ='/template/check/buy/direct/${template.id}'/>">Buy me direct</a>
+			<!-- purchase safe -->
+			<a href="${buysafe}">Buy now buy Bao kim</a>
 		</div><!-- end left block -->
 	</div>	
 </div>
