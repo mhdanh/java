@@ -273,7 +273,20 @@ public class TemplateServiceImpl extends
 		}
 		
 		List<CommentTemplate> parentComments = commentTemplateDao.getCommentsParentByTemplate(templateById);
+		//create link buy safe
+		String linkBuySafe = "https://www.baokim.vn/payment/product/version11?"
+				+ "business=" + "maidanhcongtu@gmail.com"
+				+ "&id="
+				+ "&order_description=" + templateById.getTitle()
+				+ "&product_name=" + templateById.getTitle()
+				+ "&product_price=" + templateById.getSellOff()
+				+ "&product_quantity=" + "1"
+				+ "&total_amount=" + templateById.getSellOff()
+				+ "&url_cancel=" + utility.getUrlSystem() + "/template-detail/" + templateById.getId()
+				+ "&url_detail=" + utility.getUrlSystem() + "/template-detail/" + templateById.getId()
+				+ "&url_success=" + utility.getUrlSystem() + "/template-detail/" + templateById.getId();
 		
+		model.addAttribute("buysafe",linkBuySafe);
 		model.addAttribute("parentComments", parentComments);
 		model.addAttribute("template", templateById);
 		model.addAttribute("ownerTemplate", ownerTemplate);
