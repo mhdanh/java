@@ -45,7 +45,7 @@ a:hover { text-decoration: none; }
 }
 
 .page-title {
-	border-bottom: 1px groove #ccc;
+	border-bottom: 1px solid #ccc;
 	padding-bottom: 3px;
 	color:#555;
 }
