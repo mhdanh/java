@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="row recharge-card">
-	<div class="col-sm-4">
-		<h2 class="page-title"><spring:message code = 'msg.recharge.card.title'/></h2>
+	<h2 class="page-title"><spring:message code = 'msg.recharge.card.title'/></h2>
+	<div class="col-md-12">
 		<form id = "frm-recharge" method="post" name = "frmRecharge" action = "<c:url value ='/recharge/card-add'/>">
 			<!-- type card -->
             <div class="form-group">
