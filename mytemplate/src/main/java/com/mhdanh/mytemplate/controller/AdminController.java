@@ -1,6 +1,7 @@
 package com.mhdanh.mytemplate.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,34 +19,34 @@ public class AdminController {
 	
 	@RequestMapping("/admin/init-all-template-from-zip-file")
 	@ResponseBody
-	private String initAllTemplateFromZipFile(){
+	public String initAllTemplateFromZipFile(){
 		return adminService.initAllTemplateFromZipFile();
 	}
 	
 	@RequestMapping("/admin/ajax/unpublish-template")
 	@ResponseBody
-	private Object unPublishTemplate(@RequestParam("idTemplate") int idTemplate){
+	public Object unPublishTemplate(@RequestParam("idTemplate") int idTemplate){
 		return adminService.unPublishTemplate(idTemplate);
 	}
 	
 	@RequestMapping("/admin/ajax/publish-template")
 	@ResponseBody
-	private Object publishTemplate(@RequestParam("idTemplate") int idTemplate){
+	public Object publishTemplate(@RequestParam("idTemplate") int idTemplate){
 		return adminService.publishTemplate(idTemplate);
 	}
 	
 	@RequestMapping(value = {"/admin/view-template/{idTemplate}"})
-	private String viewTemplate(@PathVariable("idTemplate") int idTemplate){
+	public String viewTemplate(@PathVariable("idTemplate") int idTemplate){
 		return adminService.viewTemplate(idTemplate);
 	}
 	
 	@RequestMapping(value = {"/admin","admin/"})
-	private String indexAdmin(Model model){
+	public String indexAdmin(Model model){
 		return adminService.indexAdmin(model);
 	}
 	
 	@RequestMapping(value = {"/admin/manage-template"})
-	private String manageTemplate(Model model){
+	public String manageTemplate(Model model){
 		return adminService.manageTemplate(model);
 	}
 }

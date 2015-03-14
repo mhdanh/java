@@ -19,7 +19,7 @@ public class InstallationController {
 	
 	@RequestMapping("/installation/insert-data-sample")
 	@ResponseBody
-	private Object insertDataSample(){
+	public Object insertDataSample(){
 		try {
 			logger.info("insert category sample");
 			

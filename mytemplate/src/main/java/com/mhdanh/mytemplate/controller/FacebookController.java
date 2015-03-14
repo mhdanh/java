@@ -23,7 +23,7 @@ public class FacebookController {
 
 	@RequestMapping("/facebook/init")
 	@ResponseBody
-	private Object initFacebook() {
+	public Object initFacebook() {
 		String tokenFace = utility
 				.getValueFromPropertiesSystemFile("system.facebook.token");
 		Facebook facebook = new FacebookTemplate(tokenFace);

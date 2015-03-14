@@ -25,11 +25,9 @@
 					
 	<jsp:include page = "/view/template/home/header.jsp"/>
 	<div class = "main-content">
-		<!-- page 404 -->
-		<div class = "error">
+		<!-- page error -->
 			<jsp:include page = "/view/pages/error/error.jsp"/>
-		</div>
-		<!-- end page 404 -->
+		<!-- end page error -->
 	</div>
 	<jsp:include page = "/view/template/home/footer.jsp"/>
 	

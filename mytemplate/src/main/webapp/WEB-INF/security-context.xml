@@ -7,10 +7,10 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 
 	<!-- Enable use-expression -->
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/upload-template-file-page" access="hasAnyRole('ADMIN','SUPPER_USER','USER')" />
+		<intercept-url pattern="/upload-template-file-page" access="hasAnyRole('ADMIN')" />
 		<intercept-url pattern="/template/my-template" access="hasAnyRole('ADMIN','SUPPER_USER','USER')" />
-		<intercept-url pattern="/admin" access="hasAnyRole('ADMIN')" />
-		<intercept-url pattern="/admin/**" access="hasAnyRole('ADMIN')" />
+		<intercept-url pattern="/admin**" access="hasAnyRole('ADMIN')" />
+		<intercept-url pattern="/recharge/**" access="isAuthenticated()" />
 		<!-- access denied page -->
 		<access-denied-handler error-page="/login" />
 		<form-login login-page="/login" default-target-url="/" 

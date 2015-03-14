@@ -1,6 +1,7 @@
 package com.mhdanh.mytemplate.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,12 +18,12 @@ public class RechargeController {
 	private RechargeService rechargeService;
 	
 	@RequestMapping("/recharge/card-page")
-	private String cardPage(Model model) {
+	public String cardPage(Model model) {
 		return rechargeService.cardPage(model);
 	}
 	
 	@RequestMapping(value = "/recharge/card-add", method = RequestMethod.POST)
-	private String cardAdd(Model model, @ModelAttribute("frmRecharge") RechargeCardModel rechargeCard) {
+	public String cardAdd(Model model, @ModelAttribute("frmRecharge") RechargeCardModel rechargeCard) {
 		return rechargeService.cardAdd(model,rechargeCard);
 	}
 	
