@@ -216,7 +216,7 @@
 				<database.driver>org.postgresql.Driver</database.driver>
 				<database.url>jdbc:postgresql://localhost:5432/mytemplate</database.url>
 				<database.username>postgres</database.username>
-				<database.password>123456</database.password>
+				<database.password>hydra</database.password>
 				<system.url.store.template>D:/opt/mytemplate/template/</system.url.store.template>
 				<system.url.store.image>D:/opt/mytemplate/images/</system.url.store.image>
 				<system.email.username>myuiinfo@gmail.com</system.email.username>

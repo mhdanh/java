@@ -265,7 +265,7 @@ public class TemplateServiceImpl extends
 		Template templateById = templateDao.getTemplateById(idTemplate);
 		Account userLogined = utility.getUserLogined();
 		if(templateById == null) {
-			return "/404";
+			return "/error-page";
 		}
 		boolean ownerTemplate = false;
 		if(userLogined != null && templateById.getOwner().getId() == userLogined.getId()){
@@ -394,7 +394,7 @@ public class TemplateServiceImpl extends
 		} catch (Exception e) {
 			System.out.println("error init my template unsuccessful: " +e);
 			logger.error("error init my template unsuccessful:", e);
-			return "/404";
+			return "/error-page";
 		}
 	}
 
@@ -438,14 +438,14 @@ public class TemplateServiceImpl extends
 			Account userLogined = utility.getUserLogined();
 			Template templateById = templateDao.getTemplateById(idTemplate);
 			if(templateById == null || userLogined == null || !userLogined.equals(templateById.getOwner())){
-				return "/404";
+				return "/error-page";
 			}
 			model.addAttribute("template", templateById);
 			return "/template/edit-description-page";
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("error edit description template page", e);
-			return "/404";
+			return "/error-page";
 		}
 		
 	}
@@ -456,7 +456,7 @@ public class TemplateServiceImpl extends
 			Account userLogined = utility.getUserLogined();
 			Template templateById = templateDao.getTemplateById(idTemplate);
 			if(templateById == null || userLogined == null || !userLogined.equals(templateById.getOwner())){
-				return "/404";
+				return "/error-page";
 			}
 			templateById.setDescription(description);
 			templateDao.update(templateById);
@@ -464,7 +464,7 @@ public class TemplateServiceImpl extends
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("edit description unsuccessful ",e);
-			return "/404";
+			return "/error-page";
 		}
 	}
 
@@ -474,7 +474,7 @@ public class TemplateServiceImpl extends
 			Account userLogined = utility.getUserLogined();
 			Template templateById = templateDao.getTemplateById(idTemplate);
 			if(templateById == null || userLogined == null || !userLogined.equals(templateById.getOwner())){
-				return "/404";
+				return "/error-page";
 			}
 			templateById.setLog(log);
 			templateDao.update(templateById);
@@ -482,7 +482,7 @@ public class TemplateServiceImpl extends
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("edit log unsuccessful ",e);
-			return "/404";
+			return "/error-page";
 		}
 	}
 
@@ -492,14 +492,14 @@ public class TemplateServiceImpl extends
 			Account userLogined = utility.getUserLogined();
 			Template templateById = templateDao.getTemplateById(idTemplate);
 			if(templateById == null || userLogined == null || !userLogined.equals(templateById.getOwner())){
-				return "/404";
+				return "/error-page";
 			}
 			model.addAttribute("template", templateById);
 			return "/template/edit-log-page";
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("error edit log template page", e);
-			return "/404";
+			return "/error-page";
 		}
 	}
 

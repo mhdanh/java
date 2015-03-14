@@ -1,0 +1,10 @@
+.main-content {
+	display:flex;
+	padding: 0px;
+}
+
+.error-404 {
+	max-width: 600px;
+	margin: auto;
+	text-align: center;
+}

@@ -90,7 +90,7 @@ public class AdminServiceImpl implements AdminService{
 		} catch (Exception e) {
 			System.out.println("error manage template page:" + e);
 			logger.error("error manage template page",e);
-			return "/404";
+			return "/error-page";
 		}
 	}
 
@@ -150,7 +150,7 @@ public class AdminServiceImpl implements AdminService{
 			templateDao.update(templateById);
 			return "redirect:/" + templateById.getLink();
 		} catch (Exception e) {
-			return "/404";
+			return "/error-page";
 		}
 	}
 }

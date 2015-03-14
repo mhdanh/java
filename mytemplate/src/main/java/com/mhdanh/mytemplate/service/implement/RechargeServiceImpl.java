@@ -81,6 +81,6 @@ public class RechargeServiceImpl extends
 			logger.error("card add service error",e);
 			
 		}
-		return "/404";
+		return "/error-page";
 	}
 }

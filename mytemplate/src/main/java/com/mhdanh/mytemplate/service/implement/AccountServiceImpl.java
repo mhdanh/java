@@ -131,7 +131,7 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 	public String initAccountPage(String token) {
 		Account accountByToken = accountDao.getAccountByToken(token);
 		if (accountByToken == null || accountByToken.getStatus().equals(ACCOUNT_STATUS.ACTIVE)) {
-			return "/404";
+			return "/error-page";
 		}
 		return "/init-account/";
 	}
@@ -159,7 +159,7 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 	public String registerSuccessAccount(Model model, String token) {
 		Account currentAccount = accountDao.getAccountByToken(token);
 		if (currentAccount == null || currentAccount.getStatus().equals(ACCOUNT_STATUS.ACTIVE)) {
-			return "/404";
+			return "/error-page";
 		}
 		String keyMessage = "msg.register.email.register.success.message.info";
 		String linkResendMail = utility.getUrlSystem() + "/register-resend-email/"+token;
@@ -172,7 +172,7 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 	public String registerResendEmailAccount(Model model, String token) {
 		Account currentAccount = accountDao.getAccountByToken(token);
 		if (currentAccount == null || currentAccount.getStatus().equals(ACCOUNT_STATUS.ACTIVE)) {
-			return "/404";
+			return "/error-page";
 		}
 		//send email
 		String tokenAccount = sendEmailActiveAccount(currentAccount);
@@ -205,7 +205,7 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 			String token) {
 		Account accountByToken = accountDao.getAccountByToken(token);
 		if (accountByToken == null || accountByToken.getStatus().equals(ACCOUNT_STATUS.ACTIVE)) {
-			return "/404";
+			return "/error-page";
 		}
 		//send email notify
 		String subject = utility.getMessage("msg.feedback.register.not.send.email.title");
@@ -270,14 +270,14 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 			model.addAttribute("message", messageInformUser);
 			return "/send-mail-for-recover-password";
 		}
-		return "/404";
+		return "/error-page";
 	}
 
 	@Override
 	public String setNewPassword(Model model, String keyRecoverPassword) {
 		Account accountByKeyRecoverPassword = accountDao.getAccountByKeyRecoverPassword(keyRecoverPassword);
 		if(accountByKeyRecoverPassword == null || keyRecoverPassword.isEmpty()){
-			return "/404";
+			return "/error-page";
 		}
 		model.addAttribute("keyRecoverPassword",keyRecoverPassword);
 		return "/set-new-password";
@@ -287,7 +287,7 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 	public String updateNewPassword(Model model, String keyRecoverPassword,String password) {
 		Account accountByKeyRecoverPassword = accountDao.getAccountByKeyRecoverPassword(keyRecoverPassword);
 		if(accountByKeyRecoverPassword == null || password.isEmpty()){
-			return "/404";
+			return "/error-page";
 		}
 		accountByKeyRecoverPassword.setPassword(utility.hashStringWithDefaultKey(password));
 		accountByKeyRecoverPassword.setKeyRecoverPassword(null);
@@ -300,7 +300,7 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 			String keyRecoverPassword) {
 		Account accountByKeyRecoverPassword = accountDao.getAccountByKeyRecoverPassword(keyRecoverPassword);
 		if(accountByKeyRecoverPassword == null){
-			return "/404";
+			return "/error-page";
 		}
 		accountByKeyRecoverPassword.setKeyRecoverPassword(null);
 		accountDao.update(accountByKeyRecoverPassword);
