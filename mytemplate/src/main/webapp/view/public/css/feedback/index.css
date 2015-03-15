@@ -1,0 +1,71 @@
+hr {
+	border-color: #ccc;
+}
+
+.feedback-page {
+	max-width: 1000px;
+	margin: auto;
+}
+
+textarea {
+	max-width: 100%;
+}
+
+.wrap-frm-feedback {
+	max-width: 500px;
+}
+
+/* style feedback list */
+.parent-feedback .content-parent-feedback {
+	margin-left: 48px;
+}
+.parent-feedback:not(:last-child) {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 10px;
+} 
+
+
+.inside-content-parent {
+	padding: 0px 7px;
+}
+
+.avatar-feedbacker {
+	float: left;
+	margin-left: -48px;
+	font-size: 3.3em;
+  	width: 48px;
+  	height: 48px;
+  	border: 1px solid #ccc;
+  	text-align: center;
+  	background: #e3e3e3;
+}
+.name-feedbacker, .subject-feedback {
+	font-weight: bold;
+}
+
+.date-feedback {
+	font-weight: bold;
+	color: #bbb;
+	font-size: 0.9em;
+	cursor: default;
+}
+/* childs feedback */
+.content-childs-feedback {
+	margin-left: 48px;
+}
+
+.childs-feedback {
+	border-top: 1px solid #ccc;
+	padding-top: 10px;
+}
+
+.group-file-submit {
+	text-align: right;
+}
+
+.file-child-feedback {
+	display: inline !important;
+}
+.file-child-feedback > * {
+	height: 34px;
+}

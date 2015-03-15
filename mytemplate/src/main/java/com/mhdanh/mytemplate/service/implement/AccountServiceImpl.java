@@ -214,7 +214,7 @@ public class AccountServiceImpl extends CommonServiceImpl<Account> implements
 		Feedback errorFeedback = new Feedback();
 		errorFeedback.setSubject(subject);
 		errorFeedback.setContent(content);
-		errorFeedback.setStatus(FEEDBACK_STATUS.UNREAD);
+		errorFeedback.setStatus(FEEDBACK_STATUS.OPEN);
 		errorFeedback.setType(FEEDBACK_TYPE.ERROR);
 		errorFeedback.setDateCreated(new Date());
 		

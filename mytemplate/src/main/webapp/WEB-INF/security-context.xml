@@ -11,6 +11,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		<intercept-url pattern="/template/my-template" access="hasAnyRole('ADMIN','SUPPER_USER','USER')" />
 		<intercept-url pattern="/admin**" access="hasAnyRole('ADMIN')" />
 		<intercept-url pattern="/recharge/**" access="isAuthenticated()" />
+		<intercept-url pattern="/feedback**" access="isAuthenticated()" />
 		<!-- access denied page -->
 		<access-denied-handler error-page="/login" />
 		<form-login login-page="/login" default-target-url="/" 

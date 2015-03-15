@@ -1,6 +1,10 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<c:set value="false" var = "logined"/>
+<sec:authorize access="isAuthenticated()">
+	<c:set value = "true" var = "logined"/>
+</sec:authorize>
 <div class="row template-detail">
 	<h2 class = "page-title">${template.title}</h2>
 	<div class = "row">
@@ -34,8 +38,15 @@
 	    			</div>
 	    			<div class="tab-pane" id="template-comment">
 	    				<div class="form-group wrap-text-comment-parent">
-	    					<textarea class="form-control" id = "ta-comment" rows="2"></textarea>
-	    					<button class="btn btn-primary  mt-button btn-sm" id = "btn-comment" data-template-id = "${template.id}"><spring:message code = 'msg.template.detail.button.comment'/></button>
+	    					<textarea class="form-control" id = "ta-comment" rows="2" <c:if test = "${!logined}">disabled</c:if> ></textarea>
+	    					<c:choose>
+	    						<c:when test = "${!logined}">
+	    							<a href = "<c:url value = '/login'/>" class="btn btn-primary  mt-button btn-sm"><spring:message code = 'msg.login.label.signin'/></a>
+	    						</c:when>
+	    						<c:otherwise>
+	    							<button class="btn btn-primary  mt-button btn-sm" id = "btn-comment" data-template-id = "${template.id}"><spring:message code = 'msg.template.detail.button.comment'/></button>
+	    						</c:otherwise>
+	    					</c:choose>
 			            </div>
 			            
 			            <div class = "wrap-list-comment">
@@ -50,7 +61,9 @@
 				            				<c:out value="${parentComment.content}" escapeXml="false"/>
 				            			</div><!-- end body-comment-parent -->
 				            			<div class = "footer-comment-parent">
-				            				<a href = "#" class = "footer-comment-rely" data-id-parent-comment = "${parentComment.id}">Rely</a>
+				            				<c:if test = "${logined}">
+				            					<a href = "#" class = "footer-comment-rely" data-id-parent-comment = "${parentComment.id}"><spring:message code = 'msg.template.detail.button.rely'/></a>
+				            				</c:if>
 				            			</div>
 				            		</div><!-- end comment-parent -->
 				            		<div class = "list-comment-child">
@@ -89,7 +102,7 @@
 	<div class = "comment-child">
 		<div class = "header-comment-child">
 			<span class = "header-comment-name"></span>
-			<span class = "header-comment-time">Today</span>
+			<span class = "header-comment-time"><spring:message code = 'msg.template.detail.text.today'/></span>
 		</div><!-- end header-comment-child -->
 		<div class = "body-comment-child">
 		</div><!-- end body-comment-child -->
@@ -102,12 +115,12 @@
 		<div class = "comment-parent">
 			<div class = "header-comment-parent">
 				<span class = "header-comment-name"></span>
-				<span class = "header-comment-time">Today</span>
+				<span class = "header-comment-time"><spring:message code = 'msg.template.detail.text.today'/></span>
 			</div><!-- end header-comment-parent -->
 			<div class = "body-comment-parent">
 			</div><!-- end body-comment-parent -->
 			<div class = "footer-comment-parent">
-				<a href = "#" class = "footer-comment-rely" data-id-parent-comment = "">Rely</a>
+				<a href = "#" class = "footer-comment-rely" data-id-parent-comment = ""><spring:message code = 'msg.template.detail.button.rely'/></a>
 			</div>
 		</div><!-- end comment-parent -->
 		<div class="list-comment-child">

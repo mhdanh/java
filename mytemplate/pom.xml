@@ -222,6 +222,7 @@
 				<system.email.username>myuiinfo@gmail.com</system.email.username>
 				<system.email.password>Mhdnnd169188</system.email.password>
 				<system.url.store.template.sample>D:/opt/mytemplate/sample/sample-template.zip</system.url.store.template.sample>
+				<system.url.store.attachment>D:/opt/mytemplate/attachment/</system.url.store.attachment>
 				<homeapp>D:</homeapp>
 			</properties>
 		</profile>
@@ -240,6 +241,7 @@
 				<system.email.username>myuiinfo@gmail.com</system.email.username>
 				<system.email.password>Mhdnnd169188</system.email.password>
 				<system.url.store.template.sample>C:/opt/mytemplate/sample/sample-template.zip</system.url.store.template.sample>
+				<system.url.store.attachment>C:/opt/mytemplate/attachment/</system.url.store.attachment>
 				<homeapp>C:</homeapp>
 			</properties>
 		</profile>
@@ -285,6 +287,7 @@
 				<system.email.username>myuiinfo@gmail.com</system.email.username>
 				<system.email.password>Mhdnnd169188</system.email.password>
 				<system.url.store.template.sample>C:/opt/mytemplate/sample/sample-template.zip</system.url.store.template.sample>
+				<system.url.store.attachment>C:/opt/mytemplate/attachment/</system.url.store.attachment>
 				<homeapp>C:</homeapp>
 			</properties>
 		</profile>

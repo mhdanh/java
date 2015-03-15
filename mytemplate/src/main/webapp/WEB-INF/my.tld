@@ -15,4 +15,10 @@
         <function-class>com.mhdanh.mytemplate.utility.ElFunctions</function-class>
         <function-signature>Object getUserLogined()</function-signature>
     </function>
+    
+    <function>
+        <name>getDateToString</name>
+        <function-class>com.mhdanh.mytemplate.utility.ElFunctions</function-class>
+        <function-signature>java.lang.String getDateToString(java.util.Date)</function-signature>
+    </function>
 </taglib>

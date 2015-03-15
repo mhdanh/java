@@ -6,7 +6,7 @@
 		<div class = "footer-top">
 			<ul class = "footer-top-ul-left">
 				<li><a href=""><spring:message code = "msg.layout.about"/></a></li>
-				<li><a href=""><spring:message code = "msg.layout.feedback"/></a></li>
+				<li><a href="<c:url value ='/feedback'/>"><spring:message code = "msg.layout.feedback"/></a></li>
 			</ul>
 			<ul class = "footer-top-ul-right">
 				<li><a href="<c:url value = '?lang=en'/>">English</a></li>
@@ -18,7 +18,7 @@
 		<div class = "footer-bottom">
 			<ul class = "footer-bottom-ul-left">
 				<li><a href="">myui.info</a> &copy; 2015 | Rights Reserved.</li>
-				<li><spring:message code = "msg.layout.otherproduct"/>: <a href="http://dainguu.blogspot.com/" target="_blank" title="<spring:message code = "msg.layout.kienthucit"/>"><spring:message code = "msg.layout.kienthucit"/></a> - <a href ="http://vieccantho.com/jobs/" title = "<spring:message code = "msg.layout.vieccantho"/>"><spring:message code = "msg.layout.vieccantho"/></a></li>
+				<li><spring:message code = "msg.layout.otherproduct"/>: <a href="http://dainguu.blogspot.com/" target="_blank" title="<spring:message code = "msg.layout.kienthucit"/>"><spring:message code = "msg.layout.kienthucit"/></a> - <a href ="http://vieccantho.com/jobs/" target = "_blank" title = "<spring:message code = "msg.layout.vieccantho"/>"><spring:message code = "msg.layout.vieccantho"/></a></li>
 			</ul>
 			<ul class = "footer-bottom-ul-right-icon-social">
 				<li><a href=""><i class="fa fa-facebook-square"></i></a></li>
