@@ -69,3 +69,8 @@ textarea {
 .file-child-feedback > * {
 	height: 34px;
 }
+
+.hight-light{
+	font-weight: bold;
+	color: #b92c28;
+}

@@ -46,6 +46,29 @@
 	</div>
 	<div class = "wrap-feedbacklist">
 		<c:forEach items="${feedbacks}" var = "feedback">
+			<c:set var="totalLikeFeedback" value = "0"/>
+			<c:set var="totalDislikeFeedback" value = "0"/>
+			<c:set var="userLiked" value = ""/>
+			<c:forEach items="${feedback.likeOrDislikes}" var = "likeOrDislike">
+				<c:if test = "${(likeOrDislike.liker eq userLogined) and (likeOrDislike.forFeedback eq feedback)}">
+					<c:choose>
+						<c:when test = "${likeOrDislike.type eq 'LIKE'}">
+							<c:set var = "userLiked" value = "liked"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var = "userLiked" value = "disliked"/>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+				<c:choose>
+					<c:when test="${likeOrDislike.type eq 'LIKE'}">
+						<c:set var="totalLikeFeedback" value = "${totalLikeFeedback + 1}"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="totalDislikeFeedback" value = "${totalDislikeFeedback + 1}"/>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
 			<div class = "parent-feedback">
 				<div class = "content-parent-feedback">
 					<a href = "">
@@ -62,12 +85,14 @@
 						</div><!-- end content -->
 						<div>
 							<c:if test = "${not empty feedback.attachment}">
-								<a href = "" class = "attachment-feedback"><i class="fa fa-paperclip"></i>${feedback.attachment.fileName}</a>
+								<a href = "<c:url value = '/feedback/download-attachment/${feedback.attachment.id}'/>" class = "attachment-feedback"><i class="fa fa-paperclip"></i>${feedback.attachment.fileName}</a>
 							</c:if>
 						</div>
 						<div>
 							<a href = "#" class = "rely-feedback-button"><spring:message code = 'msg.feedback.rely'/></a>
-							<a><i class="fa fa-thumbs-up"></i></a>
+							<a href = "#" class = "like-button fa fa-thumbs-up ${(userLiked ne '' and userLiked eq 'liked')?'hight-light':''}" data-feedback-id = "${feedback.id}">${totalLikeFeedback}</a>
+							<a href = "#" class = "dislike-button fa fa-thumbs-down ${(userLiked ne '' and userLiked eq 'disliked')?'hight-light':''}" data-feedback-id = "${feedback.id}">${totalDislikeFeedback}</a>
+							
 							<div class = "content-childs-feedback frm-rely-feedback mt-display-none">
 									<a href = "">
 										<i class="fa fa-user avatar-feedbacker"></i>
@@ -88,6 +113,29 @@
 							</div><!-- end content parent feedback -->
 							<!-- load child feedback  -->
 							<c:forEach items="${feedback.childsFeedback}" var = "childFeedback">
+								<c:set var="totalLikeFeedback" value = "0"/>
+								<c:set var="totalDislikeFeedback" value = "0"/>
+								<c:set var = "userLiked" value = ""/>
+								<c:forEach items="${childFeedback.likeOrDislikes}" var = "likeOrDislike">
+									<c:if test = "${(likeOrDislike.liker eq userLogined) and (likeOrDislike.forFeedback eq childFeedback)}">
+										<c:choose>
+											<c:when test = "${likeOrDislike.type eq 'LIKE'}">
+												<c:set var = "userLiked" value = "liked"/>
+											</c:when>
+											<c:otherwise>
+												<c:set var = "userLiked" value = "disliked"/>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+									<c:choose>
+										<c:when test="${likeOrDislike.type eq 'LIKE'}">
+											<c:set var="totalLikeFeedback" value = "${totalLikeFeedback + 1}"/>
+										</c:when>
+										<c:otherwise>
+											<c:set var="totalDislikeFeedback" value = "${totalDislikeFeedback + 1}"/>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 								<div class = "childs-feedback">
 									<div class = "content-childs-feedback">
 										<a href = "">
@@ -101,11 +149,12 @@
 											</div><!-- end content -->
 											<div>
 												<c:if test = "${not empty childFeedback.attachment}">
-													<a href = "" class = "attachment-feedback"><i class="fa fa-paperclip"></i>${childFeedback.attachment.fileName}</a>
+													<a href = "<c:url value = '/feedback/download-attachment/${feedback.attachment.id}'/>" class = "attachment-feedback"><i class="fa fa-paperclip"></i>${childFeedback.attachment.fileName}</a>
 												</c:if>
 											</div>
 											<div>
-												<a><i class="fa fa-thumbs-up"></i></a>
+												<a href = "#" class = "like-button fa fa-thumbs-up ${(userLiked ne '' and userLiked eq 'liked')?'hight-light':''}" data-feedback-id = "${childFeedback.id}">${totalLikeFeedback}</a>
+												<a href = "#" class = "dislike-button fa fa-thumbs-down ${(userLiked ne '' and userLiked eq 'disliked')?'hight-light':''}" data-feedback-id = "${childFeedback.id}">${totalDislikeFeedback}</a>
 											</div>
 										</div><!-- end wrap content -->
 									</div><!-- end content parent feedback -->

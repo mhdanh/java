@@ -238,7 +238,7 @@ public class Utility {
 		
 	}
 	
-	public void downloadFile(HttpServletResponse response,String inputFile,String filename) throws IOException{
+	public boolean downloadFile(HttpServletResponse response,String inputFile,String filename) throws IOException{
 		File file = new File(inputFile);
 		if(file.exists()){
 			try {
@@ -254,14 +254,17 @@ public class Utility {
 		        }
 		        inputStream.close();
 		        outStream.close();
+		        return true;
 			} catch (Exception e) {
 				System.out.println("Download file unsuccessful: " + e);
 				logger.error("Path file input: " + inputFile);
 				logger.error("Download file unsuccessfule",e);
+				return false;
 			}
 			
 		}else{
 			logger.error("File download not exist");
+			return false;
 		}
 	}
 	public boolean deleteFile(String pathInputTemplate) {

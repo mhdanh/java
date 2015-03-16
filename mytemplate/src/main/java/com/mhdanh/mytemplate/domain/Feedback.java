@@ -69,8 +69,12 @@ public class Feedback {
 	private Feedback parentFeedback;
 
 	@OneToMany(mappedBy = "parentFeedback")
-	@Cascade(value = {CascadeType.DELETE_ORPHAN})
+	@Cascade(value = { CascadeType.DELETE_ORPHAN })
 	private List<Feedback> childsFeedback;
+
+	@OneToMany(mappedBy = "forFeedback", targetEntity = LikeOrDislike.class)
+	@Cascade(value = { CascadeType.DELETE_ORPHAN })
+	private List<LikeOrDislike> likeOrDislikes;
 
 	@Override
 	public boolean equals(Object o) {
@@ -158,15 +162,15 @@ public class Feedback {
 	}
 
 	public List<Feedback> getChildsFeedback() {
-		//add comparator
+		// add comparator
 		Comparator<Feedback> orderDateDesc = new Comparator<Feedback>() {
 			@Override
 			public int compare(Feedback fb, Feedback fbOther) {
 				return fbOther.getDateCreated().compareTo(fb.getDateCreated());
 			}
 		};
-		if(!childsFeedback.isEmpty()) {
-			Collections.sort(childsFeedback,orderDateDesc);
+		if (!childsFeedback.isEmpty()) {
+			Collections.sort(childsFeedback, orderDateDesc);
 		}
 		return childsFeedback;
 	}
@@ -181,6 +185,14 @@ public class Feedback {
 
 	public void setFeedbacker(Account feedbacker) {
 		this.feedbacker = feedbacker;
+	}
+
+	public List<LikeOrDislike> getLikeOrDislikes() {
+		return likeOrDislikes;
+	}
+
+	public void setLikeOrDislikes(List<LikeOrDislike> likeOrDislikes) {
+		this.likeOrDislikes = likeOrDislikes;
 	}
 
 }

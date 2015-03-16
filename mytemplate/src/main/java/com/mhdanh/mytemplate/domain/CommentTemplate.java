@@ -21,9 +21,10 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "commentTemplate")
 public class CommentTemplate {
-	
-	private static final Logger logger = Logger.getLogger(CommentTemplate.class);
-	
+
+	private static final Logger logger = Logger
+			.getLogger(CommentTemplate.class);
+
 	@Id
 	@GenericGenerator(name = "increment", strategy = "increment")
 	@GeneratedValue(generator = "increment")
@@ -49,8 +50,29 @@ public class CommentTemplate {
 	private CommentTemplate parentComment;
 
 	@OneToMany(mappedBy = "parentComment")
-	@Cascade(value = CascadeType.DELETE)
+	@Cascade(value = CascadeType.DELETE_ORPHAN)
 	private List<CommentTemplate> childComments;
+
+	@OneToMany(mappedBy = "forCommentTemplate", targetEntity = LikeOrDislike.class)
+	@Cascade(value = CascadeType.DELETE_ORPHAN)
+	private List<LikeOrDislike> likeOrDislikes;
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null) {
+			return false;
+		}
+		if (!(o instanceof CommentTemplate)) {
+			return false;
+		}
+		CommentTemplate otherAccount = (CommentTemplate) o;
+		return this.getId() == otherAccount.getId();
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getId();
+	}
 
 	public CommentTemplate() {
 	}
@@ -61,12 +83,12 @@ public class CommentTemplate {
 	 */
 	public String getDateToString() {
 		try {
-			if(this.dateCreated != null){
+			if (this.dateCreated != null) {
 				String strDate = "";
 				Calendar currentDate = Calendar.getInstance();
-				int dayAfterSubtract = (int) Math
-						.floor((currentDate.getTimeInMillis() - this.dateCreated
-								.getTime()) / (1000 * 60 * 60 * 24));
+				int dayAfterSubtract = (int) Math.floor((currentDate
+						.getTimeInMillis() - this.dateCreated.getTime())
+						/ (1000 * 60 * 60 * 24));
 
 				if (Math.floor(dayAfterSubtract / 7) < 1) {
 					if (dayAfterSubtract == 0) {
@@ -165,21 +187,12 @@ public class CommentTemplate {
 		this.dateCreated = dateCreated;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (o == null) {
-			return false;
-		}
-		if (!(o instanceof CommentTemplate)) {
-			return false;
-		}
-		CommentTemplate otherAccount = (CommentTemplate) o;
-		return this.getId() == otherAccount.getId();
+	public List<LikeOrDislike> getLikeOrDislikes() {
+		return likeOrDislikes;
 	}
 
-	@Override
-	public int hashCode() {
-		return this.getId();
+	public void setLikeOrDislikes(List<LikeOrDislike> likeOrDislikes) {
+		this.likeOrDislikes = likeOrDislikes;
 	}
 
 }
