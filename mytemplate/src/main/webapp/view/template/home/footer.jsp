@@ -7,6 +7,7 @@
 			<ul class = "footer-top-ul-left">
 				<li><a href=""><spring:message code = "msg.layout.about"/></a></li>
 				<li><a href="<c:url value ='/feedback'/>"><spring:message code = "msg.layout.feedback"/></a></li>
+				<li><a href="<c:url value = '/contact'/>"><spring:message code ='msg.layout.contact'/></a></li>
 			</ul>
 			<ul class = "footer-top-ul-right">
 				<li><a href="<c:url value = '?lang=en'/>">English</a></li>
