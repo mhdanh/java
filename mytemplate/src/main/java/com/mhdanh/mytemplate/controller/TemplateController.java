@@ -117,4 +117,5 @@ private Logger logger = Logger.getLogger(TemplateController.class);
 	public Object checkTemplateUploadState(@ModelAttribute("templateUpload") UploadTemplateDTO templateUpload){
 		return templateService.checkFormatAndExistTemplate(templateUpload);
 	}
+	//ok mandf
 }
