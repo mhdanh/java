@@ -24,4 +24,6 @@ public class ViewImgController {
 		String pathImg = utility.getValueFromPropertiesSystemFile(FOLDER_IMAGE) + name;
 		utility.viewImg(response, pathImg, name);
 	}
+	
+	//why dont you take care?
 }
