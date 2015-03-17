@@ -23,12 +23,12 @@
 	<!--contact controller -->
 	<definition name="/contact" extends="homeTemplate">
 		<put-attribute name="title" value="Contact Us"></put-attribute>
-		<put-attribute name="content" value="/view/pages/about/contact.jsp"></put-attribute>
+		<put-attribute name="content" value="/view/pages/about/contactus.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
-			<add-attribute value="/view/public/css/about/contact.css" />
+			<add-attribute value="/view/public/css/about/contactus.css" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts">
-			<add-attribute value="/view/public/js/about/contact.js" />
+			<add-attribute value="/view/public/js/about/contactus.js" />
 		</put-list-attribute>
 	</definition>
 	

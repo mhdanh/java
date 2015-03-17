@@ -8,4 +8,6 @@ public interface AttachmentService extends CommonService<Attachment>{
 
 	Attachment saveAttachmentFeedback(MultipartFile fileFeedback);
 
+	Attachment saveAttachmentContactUs(MultipartFile fileContact);
+
 }

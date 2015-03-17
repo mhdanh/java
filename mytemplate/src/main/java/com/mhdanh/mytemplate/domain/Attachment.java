@@ -19,7 +19,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Attachment {
 
 	public static enum ATTACHMENT_TYPE {
-		FEEDBACK
+		FEEDBACK, CONTACT
 	}
 
 	public static enum ATTACHMENT_STATUS {

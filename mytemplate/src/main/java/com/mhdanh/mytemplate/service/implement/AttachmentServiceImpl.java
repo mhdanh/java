@@ -58,5 +58,38 @@ public class AttachmentServiceImpl extends CommonServiceImpl<Attachment> impleme
 		}
 		
 	}
+
+	@Override
+	public Attachment saveAttachmentContactUs(MultipartFile fileContact) {
+		try {
+			Attachment attachmentContactUs = new Attachment();
+			attachmentContactUs.setFileName(fileContact.getOriginalFilename());
+			attachmentContactUs.setDateModified(new Date());
+			attachmentContactUs.setSize(fileContact.getSize());
+			attachmentContactUs.setStatus(ATTACHMENT_STATUS.OK);
+			attachmentContactUs.setType(ATTACHMENT_TYPE.CONTACT);
+			attachmentContactUs.setUploader(utility.getUserLogined());
+			
+			byte[] bytesFeedbackFile = fileContact.getBytes();
+			String folderAttachmentFeedback = utility.getValueFromPropertiesSystemFile("system.url.store.attachment") + ATTACHMENT_TYPE.FEEDBACK.toString();
+			File fileFolderAttachmentFeedback = new File(folderAttachmentFeedback);
+			if(!fileFolderAttachmentFeedback.exists()) {
+				fileFolderAttachmentFeedback.mkdirs();
+			}
+			Date currentDate = new Date();
+			String strFileAttachmentFeedback = folderAttachmentFeedback + "/" + String.valueOf(currentDate.getTime()) + fileContact.getOriginalFilename();
+			File fileAttachmentFeedback = new File(strFileAttachmentFeedback);
+			FileOutputStream outFileAttachmentFeedback = new FileOutputStream(fileAttachmentFeedback);
+			outFileAttachmentFeedback.write(bytesFeedbackFile);
+			outFileAttachmentFeedback.close();
+			attachmentContactUs.setFullLink(strFileAttachmentFeedback);
+			add(attachmentContactUs);
+			return attachmentContactUs;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("error saveAttachmentContactUs ",e);
+			return null;
+		}
+	}
 	
 }
