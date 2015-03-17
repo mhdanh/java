@@ -1,5 +1,7 @@
 package com.mhdanh.mytemplate.service.implement;
 
+import java.io.File;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -31,11 +33,15 @@ public class MailServiceImpl implements MailService {
 		try {
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 			MimeMessageHelper message = new MimeMessageHelper(
-					mimeMessage, "UTF-8");
+					mimeMessage,true, "UTF-8");
 			message.setFrom(utility.getValueFromPropertiesSystemFile("system.email.username"));
 			message.setTo(new InternetAddress(mailSender.getTo()));
 			message.setSubject(mailSender.getSubject());
 			message.setText(mailSender.getContent(), true);
+			if(mailSender.getAttachmentName() != null && !mailSender.getAttachmentName().isEmpty()){
+				File attachFileForMail = new File(mailSender.getLinkAttachment());
+				message.addAttachment(mailSender.getAttachmentName(),attachFileForMail);
+			}
 			javaMailSender.send(mimeMessage);
 		} catch (AddressException e) {
 			e.printStackTrace();

@@ -9,7 +9,7 @@
 			<!-- name -->
 			<div class="form-group">
                 <label for = "txtFeedbackSubject">Your Name *</label>
-                <input type = 'text' class = "form-control  mt-no-border-radius" name = "subjectFeedback" id = "yourNameContact"/>
+                <input type = 'text' class = "form-control  mt-no-border-radius" name = "yourNameContact" id = "yourNameContact"/>
                 <div id = "error-seri-number" class = "error-custom"></div>
             </div>
             
@@ -23,7 +23,7 @@
             <!-- subject -->
             <div class="form-group">
                 <label for = "txtSubject">Subject *</label>
-                <input type = "text" class = 'form-control mt-no-border-radius' name = "" id = "subjectContact"/>
+                <input type = "text" class = 'form-control mt-no-border-radius' name = "subjectContact" id = "subjectContact"/>
             </div>
             
             <!-- content -->

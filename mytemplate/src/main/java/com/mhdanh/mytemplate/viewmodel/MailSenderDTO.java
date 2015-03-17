@@ -4,6 +4,8 @@ public class MailSenderDTO {
 	private String to;
 	private String subject;
 	private String content;
+	private String linkAttachment;
+	private String attachmentName;
 
 	public MailSenderDTO() {
 	}
@@ -30,6 +32,22 @@ public class MailSenderDTO {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getLinkAttachment() {
+		return linkAttachment;
+	}
+
+	public void setLinkAttachment(String linkAttachment) {
+		this.linkAttachment = linkAttachment;
+	}
+
+	public String getAttachmentName() {
+		return attachmentName;
+	}
+
+	public void setAttachmentName(String attachmentName) {
+		this.attachmentName = attachmentName;
 	}
 
 }
