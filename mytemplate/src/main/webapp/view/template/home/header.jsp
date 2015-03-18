@@ -13,7 +13,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<c:url value='/'/>">Home</a>
+			<a class="navbar-brand" href="<c:url value='/'/>"><spring:message code = 'msg.layout.home'/></a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -26,7 +26,10 @@
 						<li><a href="<c:url value='/recharge/card-page'/>"><spring:message code='msg.layout.recharge.by.mobile.card'/></a></li>
 					</ul>
 				</li>
-				<li><a href="<c:url value = '/upload-template-file-page'/>">Upload template</a></li>
+				<li><a href="<c:url value = '/template/your-template'/>"><spring:message code ='msg.layout.your.template'/></a></li>
+				<sec:authorize access = "hasRole('ADMIN')">
+					<li><a href="<c:url value = '/upload-template-file-page'/>"><spring:message code = 'msg.layout.upload.template'/></a></li>
+				</sec:authorize>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
@@ -35,15 +38,15 @@
 				<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">${my:getUserLogined().username} <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<c:url value='/template/my-template'/> ">My Template</a></li>
-						<li><a href="#">Account info</a></li>
+						<li><a href="<c:url value='/template/my-template'/> "><spring:message code = 'msg.layout.my.template'/></a></li>
+						<li><a href="#"><spring:message code = 'msg.layout.account.info'/></a></li>
 						<li><a href="<c:url value='/recharge/card-page'/>"><spring:message code = "msg.recharge.card.title"/></a></li>
 						<li class="divider"></li>
 						<li><a href="#">
 							<form name='logoutForm' action="<c:url value='/j_spring_security_logout' />" method='POST'>
 								<input type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
-								<button type="submit" class = "link-button-sign-out">Sign out</button>
+								<button type="submit" class = "link-button-sign-out"><spring:message code ='msg.layout.signout'/></button>
 							</form>
 							</a>
 						</li>
@@ -52,8 +55,8 @@
 				</sec:authorize>
 				
 				<sec:authorize access="isAnonymous()">
-					<li><a href="<c:url value='/login'/>">Sign in</a></li>
-					<li><a href="<c:url value='/register'/>">Sign up</a></li>
+					<li><a href="<c:url value='/login'/>"><spring:message code = 'msg.layout.signin'/></a></li>
+					<li><a href="<c:url value='/register'/>"><spring:message code = 'msg.layout.signup'/></a></li>
 				</sec:authorize>
 			</ul>
 		</div>

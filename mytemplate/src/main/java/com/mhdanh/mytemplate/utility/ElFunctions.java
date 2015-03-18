@@ -35,37 +35,52 @@ public class ElFunctions {
 				int dayAfterSubtract = (int) Math
 						.floor((currentDate.getTimeInMillis() - date
 								.getTime()) / (1000 * 60 * 60 * 24));
-
-				if (Math.floor(dayAfterSubtract / 7) < 1) {
-					if (dayAfterSubtract == 0) {
-						strDate = utility.getMessage("msg.layout.today");
-					} else if (dayAfterSubtract == 1) {
-						strDate = utility.getMessage("msg.layout.yesterday");
-					} else {
-						strDate = dayAfterSubtract + " " + utility.getMessage("msg.layout.daysago");
-					}
-				} else if (Math.floor(dayAfterSubtract / 7) >= 1
-						&& Math.floor(dayAfterSubtract / 30) < 1) {
-					int week = (int) Math.floor(dayAfterSubtract / 7);
-					if (week == 1) {
-						strDate = utility.getMessage("msg.layout.lastweek");
-					} else {
-						strDate = week + " " + utility.getMessage("msg.layout.weeksago");
-					}
-				} else if (Math.floor(dayAfterSubtract / 30) >= 1
-						&& Math.floor(dayAfterSubtract / 365) < 1) {
-					int month = (int) Math.floor(dayAfterSubtract / 30);
-					if (month == 1) {
-						strDate = utility.getMessage("msg.layout.lastmonth");
-					} else {
-						strDate = month + " " + utility.getMessage("msg.layout.monthsago");
-					}
-				} else if (Math.floor(dayAfterSubtract / 365) >= 1) {
-					int year = (int) Math.floor(dayAfterSubtract / 365);
-					if (year == 1) {
-						strDate = utility.getMessage("msg.layout.lastyear");
-					} else {
-						strDate = year + " " + utility.getMessage("msg.layout.yearsago");
+				
+				int secAfterSubtract = (int) Math
+						.floor((currentDate.getTimeInMillis() - date
+								.getTime()) / (1000));
+				//calculate second
+				
+				if(Math.floor(secAfterSubtract/60) < 1) {
+					return secAfterSubtract + " " + utility.getMessage("msg.layout.secondago");
+				} else if(Math.floor(secAfterSubtract/60) >= 1 && Math.floor(secAfterSubtract/3600) < 1){
+					int minAgo = (int) Math.floor(secAfterSubtract/60);
+					strDate =  minAgo + " " + utility.getMessage("msg.layout.minutesago");;
+				} else if(Math.floor(secAfterSubtract/3600) >= 1 && Math.floor(secAfterSubtract/86400) < 1) {
+					int hourAgo = (int) Math.floor(secAfterSubtract/3600);
+					strDate = hourAgo + " " + utility.getMessage("msg.layout.hoursago");;
+				} else {
+					if (Math.floor(dayAfterSubtract / 7) < 1) {
+						if (dayAfterSubtract == 0) {
+							strDate = utility.getMessage("msg.layout.today");
+						} else if (dayAfterSubtract == 1) {
+							strDate = utility.getMessage("msg.layout.yesterday");
+						} else {
+							strDate = dayAfterSubtract + " " + utility.getMessage("msg.layout.daysago");
+						}
+					} else if (Math.floor(dayAfterSubtract / 7) >= 1
+							&& Math.floor(dayAfterSubtract / 30) < 1) {
+						int week = (int) Math.floor(dayAfterSubtract / 7);
+						if (week == 1) {
+							strDate = utility.getMessage("msg.layout.lastweek");
+						} else {
+							strDate = week + " " + utility.getMessage("msg.layout.weeksago");
+						}
+					} else if (Math.floor(dayAfterSubtract / 30) >= 1
+							&& Math.floor(dayAfterSubtract / 365) < 1) {
+						int month = (int) Math.floor(dayAfterSubtract / 30);
+						if (month == 1) {
+							strDate = utility.getMessage("msg.layout.lastmonth");
+						} else {
+							strDate = month + " " + utility.getMessage("msg.layout.monthsago");
+						}
+					} else if (Math.floor(dayAfterSubtract / 365) >= 1) {
+						int year = (int) Math.floor(dayAfterSubtract / 365);
+						if (year == 1) {
+							strDate = utility.getMessage("msg.layout.lastyear");
+						} else {
+							strDate = year + " " + utility.getMessage("msg.layout.yearsago");
+						}
 					}
 				}
 				return strDate;

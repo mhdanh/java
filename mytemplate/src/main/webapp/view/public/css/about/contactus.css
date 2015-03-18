@@ -1,4 +1,7 @@
 .contact-us-page {
-	max-width: 600px;
+	max-width: 1000px;
 	margin: auto;
+}
+.wrap-frm-contact-us {
+	max-width: 600px;
 }

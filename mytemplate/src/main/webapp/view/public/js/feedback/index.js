@@ -2,6 +2,8 @@ $(document).ready(function() {
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");
 	
+	var msgCanNotBlank = getMsg("msg.validate.text.cannotbeblank");
+	
 	//like button
 	$(document).on("click",".like-button",function(e) {
 		e.preventDefault();
@@ -50,6 +52,36 @@ $(document).ready(function() {
 			$(formRely).removeClass("mt-display-none");
 		} else {
 			$(formRely).addClass("mt-display-none");
+		}
+	});
+	
+	//validate form
+	$("#frm-feedback").validate({
+	  	rules: {
+	  		subjectFeedback:{
+	  			required: true
+	  		},
+	  		contentFeedback:{
+	  			required: true
+	  		}
+		},
+		messages:{
+			subjectFeedback:{
+				required: msgCanNotBlank
+			}, 
+			contentFeedback:{
+				required: msgCanNotBlank
+			}
+		},
+		focusInvalid: true,
+		errorPlacement: function(error, element) {
+			if(element.attr("name") == "subjectFeedback") {
+				error.appendTo($("#error-subject"));
+			} else if(element.attr("name") == "contentFeedback") {
+				error.appendTo($("#error-content"));
+			} else {
+		        error.insertAfter(element); // default error placement.
+		    }
 		}
 	});
 });

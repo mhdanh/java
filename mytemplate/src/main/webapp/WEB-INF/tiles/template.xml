@@ -28,6 +28,7 @@
 			<add-attribute value="/view/public/css/about/contactus.css" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts">
+			<add-attribute value="/view/public/js/lib/jquery.validate.js" />
 			<add-attribute value="/view/public/js/about/contactus.js" />
 		</put-list-attribute>
 	</definition>
@@ -40,6 +41,7 @@
 			<add-attribute value="/view/public/css/feedback/index.css" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts">
+			<add-attribute value="/view/public/js/lib/jquery.validate.js" />
 			<add-attribute value="/view/public/js/feedback/index.js" />
 		</put-list-attribute>
 	</definition>

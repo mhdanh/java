@@ -19,14 +19,14 @@
 			<div class="form-group">
                 <label for = "txtFeedbackSubject"><spring:message code = 'msg.feedback.subject'/> *</label>
                 <input type = 'text' class = "form-control  mt-no-border-radius" name = "subjectFeedback" id = "txtFeedbackSubject"/>
-                <div id = "error-seri-number" class = "error-custom"></div>
+                <div id = "error-subject" class = "error-custom"></div>
             </div>
             
             <!-- content -->
 			<div class="form-group">
                 <label for = "txtFeedbackContent"><spring:message code = 'msg.feedback.content'/> *</label>
                 <textarea class = "form-control  mt-no-border-radius" name = "contentFeedback" id = "txtFeedbackContent"></textarea>
-                <div id = "error-seri-number" class = "error-custom"></div>
+                <div id = "error-content" class = "error-custom"></div>
             </div>
             
             <!-- attach mentfile -->
@@ -101,7 +101,7 @@
 										<form method="post" name = "frmAddChildFeedback" enctype="multipart/form-data" action = "<c:url value ='/feedback/add?${_csrf.parameterName}=${_csrf.token}'/>">
 											<!-- type card -->
 								            <div class="form-group">
-								                <textarea class = "form-control mt-no-border-radius" name = "contentFeedback"></textarea>
+								                <textarea class = "form-control mt-no-border-radius" name = "contentFeedback" required="true"></textarea>
 								            </div>
 								            <input type = "hidden" value = "${feedback.id}" name = "idParentFeedback"/>
 								            <div class="form-group group-file-submit">

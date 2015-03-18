@@ -13,6 +13,10 @@ textarea {
 
 .wrap-frm-feedback {
 	max-width: 500px;
+	margin-left: 15px;
+}
+.wrap-feedbacklist {
+	margin-left: 15px;
 }
 
 /* style feedback list */

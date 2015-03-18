@@ -57,7 +57,7 @@ public class FeedbackServiceImpl extends CommonServiceImpl<Feedback> implements 
 	public String feedBackAdd(FeedbackDTO feedBackData) {
 		try {
 			Feedback addFeedback = new Feedback();
-			if(feedBackData.getFileFeedback() != null) {
+			if(feedBackData.getFileFeedback() != null && !feedBackData.getFileFeedback().getOriginalFilename().isEmpty()) {
 				//save attachment
 				Attachment attachment =  attachmentService.saveAttachmentFeedback(feedBackData.getFileFeedback());
 				if(attachment != null) {
