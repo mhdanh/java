@@ -75,14 +75,12 @@
 						<i class="fa fa-user avatar-feedbacker"></i>
 					</a>
 					<div class = "inside-content-parent">
-						<a href = "" class = "name-feedbacker">${feedback.feedbacker.firstName} ${feedback.feedbacker.lastName}</a>
+						<a href = "" class = "name-feedbacker"><c:out value = "${feedback.feedbacker.firstName} ${feedback.feedbacker.lastName}" escapeXml="true"/></a>
 						<span class = "date-feedback">${my:getDateToString(feedback.dateCreated)}</span> <span>${feedback.type}</span>
 						<div class = "subject-feedback">
-							${feedback.subject}
+							<c:out value = "${feedback.subject}" escapeXml="true"/>
 						</div><!-- end subject -->
-						<div>
-							${feedback.content}
-						</div><!-- end content -->
+						<pre class = "mt-pre"><c:out value = "${feedback.content}" escapeXml="true"/></pre><!-- end content -->
 						<div>
 							<c:if test = "${not empty feedback.attachment}">
 								<a href = "<c:url value = '/feedback/download-attachment/${feedback.attachment.id}'/>" class = "attachment-feedback"><i class="fa fa-paperclip"></i>${feedback.attachment.fileName}</a>
@@ -142,11 +140,9 @@
 											<i class="fa fa-user avatar-feedbacker"></i>
 										</a>
 										<div class = "inside-content-parent">
-											<a href = "" class = "name-feedbacker">${childFeedback.feedbacker.firstName} ${feedback.feedbacker.lastName}</a>
+											<a href = "" class = "name-feedbacker"><c:out value = "${childFeedback.feedbacker.firstName} ${feedback.feedbacker.lastName}" escapeXml="true"/></a>
 											<span class = "date-feedback">${my:getDateToString(childFeedback.dateCreated)}</span>
-											<div>
-												${childFeedback.content}
-											</div><!-- end content -->
+											<pre class = "mt-pre"><c:out value = "${childFeedback.content}" escapeXml="true"/></pre><!-- end content -->
 											<div>
 												<c:if test = "${not empty childFeedback.attachment}">
 													<a href = "<c:url value = '/feedback/download-attachment/${feedback.attachment.id}'/>" class = "attachment-feedback"><i class="fa fa-paperclip"></i>${childFeedback.attachment.fileName}</a>

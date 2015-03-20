@@ -64,7 +64,7 @@ public class Account {
 	private Date dateModified;
 	
 	@Column(columnDefinition = "int default 0")
-	private Integer totalMoney;
+	private Integer totalMoney = 0;
 
 	@ManyToMany(targetEntity = Role.class)
 	@JoinTable(name = "account_role", joinColumns = { @JoinColumn(name = "account_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })

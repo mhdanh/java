@@ -20,6 +20,18 @@
 		</put-list-attribute>
 	</definition>
 	
+	<!--about me controller -->
+	<definition name="/about" extends="homeTemplate">
+		<put-attribute name="title" value="About me"></put-attribute>
+		<put-attribute name="content" value="/view/pages/about/aboutme.jsp"></put-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/view/public/css/about/aboutme.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/view/public/js/about/aboutme.js" />
+		</put-list-attribute>
+	</definition>
+	
 	<!--contact controller -->
 	<definition name="/contact" extends="homeTemplate">
 		<put-attribute name="title" value="Contact Us"></put-attribute>

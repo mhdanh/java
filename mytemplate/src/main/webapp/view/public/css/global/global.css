@@ -24,6 +24,15 @@ a:hover { text-decoration: none; }
 .mt-clear-both{clear:both;}
 .mt-float-left{float:left;}
 .mt-float-right{float:right;}
+
+.mt-pre {
+	margin: 0px;
+	padding: 0px;
+	font-size: 15px;
+	border: none;
+	background: none;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 .error-custom{
 	margin-top:3px;
 	margin-bottom:3px;

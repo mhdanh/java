@@ -54,11 +54,11 @@
 				            	<div class = "wrap-comment-parent">
 				            		<div class = "comment-parent">
 				            			<div class = "header-comment-parent">
-				            				<span class = "header-comment-name">${parentComment.commenter.firstName} ${parentComment.commenter.lastName}</span>
+				            				<span class = "header-comment-name"><c:out value = "${parentComment.commenter.firstName} ${parentComment.commenter.lastName}" escapeXml="true"/></span>
 				            				<span class = "header-comment-time">${parentComment.dateToString}</span>
 				            			</div><!-- end header-comment-parent -->
 				            			<div class = "body-comment-parent">
-				            				<c:out value="${parentComment.content}" escapeXml="false"/>
+				            				<pre class = "mt-pre"><c:out value="${parentComment.content}" escapeXml="true"/></pre>
 				            			</div><!-- end body-comment-parent -->
 				            			<div class = "footer-comment-parent">
 				            				<c:if test = "${logined}">
@@ -74,7 +74,7 @@
 				            						<span class = "header-comment-time">${childComment.dateToString}</span>
 						            			</div><!-- end header-comment-child -->
 						            			<div class = "body-comment-child">
-						            				<c:out value = "${childComment.content}" escapeXml="false"/>
+						            				<pre class = "mt-pre"><c:out value = "${childComment.content}" escapeXml="false"/></pre>
 						            			</div><!-- end body-comment-child -->
 						            		</div><!-- end comment-child -->
 					            		</c:forEach>

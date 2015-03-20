@@ -551,11 +551,11 @@ public class TemplateServiceImpl extends
 				strError = utility.getMessage("msg.template.check.buy.direct.not.exist");
 				error = true;
 			} else {
-				if(templateById.getSellOff() == 0) {
+				if(templateById.getSellOff().compareTo(0) == 0) {
 					strError = utility.getMessage("msg.template.check.buy.direct.notpremium");
 					error = true;
 				} else {
-					if(currentMoney < templateById.getSellOff()) {
+					if(currentMoney.compareTo(templateById.getSellOff()) < 0) {
 						strError = utility.getMessage("msg.template.check.buy.direct.not.enough.money");
 						error = true;
 					}
