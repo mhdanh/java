@@ -346,12 +346,7 @@ public class TemplateServiceImpl extends
 		if(templateById != null){
 			if(templateById.getSellOff() == 0){
 				try {
-					final String folderZipTemplate = "system.url.store.template";
-					String pathInputTemplate = utility.getValueFromPropertiesSystemFile(folderZipTemplate)
-							+ templateById.getOwner().getUsername()
-							+ "/"
-							+ utility.convertTextInDatabaseToNormalText(templateById.getCategory().getName())
-							+ "/" + templateById.getFileName();
+					String pathInputTemplate = getTemplateFilePath(templateById);
 					utility.downloadFile(response,pathInputTemplate, templateById.getFileName());
 					//update download time
 					Integer plusBuy = templateById.getBuy() + 1;
@@ -410,12 +405,7 @@ public class TemplateServiceImpl extends
 				resultJson.put("msg", utility.getMessage("msg.login.text.not.login"));
 				return resultJson;
 			}
-			final String folderZipTemplate = "system.url.store.template";
-			String pathInputTemplate = utility.getValueFromPropertiesSystemFile(folderZipTemplate)
-					+ templateById.getOwner().getUsername()
-					+ "/"
-					+ utility.convertTextInDatabaseToNormalText(templateById.getCategory().getName())
-					+ "/" + templateById.getFileName();
+			String pathInputTemplate = getTemplateFilePath(templateById);
 			if(utility.deleteFile(pathInputTemplate)){
 				templateDao.deleteTemplate(templateById);
 			}
@@ -511,20 +501,21 @@ public class TemplateServiceImpl extends
 			if(userLogined != null) {
 				Template templateById = templateDao.getTemplateById(idTemplate);
 				if(templateById != null){
-					if(templateById.getSellOff() != 0) {
-						if(currentMoney >= templateById.getSellOff()) {
-							final String folderZipTemplate = "system.url.store.template";
-							String pathInputTemplate = utility.getValueFromPropertiesSystemFile(folderZipTemplate)
-									+ templateById.getOwner().getUsername()
-									+ "/"
-									+ utility.convertTextInDatabaseToNormalText(templateById.getCategory().getName())
-									+ "/" + templateById.getFileName();
-							//TODO check template exist
-							utility.downloadFile(response,pathInputTemplate, templateById.getFileName());
-							//substract money in account
-							Integer moneyAfterDownloadTemplate = currentMoney - templateById.getSellOff();
-							userLogined.setTotalMoney(moneyAfterDownloadTemplate);
-							accountDao.update(userLogined);
+					//check template file exist
+					String pathInputTemplate = getTemplateFilePath(templateById);
+					File templateFile = new File(pathInputTemplate);
+					if(templateFile.exists()) {
+						if(templateById.getSellOff() != 0) {
+							if(currentMoney >= templateById.getSellOff()) {
+								utility.downloadFile(response,pathInputTemplate, templateById.getFileName());
+								//substract money in account
+								Integer moneyAfterDownloadTemplate = currentMoney - templateById.getSellOff();
+								userLogined.setTotalMoney(moneyAfterDownloadTemplate);
+								accountDao.update(userLogined);
+								//update buy time
+								Integer currentBuy = templateById.getBuy();
+								templateById.setBuy(currentBuy + 1);
+							}
 						}
 					}
 				}
@@ -537,6 +528,17 @@ public class TemplateServiceImpl extends
 	}
 
 	@Override
+	public String getTemplateFilePath(Template template) {
+		final String folderZipTemplate = "system.url.store.template";
+		String pathInputTemplate = utility.getValueFromPropertiesSystemFile(folderZipTemplate)
+				+ template.getOwner().getUsername()
+				+ "/"
+				+ utility.convertTextInDatabaseToNormalText(template.getCategory().getName())
+				+ "/" + template.getFileName();
+		return pathInputTemplate;
+	}
+
+	@Override
 	public String checkBuyTemplateDirect(Model model, int idTemplate) {
 		Account userLogined = utility.getUserLogined();
 		boolean error = false;
@@ -544,20 +546,33 @@ public class TemplateServiceImpl extends
 		if(userLogined == null) {
 			strError = utility.getMessage("msg.login.text.not.login");
 			error = true;
+			logger.warn(strError);
 		} else {
 			Integer currentMoney = userLogined.getTotalMoney();
 			Template templateById = templateDao.getTemplateById(idTemplate);
 			if(templateById == null) {
 				strError = utility.getMessage("msg.template.check.buy.direct.not.exist");
 				error = true;
+				logger.warn(strError);
 			} else {
-				if(templateById.getSellOff().compareTo(0) == 0) {
-					strError = utility.getMessage("msg.template.check.buy.direct.notpremium");
+				//check template file exist
+				String pathInputTemplate = getTemplateFilePath(templateById);
+				File templateFile = new File(pathInputTemplate);
+				if(!templateFile.exists()) {
+					strError = utility.getMessage("msg.template.check.buy.direct.template.file.not.exist");
 					error = true;
+					logger.warn(strError + " templateId: " + templateById);
 				} else {
-					if(currentMoney.compareTo(templateById.getSellOff()) < 0) {
-						strError = utility.getMessage("msg.template.check.buy.direct.not.enough.money");
+					if(templateById.getSellOff().compareTo(0) == 0) {
+						strError = utility.getMessage("msg.template.check.buy.direct.notpremium");
 						error = true;
+						logger.warn(strError);
+					} else {
+						if(currentMoney.compareTo(templateById.getSellOff()) < 0) {
+							strError = utility.getMessage("msg.template.check.buy.direct.not.enough.money");
+							error = true;
+							logger.warn(strError);
+						}
 					}
 				}
 			}

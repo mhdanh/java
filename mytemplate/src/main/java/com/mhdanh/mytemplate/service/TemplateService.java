@@ -18,6 +18,7 @@ public interface TemplateService extends CommonService<Template>{
 	int countTotalTemplatePublished();
 	void downloadTemplateFree(int idTemplate, HttpServletResponse response);
 	boolean checkTemplateFormat(MultipartFile fileTemplate);
+	String getTemplateFilePath(Template template);
 	
 	/**
 	 * return json object. 

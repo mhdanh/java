@@ -48,17 +48,17 @@ public class Template {
 	private String link;
 
 	@Column(columnDefinition = "int default 0")
-	private Integer cost;
+	private Integer cost = 0;
 
 	@Column(columnDefinition = "int default 0")
-	private Integer sellOff;
+	private Integer sellOff = 0;
 
 	@Column
 	@Enumerated(EnumType.STRING)
 	private UNIT_MONEY unitMoney;
 
 	@Column(columnDefinition = "int default 0")
-	private Integer buy;
+	private Integer buy = 0;
 
 	@Column
 	private Date dateCreated;
