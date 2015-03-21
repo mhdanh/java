@@ -53,7 +53,7 @@
 												code='msg.upload-template-file-page.label.downloadme' /></a>
 									</c:when>
 									<c:otherwise>
-										<a href="${template.link}" target="_blank"
+										<a href="<c:url value = '/template-detail/${template.id}'/>" target="_blank"
 											class="btn btn-primary mt-button"><spring:message
 												code='msg.upload-template-file-page.label.buyme' /></a>
 									</c:otherwise>
@@ -110,7 +110,7 @@
 											code='msg.upload-template-file-page.label.downloadme' /></a>
 								</c:when>
 								<c:otherwise>
-									<a href="${template.link}" target="_blank"
+									<a href="<c:url value = '/template-detail/${template.id}'/>" target="_blank"
 										class="btn btn-primary mt-button"><spring:message
 											code='msg.upload-template-file-page.label.buyme' /></a>
 								</c:otherwise>
