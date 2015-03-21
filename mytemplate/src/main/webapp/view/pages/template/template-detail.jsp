@@ -87,9 +87,9 @@
 			</div><!-- end description -->
 		</div><!-- end left block -->
 		<div class = "col-md-4">
-			<a href = "<c:url value ='/template/check/buy/direct/${template.id}'/>">Buy me direct</a>
+			<a href = "<c:url value ='/template/check/buy/direct/${template.id}'/>" class = "btn btn-danger mt-button"><spring:message code ='msg.template.detail.purchasedirect'/></a>
 			<!-- purchase safe -->
-			<a href="${buysafe}">Buy now buy Bao kim</a>
+			<a href="${buysafe}" class = "btn btn-danger mt-button"><spring:message code = 'msg.template.detail.purchasebybaokim'/></a>
 		</div><!-- end left block -->
 	</div>	
 </div>
