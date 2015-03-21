@@ -1,8 +1,73 @@
 .about-me-page {
 	max-width: 1000px;
 	margin: auto;
+	cursor: default;
 }
 
 .wrap-skill {
 	max-width: 350px;
 }
+
+.wrap-progress {
+	height: 20px;
+	background: #e3e3e3;
+	margin:5px 0px;
+ 	box-shadow: 1px 1px 20px #ccc inset;
+}
+
+.wrap-progress .inside-progress {
+	display: inline-block;
+	text-align: center;
+	color: white;
+	height: inherit;
+	overflow: hidden;
+}
+
+.progress-java {
+	background: #d9534f;
+	width: 70%;
+	-webkit-animation: java-progress 1s;
+	-moz-animation: java-progress 1s;
+}
+
+@-webkit-keyframes java-progress {
+	from {width:0%;}
+	to {width: 70%;}
+}
+@-moz-keyframes java-progress {
+	from {width:0%;}
+	to {width: 70%;}
+}
+
+.progress-php {
+	background: #f0ad4e;
+	width: 65%;
+	-webkit-animation: php-progress 2s;
+	-moz-animation: php-progress 2s;
+}
+
+@-webkit-keyframes php-progress {
+	from {width:0%;}
+	to {width: 65%;}
+}
+@-moz-keyframes php-progress {
+	from {width:0%;}
+	to {width: 65%;}
+}
+
+.progress-js-css {
+	background: #5cb85c;
+	width: 60%;
+	-webkit-animation: js-css-progress 3s;
+	-moz-animation: js-css-progress 3s;
+}
+
+@-webkit-keyframes js-css-progress {
+	from {width:0%;}
+	to {width: 60%;}
+}
+@-moz-keyframes js-css-progress {
+	from {width:0%;}
+	to {width: 60%;}
+}
+

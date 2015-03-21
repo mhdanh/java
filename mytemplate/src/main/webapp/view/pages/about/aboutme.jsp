@@ -8,7 +8,7 @@
 	<hr/>
 	<h3><spring:message code = 'msg.aboutme.request.template.or.website'/></h3>
 	<div>
-		<spring:message code = 'msg.aboutme.description.request.template.or.website'/>
+		${descriptionForRequestTemplateOrWebsite}
 	</div>
 	<hr/>
 	<div class = "wrap-skill">
