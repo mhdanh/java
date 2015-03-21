@@ -16,6 +16,11 @@
 	border-radius: 0px ;
 }
 
+#thumbnail{
+	border:none;
+	box-shadow: none;
+}
+
 /*style for comment*/
 .wrap-list-comment {
 	cursor: default;

@@ -254,7 +254,7 @@
 		<put-attribute name="title" value="Check buy template direct"></put-attribute>
 		<put-attribute name="content" value="/view/pages/template/check-buy-template-direct.jsp"></put-attribute>
 		<put-list-attribute name="stylesheets">
-			<add-attribute value="/view/public/css/template/edit-log.css" />
+			<add-attribute value="/view/public/css/template/check-buy-template-direct.css" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts">
 			<add-attribute value="" />

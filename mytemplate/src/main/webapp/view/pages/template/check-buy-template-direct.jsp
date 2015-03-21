@@ -3,5 +3,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class = "check-buy-template-direct">
-	${error}
+	<h2 class = "error-title">${error}</h2>
 </div>
