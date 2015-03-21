@@ -13,7 +13,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<c:url value='/'/>"><spring:message code = 'msg.layout.home'/></a>
+			<a class="navbar-brand" href="<c:url value='/'/>"><spring:message code = 'msg.layout.home'/><sup> beta</sup></a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -26,7 +26,7 @@
 						<li><a href="<c:url value='/recharge/card-page'/>"><spring:message code='msg.layout.recharge.by.mobile.card'/></a></li>
 					</ul>
 				</li>
-				<li><a href="<c:url value = '/template/your-template'/>"><spring:message code ='msg.layout.your.template'/></a></li>
+<%-- 				<li><a href="<c:url value = '/template/your-template'/>"><spring:message code ='msg.layout.your.template'/></a></li> --%>
 				<sec:authorize access = "hasRole('ADMIN')">
 					<li><a href="<c:url value = '/upload-template-file-page'/>"><spring:message code = 'msg.layout.upload.template'/></a></li>
 				</sec:authorize>

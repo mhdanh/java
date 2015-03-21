@@ -22,8 +22,8 @@
 				<li><spring:message code = "msg.layout.otherproduct"/>: <a href="http://dainguu.blogspot.com/" target="_blank" title="<spring:message code = "msg.layout.kienthucit"/>"><spring:message code = "msg.layout.kienthucit"/></a> - <a href ="http://vieccantho.com/jobs/" target = "_blank" title = "<spring:message code = "msg.layout.vieccantho"/>"><spring:message code = "msg.layout.vieccantho"/></a></li>
 			</ul>
 			<ul class = "footer-bottom-ul-right-icon-social">
-				<li><a href=""><i class="fa fa-facebook-square"></i></a></li>
-				<li><a href=""><i class="fa fa-google-plus-square"></i></a></li>
+				<li><a href="https://www.facebook.com/pages/My-ui/337810446423142" target = "_blank"><i class="fa fa-facebook-square"></i></a></li>
+				<li><a href="https://plus.google.com/110814290957816282578/posts" target = "_blank"><i class="fa fa-google-plus-square"></i></a></li>
 			</ul>
 			<div class = "mt-clear-both"></div>
 		</div><!-- end footer bottom -->
