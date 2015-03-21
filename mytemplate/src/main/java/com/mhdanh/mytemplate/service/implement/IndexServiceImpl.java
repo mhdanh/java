@@ -14,6 +14,7 @@ import com.mhdanh.mytemplate.domain.Category;
 import com.mhdanh.mytemplate.domain.Template;
 import com.mhdanh.mytemplate.service.IndexService;
 import com.mhdanh.mytemplate.service.TemplateService;
+import com.mhdanh.mytemplate.utility.Utility;
 import com.mhdanh.mytemplate.viewmodel.FilterModel;
 import com.mhdanh.mytemplate.viewmodel.HardCode;
 import com.mhdanh.mytemplate.viewmodel.LazyLoadTemplateFilterIndex;
@@ -26,6 +27,8 @@ public class IndexServiceImpl implements IndexService{
 	private TemplateService templateService;
 	@Autowired
 	private CategoryDao categoryDao;
+	@Autowired
+	private Utility utility;
 	
 	@Override
 	public String indexPage(Model model,LazyLoadTemplateFilterIndex lazyLoadingTemplate) {
@@ -58,32 +61,32 @@ public class IndexServiceImpl implements IndexService{
 		List<FilterModel> filters = new ArrayList<FilterModel>();
 		FilterModel filterTopDownload = new FilterModel();
 		filterTopDownload.setValue(HardCode.topDownload);
-		filterTopDownload.setDisplayName("Top download");
+		filterTopDownload.setDisplayName(utility.getMessage("msg.index.top.download"));
 		filters.add(filterTopDownload);
 		
 		FilterModel filterTopFree = new FilterModel();
 		filterTopFree.setValue(HardCode.topFreeDownload);
-		filterTopFree.setDisplayName("Top free download");
+		filterTopFree.setDisplayName(utility.getMessage("msg.index.top.free.download"));
 		filters.add(filterTopFree);
 		
 		FilterModel filterTopPremium = new FilterModel();
 		filterTopPremium.setValue(HardCode.topPremiumDownload);
-		filterTopPremium.setDisplayName("Top premium download");
+		filterTopPremium.setDisplayName(utility.getMessage("msg.index.top.premium.download"));
 		filters.add(filterTopPremium);
 		
 		FilterModel filterNewest = new FilterModel();
 		filterNewest.setValue(HardCode.newest);
-		filterNewest.setDisplayName("Template Newest");
+		filterNewest.setDisplayName(utility.getMessage("msg.index.template.newest"));
 		filters.add(filterNewest);
 		
 		FilterModel filterFreeNewest = new FilterModel();
 		filterFreeNewest.setValue(HardCode.freeNewest);
-		filterFreeNewest.setDisplayName("Template Free Newest");
+		filterFreeNewest.setDisplayName(utility.getMessage("msg.index.template.free.newest"));
 		filters.add(filterFreeNewest);
 		
 		FilterModel filterPremiumNewest = new FilterModel();
 		filterPremiumNewest.setValue(HardCode.premiumNewest);
-		filterPremiumNewest.setDisplayName("Template Premium Newest");
+		filterPremiumNewest.setDisplayName(utility.getMessage("msg.index.template.premium.newest"));
 		filters.add(filterPremiumNewest);
 		
 		return filters;

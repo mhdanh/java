@@ -39,7 +39,7 @@
 					</c:forEach>
 				</select>
 		    </div>
-		    <button type="submit" class="btn btn-danger mt-button">Filter</button>
+		    <button type="submit" class="btn btn-danger mt-button"><spring:message code = 'msg.index.filter'/></button>
 		</form>
 	</div><!-- end filter template -->
 	<div class = "index-wrap-content-load-template">
