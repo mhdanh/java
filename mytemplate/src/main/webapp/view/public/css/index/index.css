@@ -19,7 +19,7 @@
 	padding-bottom:20px;
 }
 .title-template{
-	overflow-x:hidden;
+	overflow:hidden;
 	white-space:nowrap;
 	text-overflow:ellipsis;
 	color:#3c763d;
