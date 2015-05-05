@@ -246,6 +246,40 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>production-jboss</id>
+			<build>
+				<finalName>mytemplate</finalName>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>2.3</version>
+						<configuration>
+							<webResources>
+								<resource>
+									<filtering>true</filtering>
+									<directory>src/main/webapp/WEB-INF/profiles/production-jboss</directory>
+									<targetPath>WEB-INF</targetPath>
+									<includes>
+										<include>hibernate-context.xml</include>
+									</includes>
+								</resource>
+							</webResources>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<system.url.store.template>D:/opt/mytemplate/template/</system.url.store.template>
+				<system.url.store.image>D:/opt/mytemplate/images/</system.url.store.image>
+				<system.email.username>myuiinfo@gmail.com</system.email.username>
+				<system.email.password>Mhdnnd169188</system.email.password>
+				<system.url.store.template.sample>D:/opt/mytemplate/sample/sample-template.zip</system.url.store.template.sample>
+				<system.url.store.attachment>D:/opt/mytemplate/attachment/</system.url.store.attachment>
+				<homeapp>D:</homeapp>
+			</properties>
+		</profile>
+		<profile>
 			<id>production-geronimo</id>
 			<build>
 				<finalName>mytemplate</finalName>
