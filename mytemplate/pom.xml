@@ -246,7 +246,7 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>production-jboss</id>
+			<id>deloyment-jboss</id>
 			<build>
 				<finalName>mytemplate</finalName>
 				<plugins>
@@ -262,6 +262,14 @@
 									<targetPath>WEB-INF</targetPath>
 									<includes>
 										<include>hibernate-context.xml</include>
+									</includes>
+								</resource>
+								<resource>
+									<filtering>true</filtering>
+									<directory>src/main/webapp/WEB-INF/profiles/production-jboss</directory>
+									<targetPath>WEB-INF</targetPath>
+									<includes>
+										<include>jboss-web.xml</include>
 									</includes>
 								</resource>
 							</webResources>
