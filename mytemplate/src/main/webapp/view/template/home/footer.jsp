@@ -29,6 +29,13 @@
 		</div><!-- end footer bottom -->
 	</div>
 </footer>
+<!-- ajax loader -->
+<div class="ajax-loader mt-display-none">
+	<div class="ajax-wrap-image">
+		<img alt="please wait..." src="<c:url value='/view/public/image/loading.gif'/>"/>
+		<i class="ajax-counter-time">0</i>
+	</div>
+</div>
 <!-- modal confirm yes no-->
 <div class="modal" id = "modal-confirm-yes-no">
 	<div class="modal-dialog modal-vertical-centered">
