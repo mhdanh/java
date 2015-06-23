@@ -5,31 +5,36 @@ $(document).ready(function(){
 	var msgCanNotBlank = getMsg("msg.validate.text.cannotbeblank");
 	var msgWrongEmailFormat = getMsg("msg.validate.text.email.wrongformat");
 	
+	
+
+	
 	$(document).on("keyup","#email",function(){
-		var valueEmail = $.trim($(this).val());
-		if(valueEmail != ""){
-			var registerEmail = new FormData();
-			registerEmail.append("email",valueEmail);
-			$.ajax({
-				url : ctxPath + "/ajax-register-check-email-exist",
-				data : registerEmail,
-				processData : false,
-				contentType : false,
-				method : 'POST',
-				beforeSend:function(xhr){
-					xhr.setRequestHeader(header, token);
-				},
-				success : function(data) {
-					console.log(data);
-					if(data.key == "true"){
-						$("#error-exist-email-register").html("<label>"+data.msg+"<label>");
-						$("#error-exist-email-register").show();
-					}else{
-						$("#error-exist-email-register").hide();
+		delayTimeFunction( function() {
+			var valueEmail = $.trim($(this).val());
+			if(valueEmail != ""){
+				var registerEmail = new FormData();
+				registerEmail.append("email",valueEmail);
+				$.ajax({
+					url : ctxPath + "/ajax-register-check-email-exist",
+					data : registerEmail,
+					processData : false,
+					contentType : false,
+					method : 'POST',
+					beforeSend:function(xhr){
+						xhr.setRequestHeader(header, token);
+					},
+					success : function(data) {
+						console.log(data);
+						if(data.key == "true"){
+							$("#error-exist-email-register").html("<label>"+data.msg+"<label>");
+							$("#error-exist-email-register").show();
+						}else{
+							$("#error-exist-email-register").hide();
+						}
 					}
-				}
-			});
-		}
+				});
+			}
+	    }, 1000);
 	});
 	
 	

@@ -12,6 +12,14 @@ function createModalConfirmYesNo(title, body, action) {
 	});
 }
 
+var delayTimeFunction = (function() {
+    var timer = 0;
+    return function(callback, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
+
 //function start and complete ajax
 var varIntervalCounter = {};
 function startAjaxLoader() {
