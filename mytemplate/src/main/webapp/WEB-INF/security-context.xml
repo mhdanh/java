@@ -1,12 +1,24 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 	http://www.springframework.org/schema/security
-	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	http://www.springframework.org/schema/security/spring-security.xsd
+	http://www.springframework.org/schema/websocket
+    http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
 	<!-- Enable use-expression -->
+	<http pattern="/websocket-app/**" security="none" />
+	<http pattern="/websocket-account-endpoint/**" security="none" />
+	
 	<http auto-config="true" use-expressions="true">
+<!-- 		<intercept-url pattern="/websocket-app/**" filters="none"/> -->
+<!-- 		<intercept-url pattern="/websocket-account-endpoint/**" filters="none"/> -->
+<!-- 		<intercept-url pattern="/state/**" filters="none"/> -->
+		
+		
 		<intercept-url pattern="/upload-template-file-page" access="hasAnyRole('ADMIN')" />
 		<intercept-url pattern="/template/my-template" access="hasAnyRole('ADMIN','SUPPER_USER','USER')" />
 		<intercept-url pattern="/admin**" access="hasAnyRole('ADMIN')" />
@@ -20,11 +32,13 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		<logout logout-success-url="/login?logout" delete-cookies="JSESSIONID" invalidate-session="true" />
 		<!-- Enable CSRF Protection - Prevent CSRF Attach from hacker => by add 
 			token into link - below GET OR POST METHOD -->
-		<csrf />
-
+		
+		<!-- custom csrf -->
+		<csrf/>
+		
 		<session-management 
         invalid-session-url="/login">
-
+		
         <concurrency-control 
             max-sessions="1" 
             expired-url="/login" />
@@ -37,6 +51,13 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		<!-- <remember-me token-validity-seconds="20" remember-me-parameter="remember-me" 
 			data-source-ref="dataSource" /> -->
 	</http>
+	
+	
+	<!-- allow websocket resource -->
+<!-- 	<security:websocket-message-broker> -->
+<!-- 	    <security:intercept-message pattern="/**" access="permitAll" /> -->
+<!-- 	</security:websocket-message-broker> -->
+	
 
 	<!-- custom authentication provider -->
 	<authentication-manager>

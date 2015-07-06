@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://java.sun.com/xml/ns/javaee" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   	<display-name>Archetype Created Web Application</display-name>
   	<context-param>
     	<param-name>contextConfigLocation</param-name>
@@ -24,6 +26,8 @@
       		<param-value>WEB-INF/servlet-context.xml</param-value>
     	</init-param>
     	<load-on-startup>1</load-on-startup>
+    	<!-- support websocket -->
+    	<async-supported>true</async-supported>
   	</servlet>
   	<servlet-mapping>
     	<servlet-name>dispatcher</servlet-name>
@@ -34,6 +38,8 @@
   	<filter>
       <filter-name>hibernateFilter</filter-name>
       <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+      <!-- supoort websocket -->
+	  <async-supported>true</async-supported>
       <init-param>
          <param-name>sessionFactoryBeanName</param-name>
          <param-value>sessionFactory</param-value>         
@@ -49,11 +55,13 @@
    	<!-- spring security -->
    	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
-			</filter-class>
-		</filter>
-		<filter-mapping>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<!-- supoort websocket -->
+		<async-supported>true</async-supported>
+	</filter>
+	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
+		<!-- /* support websocket -->
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<listener>
@@ -81,8 +89,10 @@
   	<!-- utf 8 -->
 	<filter>
 	    <filter-name>encodingFilter</filter-name>
-	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-	<init-param>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<!-- supoort websocket -->
+	  	<async-supported>true</async-supported>
+		<init-param>
 	        <param-name>encoding</param-name>
 	        <param-value>UTF-8</param-value>
 	    </init-param>
